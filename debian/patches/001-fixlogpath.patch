@@ -1,0 +1,21 @@
+move log file in /var/log/seeks
+--- a/src/config
++++ b/src/config
+@@ -193,7 +193,7 @@ templdir proxy/templates
+ #
+ #      No trailing "/", please.
+ #
+-logdir .
++logdir /var/log/
+ #
+ #
+ #  2.4. logfile
+@@ -239,7 +239,7 @@ logdir .
+ #      Any log files must be writable by whatever user Seeks is
+ #      being run as.
+ #
+-logfile logfile
++logfile seeks.log
+ #
+ #
+ # 2.5. plugindir

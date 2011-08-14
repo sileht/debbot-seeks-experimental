@@ -1,0 +1,2 @@
+version=3
+opts="uversionmangle=s/%7e/~/g,filenamemangle=s/%7e/~/g,downloadurlmangle=s/%7e/~/g" http://archive.sileht.net/seeks-snapshot/seeks-experimental-(.+)\.tar\.gz

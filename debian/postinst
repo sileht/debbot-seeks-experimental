@@ -1,0 +1,27 @@
+#!/bin/sh
+set -e
+
+DEFAULT=/etc/default/seeks
+
+case "$1" in
+    configure)
+	# if seeks user doesn't exists, create it
+        if ! getent passwd seeks > /dev/null ; then
+	 echo "Adding system-user for seeks daemon"
+	 adduser --system --group --quiet --home /nonexistent --no-create-home --disabled-login seeks
+	fi
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

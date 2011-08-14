@@ -1,0 +1,9 @@
+# Defaults for seeks initscript
+# sourced by /etc/init.d/seeks
+# installed at /etc/default/seeks by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+DAEMON_USER="seeks"

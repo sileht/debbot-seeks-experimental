@@ -1,0 +1,13 @@
+move user data in /var/lib/seeks/user.db
+Index: tes/src/config
+===================================================================
+--- tes.orig/src/config	2011-08-12 11:12:01.000000000 +0200
++++ tes/src/config	2011-08-12 11:12:28.000000000 +0200
+@@ -375,6 +375,7 @@
+ #      as default location.
+ #
+ # user-db-file /path/to/file.db
++user-db-file /var/lib/seeks/user.db
+ #
+ #  2.10. user-db-address
+ #  =====================

@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+#export DH_OPTIONS=-v
+
+%:
+	dh $@ --with autotools-dev
+
+
+override_dh_auto_configure:
+	dh_auto_configure -- --enable-httpserv-plugin  --disable-opencv #--enable-image-websearch-plugin
+
+
+
