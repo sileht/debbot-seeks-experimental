@@ -1,0 +1,46 @@
+<div id="search_results" class="yui3-g clustered">
+
+    <div class="yui3-u-1-2 first">
+      <div class="cluster">
+      @ccluster0@
+      </div>
+<!-- @if-have-cluster3-start -->
+      <div class="cluster">
+        @ccluster3@
+      </div>
+<!-- if-have-cluster3-end@ -->
+<!-- @if-have-cluster4-start -->
+      <div class="cluster">
+        @ccluster4@
+      </div>
+<!-- if-have-cluster4-end@ -->
+<!-- @if-have-cluster6-start -->
+      <div class="cluster">
+        @ccluster6@
+      </div>
+<!-- if-have-cluster6-end@ -->
+</div>
+
+    <div class="yui3-u-1-2">
+      <div class="cluster">
+        @ccluster1@
+      </div>
+<!-- @if-have-cluster2-start -->
+      <div class="cluster">
+        @ccluster2@
+      </div>
+<!-- if-have-cluster2-end@ -->
+<!-- @if-have-cluster5-start -->
+<div class="cluster">
+        @ccluster5@
+      </div>
+<!-- if-have-cluster5-end@ -->
+<!-- @if-have-cluster7-start -->
+      <div class="cluster">
+      @ccluster7@
+      </div>
+<!-- if-have-cluster7-end@ -->
+    </div>
+
+</div>
+</div>

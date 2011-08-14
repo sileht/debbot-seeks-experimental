@@ -1,0 +1,6 @@
+# websites
+www.linuxquestions.org/
+
+# patterns
+.*forum.*
+.*forums.*
