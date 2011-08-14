@@ -1,0 +1,302 @@
+/* config.h.in.  Generated from configure.in by autoheader.  */
+
+/* "Allows the user of an ACL to control access to the proxy by IP address" */
+#undef FEATURE_ACL
+
+/* "Keep outgoing connections alive if possible" */
+#undef FEATURE_CONNECTION_KEEP_ALIVE
+
+/* "Allow extended regular expressions in host patterns" */
+#undef FEATURE_EXTENDED_HOST_PATTERNS
+
+/* "Supports fast redirects" */
+#undef FEATURE_FAST_REDIRECTS
+
+/* "HTTP server plugin available" */
+#undef FEATURE_HTTPSERV_PLUGIN
+
+/* "ICU library is there" */
+#undef FEATURE_ICU
+
+/* "Image websearch plugin available" */
+#undef FEATURE_IMG_WEBSEARCH_PLUGIN
+
+/* "OpenCV library is there" */
+#undef FEATURE_OPENCV2
+
+/* "pthreads" */
+#undef FEATURE_PTHREAD
+
+/* "Enables statistics function" */
+#undef FEATURE_STATISTICS
+
+/* "Allow Seeks proxy to be disabled" */
+#undef FEATURE_TOGGLE
+
+/* Define to 1 to use compression through the zlib library. */
+#undef FEATURE_ZLIB
+
+/* Define to 1 if you have the `access' function. */
+#undef HAVE_ACCESS
+
+/* Define to 1 if you have the `atexit' function. */
+#undef HAVE_ATEXIT
+
+/* "debug output" */
+#undef HAVE_DEBUG
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you have the `getcwd' function. */
+#undef HAVE_GETCWD
+
+/* Define to 1 if you have the `gethostbyaddr' function. */
+#undef HAVE_GETHOSTBYADDR
+
+/* Define to 1 if you have the `gethostbyaddr_r' function. */
+#undef HAVE_GETHOSTBYADDR_R
+
+/* "" */
+#undef HAVE_GETHOSTBYADDR_R_5_ARGS
+
+/* "" */
+#undef HAVE_GETHOSTBYADDR_R_7_ARGS
+
+/* "" */
+#undef HAVE_GETHOSTBYADDR_R_8_ARGS
+
+/* Define to 1 if you have the `gethostbyname' function. */
+#undef HAVE_GETHOSTBYNAME
+
+/* Define to 1 if you have the `gethostbyname_r' function. */
+#undef HAVE_GETHOSTBYNAME_R
+
+/* "" */
+#undef HAVE_GETHOSTBYNAME_R_3_ARGS
+
+/* "" */
+#undef HAVE_GETHOSTBYNAME_R_5_ARGS
+
+/* "" */
+#undef HAVE_GETHOSTBYNAME_R_6_ARGS
+
+/* Define to 1 if you have the `gettimeofday' function. */
+#undef HAVE_GETTIMEOFDAY
+
+/* Define to 1 if you have the `gmtime_r' function. */
+#undef HAVE_GMTIME_R
+
+/* Define to 1 if you have the `inet_ntoa' function. */
+#undef HAVE_INET_NTOA
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* "libevent-1.x used to build the HTTP server" */
+#undef HAVE_LEVENT1
+
+/* Define to 1 if you have the `nsl' library (-lnsl). */
+#undef HAVE_LIBNSL
+
+/* Define to 1 if you have the `localtime_r' function. */
+#undef HAVE_LOCALTIME_R
+
+/* Define to 1 if your system has a GNU libc compatible `malloc' function, and
+   to 0 otherwise. */
+#undef HAVE_MALLOC
+
+/* Define to 1 if you have the `memchr' function. */
+#undef HAVE_MEMCHR
+
+/* Define to 1 if you have the `memmove' function. */
+#undef HAVE_MEMMOVE
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the `memset' function. */
+#undef HAVE_MEMSET
+
+/* Perl */
+#undef HAVE_PERL
+
+/* Define to 1 if you have the `poll' function. */
+#undef HAVE_POLL
+
+/* Define to 1 if you have the `putenv' function. */
+#undef HAVE_PUTENV
+
+/* Define to 1 if you have the `random' function. */
+#undef HAVE_RANDOM
+
+/* Define to 1 if your system has a GNU libc compatible `realloc' function,
+   and to 0 otherwise. */
+#undef HAVE_REALLOC
+
+/* Define to 1 if you have the `regcomp' function. */
+#undef HAVE_REGCOMP
+
+/* Define if RFC 2553 resolver functions like getaddrinfo(3) and
+   getnameinfo(3) present */
+#undef HAVE_RFC2553
+
+/* Define to 1 if you have the `select' function. */
+#undef HAVE_SELECT
+
+/* Define to 1 if you have the `setlocale' function. */
+#undef HAVE_SETLOCALE
+
+/* Define to 1 if you have the `snprintf' function. */
+#undef HAVE_SNPRINTF
+
+/* Define to 1 if you have the `socket' function. */
+#undef HAVE_SOCKET
+
+/* Define to 1 if stdbool.h conforms to C99. */
+#undef HAVE_STDBOOL_H
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the `strchr' function. */
+#undef HAVE_STRCHR
+
+/* Define to 1 if you have the `strdup' function. */
+#undef HAVE_STRDUP
+
+/* Define to 1 if you have the `strerror' function. */
+#undef HAVE_STRERROR
+
+/* Define to 1 if you have the `strftime' function. */
+#undef HAVE_STRFTIME
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the `strlcat' function. */
+#undef HAVE_STRLCAT
+
+/* Define to 1 if you have the `strlcpy' function. */
+#undef HAVE_STRLCPY
+
+/* Define to 1 if you have the `strndup' function. */
+#undef HAVE_STRNDUP
+
+/* Define to 1 if you have the `strptime' function. */
+#undef HAVE_STRPTIME
+
+/* Define to 1 if you have the `strstr' function. */
+#undef HAVE_STRSTR
+
+/* Define to 1 if you have the `strtoul' function. */
+#undef HAVE_STRTOUL
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the `timegm' function. */
+#undef HAVE_TIMEGM
+
+/* "Have tr1 hash map" */
+#undef HAVE_TR1_HASH_MAP
+
+/* Define to 1 if you have the `tzset' function. */
+#undef HAVE_TZSET
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if the system has the type `_Bool'. */
+#undef HAVE__BOOL
+
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#undef LT_OBJDIR
+
+/* "OpenBSD" */
+#undef ON_OPENBSD
+
+/* "OSX" */
+#undef ON_OSX
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* "Protocol buffers available" */
+#undef PROTOBUF
+
+/* "" */
+#undef SEEKS_CODE_STATUS
+
+/* "" */
+#undef SEEKS_VERSION
+
+/* "" */
+#undef SEEKS_VERSION_MAJOR
+
+/* "" */
+#undef SEEKS_VERSION_MINOR
+
+/* "" */
+#undef SEEKS_VERSION_POINT
+
+/* "using internal pcrs" */
+#undef STATIC_PCRS
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* "Tokyo Cabinet available" */
+#undef TC
+
+/* "Tokyo Tyrant available" */
+#undef TT
+
+/* Version number of package */
+#undef VERSION
+
+/* Define to empty if `const' does not conform to ANSI C. */
+#undef const
+
+/* Define to `__inline__' or `__inline' if that's what the C compiler
+   calls it, or to nothing if 'inline' is not supported under any name.  */
+#ifndef __cplusplus
+#undef inline
+#endif
+
+/* Define to rpl_malloc if the replacement function should be used. */
+#undef malloc
+
+/* Define to rpl_realloc if the replacement function should be used. */
+#undef realloc
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#undef size_t

@@ -1,0 +1,27 @@
+# Weight given to domain names (as opposed to exact URLs).
+# This is a measure of trust / likeliness of an already visited domain
+# to hold good / interesting URL (wrt. content).
+# default: 0.3
+domain-name-weight 0.3
+
+# Timeout on cached remote records, in seconds.
+# 0 means no cache at all.
+# default: 600
+record-cache-timeout 600
+
+# Static list of peers for collaborative filtering.
+# One of more lines, of the form: cf-peer address port (sn | bsn | tt)
+# 'sn' for HTTP transport to Seeks node (current default), 
+# 'bsn' for HTTP batch transport to Seeks node (soon to be default),
+# 'tt' for serving a peer user database with Tokyo Tyrant.
+# default: unset
+cf-peer http://www.seeks.fr bsn
+cf-peer http://seeks-project.info/search_exp.php bsn
+cf-peer http://seeks-project.info/search.php bsn
+
+# Time interval in seconds between two check on dead peers.
+# default: 300
+dead-peer-check 300
+
+# Number of retries before marking a peer as dead.
+dead-peer-retries 3

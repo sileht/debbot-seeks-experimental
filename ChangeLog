@@ -1,0 +1,303 @@
+* DiAngelo-0.3.4-HIPPY-stable
+
+First release with peer-to-peer activated as default. Every Seeks node
+defines a list of Seeks peers to work with. This list defines a
+ring of trusted peers. In future versions, the list will be updated
+automatically, before a DHT takes over.
+
+- Pure Seeks results: results now include data coming from the Seeks
+  network (other peers) and not exclusively from feeds and search
+  engines in the pipe.
+
+- Default UI now includes peer information and recommendations.
+	
+- Implements three P2P call types over HTTP: per-key db access using Tokyo
+  Tyrant, query fragment key extraction from Seeks node directly, and
+  'batch' P2P query calls that fetch the whole halo of similar queries
+  from a distant Seeks node (default).
+
+- Automatic detection and testing of dead peers. Dead peers are marked back as
+  alive when they are confirmed to operate correctly.
+	
+- libevent-2.x support is now default, see
+http://sourceforge.net/mailarchive/forum.php?thread_name=20110701064850.GA1476%40hyperion.musicophages&forum_name=seeks-users
+
+- new threaded and interleaved calls to feeds and remote Seeks peers.
+
+- new threaded collaborative filter, with improved local filtering (local
+  user control on all results, including those coming from other peers,
+  avoids spam or preferences to be overriden).
+	
+- Many leaks and bug fixes.
+
+- Added special flag to disable OpenCV, as the library seems partly broken
+  on Debian testing & sid. See:
+http://sourceforge.net/mailarchive/forum.php?thread_name=20110701091640.GA3016%40hyperion.musicophages&forum_name=seeks-users
+	
+* DiAngelo-0.3.3-SOLO-stable
+
+- Reworked parser and feeds / search engines connection. Allows using the
+  same parser over several feeds. Each feed can be accessed independently
+  from the API.
+
+- Added support for the following result formats: opensearch (ATOM & RSS),
+  dokuwiki and mediawiki.
+	
+- Slightly improved personalization over halos of similar queries.
+	
+- Few bug fixes, on personalization and on parsers.
+
+- User db optimization is now optional.
+
+- Improved exception model and handling in all plugins.
+
+- Added info API call to HTTP server plugin.
+
+- Many fixes to JSON search output.
+
+- Support for remote user database, for personalization and other means.
+  This allows to deport the user database away from the Seeks node itself.
+  It is the first step towards enabling of a mixture of remote user
+  profiles, in forthcoming version.
+
+- Personalization using remote user database.
+
+- Added new user db remote service plugin (udb-service) to serve user
+  database records remotely, over HTTP.
+
+- Added support for Tokyo Tyrant.
+ 
+	
+* DiAngelo-0.3.2-SOLO-stable
+
+- Added active rejection of personalized results. This allows a negative
+  user feedback that is taken into account in ranking and recommendation.
+
+- Added automated recommendation of queries, URLs (more results to a query).
+  Uses an improved query-to-query weighted distance.
+
+- Added support for remote user database with Tokyo Tyrant.
+
+- Several bug fixes, from language detection to missing results from search
+  engine parsers.
+
+- Fixes to image search.
+
+- Added detection / handling of non-UTF-8 strings for queries and URIs.
+  (includes optional support for libICU).
+
+- non-UTF-8 user db entry fix runs once at first startup of this new release.
+
+- Fixed service of opensearch.xml
+
+- Fixed minor leaks.
+
+- Cleaner destruction of objects at node shutdown.
+
+- Fixed encoding with Blekko parser.
+
+- More unit tests.
+
+* DiAngelo-0.3.1-SOLO-stable
+
+- Added new 'compact' theme as the default search interface. Thanks
+  to gwip for design and implementation.
+
+- Added themes framework that allows contributors to create new themes
+  with no dependency to the inner machinery.
+
+- Added dynamic JSON-based User Interface with basic features. Faster
+  to use, and ready to be plugged to the p2p net when it is released.
+
+- Fixed key generation bug in user db. This version includes an automatic
+  fix for dbs that may have been affected by the bug, so this remains
+  transparent for the users and node maintainers.
+
+- Replaced YUI-3.0.0 with YUI-3.2.0.
+
+- Added generic export framework to the user db. Thanks to sileht
+  for the good work.
+
+- Added Blekko to the search engine parsers.
+
+- Remove Cuil from the search engine parsers (Cuil is dead).
+
+- Added infrastructure for unit testing based on gtests. Added unit
+  tests for several key components. Thanks to dachary for all the
+  hacking involved.
+
+- Fixed a bug in the grouping of similar snippet due to bad encoding
+  of URLs. Thanks to piti for discovering and fixing this.
+
+- Added coloration to already visited URLs.
+
+- Code documentation with doxygen.
+
+* DiAngelo-0.3-SOLO-stable
+
+- Added personalization of results. Queries & clicks on URIs are
+recorded in a flexible user DB to improve ranking of results according
+to past queries and use navigation.
+
+- Added option for announcement panel on search result page.
+
+- Several bug fixes.
+
+- Fixed several tiny memory leaks.
+
+* Bubs-0.2.5b-SOLO-stable
+
+- Fixed crash in image similarity analysis.
+
+* Bubs-0.2.5a-SOLO-stable
+
+- Fixed bad cases in URLs.
+
+* Bubs-0.2.5-SOLO-stable
+
+- Tweets search, from Twitter and Identi.ca. Automatic aggregation
+of retweets. Automated clustering of tweets.
+
+- Videos search, from Youtube and Dailymotion. Automated clustering
+of videos, based on their title or page's surrounding content.
+
+- Fixes and improvements to the REST API.
+
+- Added Yauba as a text engine.
+
+- Cuil is now off by default as the engine itself seems to be dead.
+
+- An internal fix to ranking for counterbalancing Bing / Yahoo becoming one
+and single engine in English searches.
+
+- Internal fixes and improvement to rendering of pages and results.
+
+- Plugin system is now compatible with OSX and OpenBSD.
+
+* Bubs-0.2.4-SOLO-stable
+This releases brings image metasearch in the form of a new plugin, as
+well as many improvements to memory management and stability.
+
+- Image metasearch plugin integrating results from Bing, Yahoo, Google,
+Flickr and Wikimedia Commons.
+
+- Image metasearch safesearch mode on/off.
+
+- Image similarity analysis functionalities based on OpenCV SURF
+features computation.
+
+- Fixed several memory leaks.
+
+- Slightly reworked user interface, new bar, variable width of column
+results in clustering and classification per type.
+
+- Image service with HTTP server plugin.
+
+- Image search JSON output.
+
+- Using the HTTP server plugin now automatically disables the proxy.
+  A new option allows to override this behavior.
+
+- Performance boost when recalling a query that is still in cache.
+
+- Autotools 'make distcheck' now produces a proper tarball.
+
+- Minor bug fixes and improvements.
+
+* Bubs-0.2.3-SOLO-stable
+This releases brings two plugins, an embedded light HTTP server for easing the
+deployment or personal and public search nodes; a URL blocker for controlling
+trafic through the proxy (e.g. ad-blocking). The release has an improved
+overall stability.
+
+- Light embedded HTTP server plugin based on libevent. Support for direct
+websearch, opensearch.xml and robots.txt.
+
+- URL blocker plugin for controlling trafic through the proxy, such as
+ad-blocking and more, based on a (by default empty) list of positive and
+negative regexps.
+
+- Per-query selection of search engines with parameter "engines=" in query
+URI.
+
+- Improved stability with the correction of some rare but critical bugs and
+  and a memory leak.
+
+- Fixed parsing of some engines results.
+
+- Fixed swedish stop word list.
+
+- Fixed bug when loading stopwordlist at startup for system-wide installation.
+
+* Bubs-0.2.2-SOLO-stable
+This release brings some improvements and includes a JSON API for using/reusing
+the search results in third-party applications.
+
+- Highlight of most discriminative words in every search result snippet.
+	
+- Full HTML5 compliance of generated pages.
+
+- JSON API for search, clustering, type grouping, similarity ranking.
+
+- Fixed bug in ranking.
+
+- Max expansion limit for protection against potential attacks on public nodes.
+	
+- Improved stability.
+
+* Bubs-0.2.1-SOLO-stable
+This release brings some technical improvements for stability.
+
+- Better mutexes around the concurrent treatment of queries.
+
+- Fixes rare crash in clustering too few snippets.
+
+- Removed some decoration on the UI.
+
+- Language indicator on the search result page.
+
+- Ready for Ubuntu and Debian packaging.
+
+- Compiles under FreeBSD and Gentoo.
+
+- Some other minor fixes here and then.
+
+* Bubs-0.2-SOLO-stable
+This release enables a set of novel websearch features, fixes bugs
+in the machinery, eases the deployment of public Seeks nodes.
+As such this the first truely mature of the SOLO releases.
+
+- Support for multiple languages. This includes:
+  ¤ Automatic language detection from the http headers.
+  * In-query language command.
+  ¤ Stop word list in content analysis, in multiple languages.
+  
+- Clustering of websearch results.
+  ¤ Online sphercial k-means.
+  ¤ Two clustering modes, from websearch snippets summaries,
+    from automatically downloaded and analyzed web content.
+  ¤ Automated computation of cluster labels. 
+  ¤ Cluster labels as extended queries.
+
+- Improved automatic similarity of results with tf-idf
+  feature generation.
+
+- Automatic reload of configuration files at runtime when 
+  changes are made.
+
+- Sorting and grouping of websearch results, by urls, titles,
+  and result types (webpage, wiki, pdf, videos, mp3, other files,
+  ...).
+
+- Added optional thumbails of websearch results.
+
+- Improved parsing of supported search engines, and added
+  support for Yahoo! Search and Exalead.
+  
+- Much improved Makefiles and template serving functions.
+
+- Added top banner for displaying the Seeks node information.
+
+- Added Access Control List (ACL). Allows to block and/or filter
+  authorized connections by IP address. Helpful to secure public
+  nodes.
