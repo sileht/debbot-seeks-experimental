@@ -8,7 +8,7 @@
 
 
 override_dh_auto_configure:
-	dh_auto_configure -- --disable-httpserv-plugin --disable-opencv #--enable-image-websearch-plugin --enable-httpserv-plugin 
+	dh_auto_configure -- --disable-opencv --enable-httpserv-plugin --enable-libevent1  #--enable-image-websearch-plugin 
 
 
 
