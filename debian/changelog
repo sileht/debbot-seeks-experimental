@@ -1,3 +1,12 @@
+seeks-experimental (0.4~git201108082344-2) UNRELEASED; urgency=low
+
+  [ Mehdi ABAAKOUK ]
+  * Add gtest dep
+
+  [ Abaakouk Mehdi ]
+
+ -- Abaakouk Mehdi <theli48@gmail.com>  Sat, 20 Aug 2011 16:09:53 +0200
+
 seeks-experimental (0.4~git201108082344-1) UNRELEASED; urgency=low
 
   [ Mehdi ABAAKOUK ]
