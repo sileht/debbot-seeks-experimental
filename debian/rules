@@ -11,4 +11,5 @@ override_dh_auto_configure:
 	dh_auto_configure -- --disable-opencv --enable-httpserv-plugin --enable-libevent1 --disable-external-gtest #--enable-image-websearch-plugin 
 
 
-
+override_dh_auto_test:
+	echo "Skip dh_auto_test"
