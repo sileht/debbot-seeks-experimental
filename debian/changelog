@@ -1,3 +1,12 @@
+seeks-experimental (0.4~git201108212241-1) UNRELEASED; urgency=low
+
+  [ Mehdi Abaakouk ]
+  * Imported Upstream version 0.4~git201108212241
+
+  [ Abaakouk Mehdi ]
+
+ -- Abaakouk Mehdi <theli48@gmail.com>  Sat, 27 Aug 2011 18:41:17 +0200
+
 seeks-experimental (0.4~git201108191949-4) UNRELEASED; urgency=low
 
   [ Mehdi ABAAKOUK ]
