@@ -44,7 +44,8 @@ noinst_PROGRAMS = test_ggle_parser$(EXEEXT) test_bing_parser$(EXEEXT) \
 	test_youtube_parser$(EXEEXT) test_dailymotion_parser$(EXEEXT) \
 	test_yauba_parser$(EXEEXT) test_blekko_parser$(EXEEXT) \
 	test_osearch_parser$(EXEEXT) test_doku_parser$(EXEEXT) \
-	test_mediawiki_parser$(EXEEXT) test_delicious_parser$(EXEEXT)
+	test_mediawiki_parser$(EXEEXT) test_delicious_parser$(EXEEXT) \
+	test_wordpress_parser$(EXEEXT) test_redmine_parser$(EXEEXT)
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/src/Makefile.include
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_1 = \
@@ -151,10 +152,20 @@ test_osearch_parser_OBJECTS = $(am_test_osearch_parser_OBJECTS)
 test_osearch_parser_LDADD = $(LDADD)
 test_osearch_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+am_test_redmine_parser_OBJECTS = test-redmine-parser.$(OBJEXT)
+test_redmine_parser_OBJECTS = $(am_test_redmine_parser_OBJECTS)
+test_redmine_parser_LDADD = $(LDADD)
+test_redmine_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_test_twitter_parser_OBJECTS = test-twitter-parser.$(OBJEXT)
 test_twitter_parser_OBJECTS = $(am_test_twitter_parser_OBJECTS)
 test_twitter_parser_LDADD = $(LDADD)
 test_twitter_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+am_test_wordpress_parser_OBJECTS = test-wordpress-parser.$(OBJEXT)
+test_wordpress_parser_OBJECTS = $(am_test_wordpress_parser_OBJECTS)
+test_wordpress_parser_LDADD = $(LDADD)
+test_wordpress_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_test_yahoo_parser_OBJECTS = test-yahoo-parser.$(OBJEXT)
 test_yahoo_parser_OBJECTS = $(am_test_yahoo_parser_OBJECTS)
@@ -230,11 +241,13 @@ SOURCES = $(test_bing_parser_SOURCES) $(test_blekko_parser_SOURCES) \
 	$(test_exalead_parser_SOURCES) $(test_ggle_parser_SOURCES) \
 	$(test_html_txt_parser_SOURCES) \
 	$(test_mediawiki_parser_SOURCES) \
-	$(test_osearch_parser_SOURCES) $(test_twitter_parser_SOURCES) \
-	$(test_yahoo_parser_SOURCES) $(test_yauba_parser_SOURCES) \
-	$(test_youtube_parser_SOURCES) $(ut_content_handler_SOURCES) \
-	$(ut_feeds_SOURCES) $(ut_json_renderer_SOURCES) \
-	$(ut_parser_SOURCES) $(ut_qc_SOURCES) $(ut_se_handler_SOURCES) \
+	$(test_osearch_parser_SOURCES) $(test_redmine_parser_SOURCES) \
+	$(test_twitter_parser_SOURCES) \
+	$(test_wordpress_parser_SOURCES) $(test_yahoo_parser_SOURCES) \
+	$(test_yauba_parser_SOURCES) $(test_youtube_parser_SOURCES) \
+	$(ut_content_handler_SOURCES) $(ut_feeds_SOURCES) \
+	$(ut_json_renderer_SOURCES) $(ut_parser_SOURCES) \
+	$(ut_qc_SOURCES) $(ut_se_handler_SOURCES) \
 	$(ut_snippet_SOURCES) $(ut_websearch_SOURCES)
 DIST_SOURCES = $(test_bing_parser_SOURCES) \
 	$(test_blekko_parser_SOURCES) \
@@ -243,11 +256,13 @@ DIST_SOURCES = $(test_bing_parser_SOURCES) \
 	$(test_exalead_parser_SOURCES) $(test_ggle_parser_SOURCES) \
 	$(test_html_txt_parser_SOURCES) \
 	$(test_mediawiki_parser_SOURCES) \
-	$(test_osearch_parser_SOURCES) $(test_twitter_parser_SOURCES) \
-	$(test_yahoo_parser_SOURCES) $(test_yauba_parser_SOURCES) \
-	$(test_youtube_parser_SOURCES) $(ut_content_handler_SOURCES) \
-	$(ut_feeds_SOURCES) $(ut_json_renderer_SOURCES) \
-	$(ut_parser_SOURCES) $(ut_qc_SOURCES) $(ut_se_handler_SOURCES) \
+	$(test_osearch_parser_SOURCES) $(test_redmine_parser_SOURCES) \
+	$(test_twitter_parser_SOURCES) \
+	$(test_wordpress_parser_SOURCES) $(test_yahoo_parser_SOURCES) \
+	$(test_yauba_parser_SOURCES) $(test_youtube_parser_SOURCES) \
+	$(ut_content_handler_SOURCES) $(ut_feeds_SOURCES) \
+	$(ut_json_renderer_SOURCES) $(ut_parser_SOURCES) \
+	$(ut_qc_SOURCES) $(ut_se_handler_SOURCES) \
 	$(ut_snippet_SOURCES) $(ut_websearch_SOURCES)
 ETAGS = etags
 CTAGS = ctags
@@ -465,6 +480,8 @@ test_delicious_parser_SOURCES = test-delicious-parser.cpp
 test_osearch_parser_SOURCES = test-osearch-parser.cpp
 test_doku_parser_SOURCES = test-doku-parser.cpp
 test_mediawiki_parser_SOURCES = test-mediawiki-parser.cpp
+test_wordpress_parser_SOURCES = test-wordpress-parser.cpp
+test_redmine_parser_SOURCES = test-redmine-parser.cpp
 test_html_txt_parser_SOURCES = test-html-text-parser.cpp
 AM_CPPFLAGS = $(am__append_1) $(am__append_4) $(am__append_6) \
 	$(am__append_8) -Wall -g -Wno-deprecated -pipe -I${srcdir} \
@@ -565,9 +582,15 @@ test_mediawiki_parser$(EXEEXT): $(test_mediawiki_parser_OBJECTS) $(test_mediawik
 test_osearch_parser$(EXEEXT): $(test_osearch_parser_OBJECTS) $(test_osearch_parser_DEPENDENCIES) 
 	@rm -f test_osearch_parser$(EXEEXT)
 	$(CXXLINK) $(test_osearch_parser_OBJECTS) $(test_osearch_parser_LDADD) $(LIBS)
+test_redmine_parser$(EXEEXT): $(test_redmine_parser_OBJECTS) $(test_redmine_parser_DEPENDENCIES) 
+	@rm -f test_redmine_parser$(EXEEXT)
+	$(CXXLINK) $(test_redmine_parser_OBJECTS) $(test_redmine_parser_LDADD) $(LIBS)
 test_twitter_parser$(EXEEXT): $(test_twitter_parser_OBJECTS) $(test_twitter_parser_DEPENDENCIES) 
 	@rm -f test_twitter_parser$(EXEEXT)
 	$(CXXLINK) $(test_twitter_parser_OBJECTS) $(test_twitter_parser_LDADD) $(LIBS)
+test_wordpress_parser$(EXEEXT): $(test_wordpress_parser_OBJECTS) $(test_wordpress_parser_DEPENDENCIES) 
+	@rm -f test_wordpress_parser$(EXEEXT)
+	$(CXXLINK) $(test_wordpress_parser_OBJECTS) $(test_wordpress_parser_LDADD) $(LIBS)
 test_yahoo_parser$(EXEEXT): $(test_yahoo_parser_OBJECTS) $(test_yahoo_parser_DEPENDENCIES) 
 	@rm -f test_yahoo_parser$(EXEEXT)
 	$(CXXLINK) $(test_yahoo_parser_OBJECTS) $(test_yahoo_parser_LDADD) $(LIBS)
@@ -618,7 +641,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-html-text-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-mediawiki-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-osearch-parser.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-redmine-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-twitter-parser.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-wordpress-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-yahoo-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-yauba-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-youtube-parser.Po@am__quote@
