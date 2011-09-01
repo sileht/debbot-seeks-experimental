@@ -1,3 +1,9 @@
+seeks-experimental (3:0.4~git201108300007-3) UNRELEASED; urgency=low
+
+  * Add epoq 
+
+ -- Abaakouk Mehdi <theli48@gmail.com>  Thu, 01 Sep 2011 19:53:16 +0200
+
 seeks-experimental (0.4~git201108300007-2) UNRELEASED; urgency=low
 
   [ Mehdi Abaakouk ]
