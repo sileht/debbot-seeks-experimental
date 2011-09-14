@@ -1,3 +1,9 @@
+seeks-experimental (3:0.4~git201109130751-1) UNRELEASED; urgency=low
+
+  * Imported Upstream version 0.4~git201109130751
+
+ -- Mehdi Abaakouk <sileht@sileht.net>  Wed, 14 Sep 2011 22:11:46 +0200
+
 seeks-experimental (3:0.4~git201109121103-1) UNRELEASED; urgency=low
 
   [ Mehdi Abaakouk ]
