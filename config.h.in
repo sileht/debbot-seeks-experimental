@@ -24,9 +24,6 @@
 /* "OpenCV library is there" */
 #undef FEATURE_OPENCV2
 
-/* "pthreads" */
-#undef FEATURE_PTHREAD
-
 /* "Enables statistics function" */
 #undef FEATURE_STATISTICS
 

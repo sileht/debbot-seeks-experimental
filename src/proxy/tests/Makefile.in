@@ -36,53 +36,52 @@ build_triplet = @build@
 host_triplet = @host@
 bin_PROGRAMS = user_db_ops$(EXEEXT)
 noinst_PROGRAMS = test_curl_mget$(EXEEXT) shash$(EXEEXT) \
-	$(am__EXEEXT_1)
+	$(am__EXEEXT_2)
+check_PROGRAMS = ut_plugin_manager$(EXEEXT) $(am__EXEEXT_1)
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_1 = user_db_print user_db_clear user_db_remove user_db_find_key user_db_export
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@check_PROGRAMS =  \
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	ut_user_db$(EXEEXT) \
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	ut_urlmatch$(EXEEXT)
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_2 = ut_user_db ut_urlmatch
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/src/Makefile.include
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_2 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_3 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-I$(top_srcdir)/src/plugins/uri_capture \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-I$(top_srcdir)/src/plugins/query_capture \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-I$(top_srcdir)/src/plugins/cf \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-I$(top_srcdir)/src/plugins/udb_service
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_3 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_4 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-L$(top_builddir)/src/plugins/uri_capture \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-L$(top_builddir)/src/plugins/query_capture \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-L$(top_builddir)/src/plugins/cf \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-L$(top_builddir)/src/plugins/udb_service
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_4 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_5 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@        -luricaptureplugin \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-lquerycaptureplugin \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-lcfplugin \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-ludbserviceplugin
 
-@HAVE_PROTOBUF_TRUE@am__append_5 = \
+@HAVE_PROTOBUF_TRUE@am__append_6 = \
 @HAVE_PROTOBUF_TRUE@	`pkg-config --cflags protobuf`
 
-@HAVE_PROTOBUF_TRUE@am__append_6 = \
+@HAVE_PROTOBUF_TRUE@am__append_7 = \
 @HAVE_PROTOBUF_TRUE@	`pkg-config --libs protobuf`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_7 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_8 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	`pkg-config --cflags tokyocabinet`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_8 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_9 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@        `pkg-config --libs tokyocabinet`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_9 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_10 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@        `pkg-config --cflags tokyotyrant`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_10 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_11 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@      	   `pkg-config --libs tokyotyrant`
 
-@HAVE_PROTOBUF_TRUE@am__append_11 = \
+@HAVE_PROTOBUF_TRUE@am__append_12 = \
 @HAVE_PROTOBUF_TRUE@	-lseeksuserdb -lseeksuserdbfix
 
-@USE_PERL_TRUE@am__append_12 = `perl -MExtUtils::Embed -e ldopts`
+@USE_PERL_TRUE@am__append_13 = `perl -MExtUtils::Embed -e ldopts`
 subdir = src/proxy/tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
@@ -94,7 +93,9 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__EXEEXT_1 =  \
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__EXEEXT_1 = ut_user_db$(EXEEXT) \
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	ut_urlmatch$(EXEEXT)
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__EXEEXT_2 =  \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	user_db_print$(EXEEXT) \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	user_db_clear$(EXEEXT) \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	user_db_remove$(EXEEXT) \
@@ -154,6 +155,11 @@ user_db_remove_OBJECTS = $(am_user_db_remove_OBJECTS)
 user_db_remove_LDADD = $(LDADD)
 user_db_remove_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+am_ut_plugin_manager_OBJECTS = ut-plugin-manager.$(OBJEXT)
+ut_plugin_manager_OBJECTS = $(am_ut_plugin_manager_OBJECTS)
+ut_plugin_manager_LDADD = $(LDADD)
+ut_plugin_manager_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_ut_urlmatch_OBJECTS = ut-urlmatch.$(OBJEXT)
 ut_urlmatch_OBJECTS = $(am_ut_urlmatch_OBJECTS)
 ut_urlmatch_LDADD = $(LDADD)
@@ -183,14 +189,16 @@ SOURCES = $(shash_SOURCES) $(test_curl_mget_SOURCES) \
 	$(user_db_clear_SOURCES) $(user_db_export_SOURCES) \
 	$(user_db_find_key_SOURCES) $(user_db_ops_SOURCES) \
 	$(user_db_print_SOURCES) $(user_db_remove_SOURCES) \
-	$(ut_urlmatch_SOURCES) $(ut_user_db_SOURCES)
+	$(ut_plugin_manager_SOURCES) $(ut_urlmatch_SOURCES) \
+	$(ut_user_db_SOURCES)
 DIST_SOURCES = $(shash_SOURCES) $(test_curl_mget_SOURCES) \
 	$(am__user_db_clear_SOURCES_DIST) \
 	$(am__user_db_export_SOURCES_DIST) \
 	$(am__user_db_find_key_SOURCES_DIST) \
 	$(am__user_db_ops_SOURCES_DIST) \
 	$(am__user_db_print_SOURCES_DIST) \
-	$(am__user_db_remove_SOURCES_DIST) $(ut_urlmatch_SOURCES) \
+	$(am__user_db_remove_SOURCES_DIST) \
+	$(ut_plugin_manager_SOURCES) $(ut_urlmatch_SOURCES) \
 	$(am__ut_user_db_SOURCES_DIST)
 ETAGS = etags
 CTAGS = ctags
@@ -387,6 +395,7 @@ udbservice = @udbservice@
 uricapture = @uricapture@
 with_gtest = @with_gtest@
 TESTS = $(check_PROGRAMS)
+ut_plugin_manager_SOURCES = ut-plugin-manager.cpp
 test_curl_mget_SOURCES = test-curl-mget.cpp
 shash_SOURCES = shash.cpp
 ut_urlmatch_SOURCES = ut-urlmatch.cpp
@@ -397,19 +406,19 @@ ut_urlmatch_SOURCES = ut-urlmatch.cpp
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@user_db_find_key_SOURCES = user-db-find-key.cpp
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@user_db_ops_SOURCES = user-db-ops.cpp
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@ut_user_db_SOURCES = ut-user-db.cpp
-AM_CPPFLAGS = $(am__append_2) $(am__append_5) $(am__append_7) \
-	$(am__append_9) -Wall -g -Wno-deprecated -pipe -I${srcdir} \
+AM_CPPFLAGS = $(am__append_3) $(am__append_6) $(am__append_8) \
+	$(am__append_10) -Wall -g -Wno-deprecated -pipe -I${srcdir} \
 	-I${srcdir}/.. -I${top_srcdir}/src/dht -I${top_srcdir}/src/lsh \
 	-I${top_srcdir}/src/proxy -I${top_srcdir}/src/utils \
 	-I$(top_srcdir)/src/plugins/websearch @PCRE_CFLAGS@ \
 	@XML2_CFLAGS@ @ICU_CFLAGS@ $(GTEST_CPPFLAGS) -I../
-AM_LDFLAGS = $(am__append_3) $(am__append_6) $(am__append_8) \
-	$(am__append_10) -L.. -L$(top_builddir)/src/dht \
+AM_LDFLAGS = $(am__append_4) $(am__append_7) $(am__append_9) \
+	$(am__append_11) -L.. -L$(top_builddir)/src/dht \
 	-L$(top_builddir)/src/lsh -L$(top_builddir)/src/proxy \
 	-L$(top_builddir)/src/utils \
 	-L$(top_builddir)/src/plugins/websearch $(GTEST_LDFLAGS) \
-	$(am__append_12)
-LDADD = $(am__append_4) $(am__append_11) -lseeksdht -lseekslsh \
+	$(am__append_13)
+LDADD = $(am__append_5) $(am__append_12) -lseeksdht -lseekslsh \
 	-lseeksproxy -lseeksplugins -lseeksutils \
 	-lseekswebsearchplugin -lrmd160 @XML2_LDADD@ @CURL_LDADD@ \
 	@ICU_LDADD@ -lpthread -lpcreposix -lpcre -lz @LCOV_LIBS@ \
@@ -533,6 +542,9 @@ user_db_print$(EXEEXT): $(user_db_print_OBJECTS) $(user_db_print_DEPENDENCIES)
 user_db_remove$(EXEEXT): $(user_db_remove_OBJECTS) $(user_db_remove_DEPENDENCIES) 
 	@rm -f user_db_remove$(EXEEXT)
 	$(CXXLINK) $(user_db_remove_OBJECTS) $(user_db_remove_LDADD) $(LIBS)
+ut_plugin_manager$(EXEEXT): $(ut_plugin_manager_OBJECTS) $(ut_plugin_manager_DEPENDENCIES) 
+	@rm -f ut_plugin_manager$(EXEEXT)
+	$(CXXLINK) $(ut_plugin_manager_OBJECTS) $(ut_plugin_manager_LDADD) $(LIBS)
 ut_urlmatch$(EXEEXT): $(ut_urlmatch_OBJECTS) $(ut_urlmatch_DEPENDENCIES) 
 	@rm -f ut_urlmatch$(EXEEXT)
 	$(CXXLINK) $(ut_urlmatch_OBJECTS) $(ut_urlmatch_LDADD) $(LIBS)
@@ -554,6 +566,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/user-db-ops.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/user-db-print.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/user-db-remove.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ut-plugin-manager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ut-urlmatch.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ut-user-db.Po@am__quote@
 
