@@ -378,7 +378,8 @@ imgwebsearchplugindatadir = $(datadir)/seeks/plugins/img_websearch
 AM_CPPFLAGS = -Wno-deprecated -Wall -g -pipe -I${srcdir} \
 	-I${srcdir}/../../utils -I${srcdir}/../../lsh \
 	-I${srcdir}/../../proxy -I${srcdir}/../websearch \
-	-I${srcdir}/../../dht $(am__append_1) $(am__append_2) \
+	-I${srcdir}/../../dht -I${srcdir}/../cf \
+	-I${srcdir}/..//query_capture $(am__append_1) $(am__append_2) \
 	$(am__append_3) $(am__append_4)
 ACLOCAL_AMFLAGS = -I m4
 imgwebsearchpluginlib_LTLIBRARIES = libseeksimgwebsearchplugin.la
