@@ -66,28 +66,39 @@ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-lcfplugin \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-ludbserviceplugin
 
-@HAVE_PROTOBUF_TRUE@am__append_4 = \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_4 = \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@	-I$(top_srcdir)/src/plugins/img_websearch \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@	`pkg-config opencv --cflags`
+
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_5 = \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@       -L$(top_builddir)/src/plugins/img_websearch \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@       `pkg-config opencv --libs`
+
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_6 = \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@       -lseeksimgwebsearchplugin
+
+@HAVE_PROTOBUF_TRUE@am__append_7 = \
 @HAVE_PROTOBUF_TRUE@	`pkg-config --cflags protobuf`
 
-@HAVE_PROTOBUF_TRUE@am__append_5 = \
+@HAVE_PROTOBUF_TRUE@am__append_8 = \
 @HAVE_PROTOBUF_TRUE@	`pkg-config --libs protobuf`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_6 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_9 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	`pkg-config --cflags tokyocabinet`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_7 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_10 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@        `pkg-config --libs tokyocabinet`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_8 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_11 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@        `pkg-config --cflags tokyotyrant`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_9 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_12 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@      	   `pkg-config --libs tokyotyrant`
 
-@HAVE_PROTOBUF_TRUE@am__append_10 = \
+@HAVE_PROTOBUF_TRUE@am__append_13 = \
 @HAVE_PROTOBUF_TRUE@	-lseeksuserdb -lseeksuserdbfix
 
-@USE_PERL_TRUE@am__append_11 = `perl -MExtUtils::Embed -e ldopts`
+@USE_PERL_TRUE@am__append_14 = `perl -MExtUtils::Embed -e ldopts`
 subdir = src/plugins/websearch/tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
@@ -104,124 +115,144 @@ test_bing_parser_OBJECTS = $(am_test_bing_parser_OBJECTS)
 test_bing_parser_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
 test_bing_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_blekko_parser_OBJECTS = test-blekko-parser.$(OBJEXT)
 test_blekko_parser_OBJECTS = $(am_test_blekko_parser_OBJECTS)
 test_blekko_parser_LDADD = $(LDADD)
 test_blekko_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_dailymotion_parser_OBJECTS =  \
 	test-dailymotion-parser.$(OBJEXT)
 test_dailymotion_parser_OBJECTS =  \
 	$(am_test_dailymotion_parser_OBJECTS)
 test_dailymotion_parser_LDADD = $(LDADD)
 test_dailymotion_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_delicious_parser_OBJECTS = test-delicious-parser.$(OBJEXT)
 test_delicious_parser_OBJECTS = $(am_test_delicious_parser_OBJECTS)
 test_delicious_parser_LDADD = $(LDADD)
 test_delicious_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_doku_parser_OBJECTS = test-doku-parser.$(OBJEXT)
 test_doku_parser_OBJECTS = $(am_test_doku_parser_OBJECTS)
 test_doku_parser_LDADD = $(LDADD)
 test_doku_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_exalead_parser_OBJECTS = test-exalead-parser.$(OBJEXT)
 test_exalead_parser_OBJECTS = $(am_test_exalead_parser_OBJECTS)
 test_exalead_parser_LDADD = $(LDADD)
 test_exalead_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_ggle_parser_OBJECTS = test-ggle-parser.$(OBJEXT)
 test_ggle_parser_OBJECTS = $(am_test_ggle_parser_OBJECTS)
 test_ggle_parser_LDADD = $(LDADD)
 test_ggle_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_html_txt_parser_OBJECTS = test-html-text-parser.$(OBJEXT)
 test_html_txt_parser_OBJECTS = $(am_test_html_txt_parser_OBJECTS)
 test_html_txt_parser_LDADD = $(LDADD)
 test_html_txt_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_mediawiki_parser_OBJECTS = test-mediawiki-parser.$(OBJEXT)
 test_mediawiki_parser_OBJECTS = $(am_test_mediawiki_parser_OBJECTS)
 test_mediawiki_parser_LDADD = $(LDADD)
 test_mediawiki_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_osearch_parser_OBJECTS = test-osearch-parser.$(OBJEXT)
 test_osearch_parser_OBJECTS = $(am_test_osearch_parser_OBJECTS)
 test_osearch_parser_LDADD = $(LDADD)
 test_osearch_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_redmine_parser_OBJECTS = test-redmine-parser.$(OBJEXT)
 test_redmine_parser_OBJECTS = $(am_test_redmine_parser_OBJECTS)
 test_redmine_parser_LDADD = $(LDADD)
 test_redmine_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_twitter_parser_OBJECTS = test-twitter-parser.$(OBJEXT)
 test_twitter_parser_OBJECTS = $(am_test_twitter_parser_OBJECTS)
 test_twitter_parser_LDADD = $(LDADD)
 test_twitter_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_wordpress_parser_OBJECTS = test-wordpress-parser.$(OBJEXT)
 test_wordpress_parser_OBJECTS = $(am_test_wordpress_parser_OBJECTS)
 test_wordpress_parser_LDADD = $(LDADD)
 test_wordpress_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_yahoo_parser_OBJECTS = test-yahoo-parser.$(OBJEXT)
 test_yahoo_parser_OBJECTS = $(am_test_yahoo_parser_OBJECTS)
 test_yahoo_parser_LDADD = $(LDADD)
 test_yahoo_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_yauba_parser_OBJECTS = test-yauba-parser.$(OBJEXT)
 test_yauba_parser_OBJECTS = $(am_test_yauba_parser_OBJECTS)
 test_yauba_parser_LDADD = $(LDADD)
 test_yauba_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_youtube_parser_OBJECTS = test-youtube-parser.$(OBJEXT)
 test_youtube_parser_OBJECTS = $(am_test_youtube_parser_OBJECTS)
 test_youtube_parser_LDADD = $(LDADD)
 test_youtube_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_ut_content_handler_OBJECTS = ut-content-handler.$(OBJEXT)
 ut_content_handler_OBJECTS = $(am_ut_content_handler_OBJECTS)
 ut_content_handler_LDADD = $(LDADD)
 ut_content_handler_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_ut_feeds_OBJECTS = ut-feeds.$(OBJEXT)
 ut_feeds_OBJECTS = $(am_ut_feeds_OBJECTS)
 ut_feeds_LDADD = $(LDADD)
 ut_feeds_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_ut_json_renderer_OBJECTS = ut-json-renderer.$(OBJEXT)
 ut_json_renderer_OBJECTS = $(am_ut_json_renderer_OBJECTS)
 ut_json_renderer_LDADD = $(LDADD)
 ut_json_renderer_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_ut_parser_OBJECTS = ut-parser.$(OBJEXT)
 ut_parser_OBJECTS = $(am_ut_parser_OBJECTS)
 ut_parser_LDADD = $(LDADD)
 ut_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_ut_qc_OBJECTS = ut-qc.$(OBJEXT)
 ut_qc_OBJECTS = $(am_ut_qc_OBJECTS)
 ut_qc_LDADD = $(LDADD)
 ut_qc_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_ut_se_handler_OBJECTS = ut-se-handler.$(OBJEXT)
 ut_se_handler_OBJECTS = $(am_ut_se_handler_OBJECTS)
 ut_se_handler_LDADD = $(LDADD)
 ut_se_handler_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_ut_snippet_OBJECTS = ut-snippet.$(OBJEXT)
 ut_snippet_OBJECTS = $(am_ut_snippet_OBJECTS)
 ut_snippet_LDADD = $(LDADD)
 ut_snippet_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_ut_websearch_OBJECTS = ut-websearch.$(OBJEXT)
 ut_websearch_OBJECTS = $(am_ut_websearch_OBJECTS)
 ut_websearch_LDADD = $(LDADD)
 ut_websearch_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -483,23 +514,26 @@ test_mediawiki_parser_SOURCES = test-mediawiki-parser.cpp
 test_wordpress_parser_SOURCES = test-wordpress-parser.cpp
 test_redmine_parser_SOURCES = test-redmine-parser.cpp
 test_html_txt_parser_SOURCES = test-html-text-parser.cpp
-AM_CPPFLAGS = $(am__append_1) $(am__append_4) $(am__append_6) \
-	$(am__append_8) -Wall -g -Wno-deprecated -pipe -I${srcdir} \
-	-I${srcdir}/.. -I${top_srcdir}/src/dht -I${top_srcdir}/src/lsh \
-	-I${top_srcdir}/src/proxy -I${top_srcdir}/src/utils \
-	-I$(top_srcdir)/src/plugins/websearch @PCRE_CFLAGS@ \
+AM_CPPFLAGS = $(am__append_1) $(am__append_4) $(am__append_7) \
+	$(am__append_9) $(am__append_11) -Wall -g -Wno-deprecated \
+	-pipe -I${srcdir} -I${srcdir}/.. -I${top_srcdir}/src/dht \
+	-I${top_srcdir}/src/lsh -I${top_srcdir}/src/proxy \
+	-I${top_srcdir}/src/utils \
+	-I$(top_srcdir)/src/plugins/websearch \
+	-I$(top_srcdir)/src/plugins/websearch_api_compat @PCRE_CFLAGS@ \
 	@XML2_CFLAGS@ @ICU_CFLAGS@ $(GTEST_CPPFLAGS) -I../../../proxy/
-AM_LDFLAGS = $(am__append_2) $(am__append_5) $(am__append_7) \
-	$(am__append_9) -L.. -L$(top_builddir)/src/dht \
-	-L$(top_builddir)/src/lsh -L$(top_builddir)/src/proxy \
-	-L$(top_builddir)/src/utils \
-	-L$(top_builddir)/src/plugins/websearch $(GTEST_LDFLAGS) \
-	$(am__append_11)
-LDADD = $(am__append_3) $(am__append_10) -lseeksdht -lseekslsh \
-	-lseeksproxy -lseeksplugins -lseeksutils \
-	-lseekswebsearchplugin -lrmd160 @XML2_LDADD@ @CURL_LDADD@ \
-	@ICU_LDADD@ -lpthread -lpcreposix -lpcre -lz @LCOV_LIBS@ \
-	$(GTEST_LIBS)
+AM_LDFLAGS = $(am__append_2) $(am__append_5) $(am__append_8) \
+	$(am__append_10) $(am__append_12) -L.. \
+	-L$(top_builddir)/src/dht -L$(top_builddir)/src/lsh \
+	-L$(top_builddir)/src/proxy -L$(top_builddir)/src/utils \
+	-L$(top_builddir)/src/plugins/websearch \
+	-L$(top_builddir)/src/plugins/websearch_api_compat \
+	$(GTEST_LDFLAGS) $(am__append_14)
+LDADD = $(am__append_3) $(am__append_6) $(am__append_13) -lseeksdht \
+	-lseekslsh -lseeksproxy -lseeksplugins -lseeksutils \
+	-lseekswebsearchplugin -lseekswebsearchapicompatplugin \
+	-lrmd160 @XML2_LDADD@ @CURL_LDADD@ @ICU_LDADD@ -lpthread \
+	-lpcreposix -lpcre -lz @LCOV_LIBS@ $(GTEST_LIBS)
 all: all-am
 
 .SUFFIXES:
