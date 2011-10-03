@@ -34,10 +34,11 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_1 = query_capture uri_capture cf udb_service
-@HAVE_PROTOBUF_TRUE@am__append_2 = query_capture/tests \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_2 = img_websearch
+@HAVE_HTTPSERV_PLUGIN_TRUE@am__append_3 = httpserv
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_4 = img_websearch/tests
+@HAVE_PROTOBUF_TRUE@am__append_5 = query_capture/tests \
 @HAVE_PROTOBUF_TRUE@	udb_service/tests
-@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_3 = img_websearch
-@HAVE_HTTPSERV_PLUGIN_TRUE@am__append_4 = httpserv
 subdir = src/plugins
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -65,9 +66,10 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
 	distdir
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = query_capture uri_capture cf udb_service websearch \
-	websearch_api_compat blocker no_tracking query_capture/tests \
-	udb_service/tests img_websearch httpserv
+DIST_SUBDIRS = query_capture uri_capture cf udb_service \
+	websearch_api_compat websearch blocker no_tracking \
+	img_websearch httpserv websearch/tests img_websearch/tests \
+	query_capture/tests udb_service/tests
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 am__relativize = \
   dir0=`pwd`; \
@@ -283,8 +285,9 @@ top_srcdir = @top_srcdir@
 udbservice = @udbservice@
 uricapture = @uricapture@
 with_gtest = @with_gtest@
-SUBDIRS = $(am__append_1) websearch websearch_api_compat blocker \
-	no_tracking $(am__append_2) $(am__append_3) $(am__append_4)
+SUBDIRS = $(am__append_1) websearch_api_compat websearch blocker \
+	no_tracking $(am__append_2) $(am__append_3) websearch/tests \
+	$(am__append_4) $(am__append_5)
 all: all-recursive
 
 .SUFFIXES:

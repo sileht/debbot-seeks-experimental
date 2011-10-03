@@ -56,28 +56,39 @@ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-lcfplugin \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	-ludbserviceplugin
 
-@HAVE_PROTOBUF_TRUE@am__append_4 = \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_4 = \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@	-I$(top_srcdir)/src/plugins/img_websearch \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@	`pkg-config opencv --cflags`
+
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_5 = \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@       -L$(top_builddir)/src/plugins/img_websearch \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@       `pkg-config opencv --libs`
+
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_6 = \
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@       -lseeksimgwebsearchplugin
+
+@HAVE_PROTOBUF_TRUE@am__append_7 = \
 @HAVE_PROTOBUF_TRUE@	`pkg-config --cflags protobuf`
 
-@HAVE_PROTOBUF_TRUE@am__append_5 = \
+@HAVE_PROTOBUF_TRUE@am__append_8 = \
 @HAVE_PROTOBUF_TRUE@	`pkg-config --libs protobuf`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_6 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_9 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	`pkg-config --cflags tokyocabinet`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_7 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_10 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@        `pkg-config --libs tokyocabinet`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_8 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_11 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@        `pkg-config --cflags tokyotyrant`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_9 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_12 = \
 @HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@      	   `pkg-config --libs tokyotyrant`
 
-@HAVE_PROTOBUF_TRUE@am__append_10 = \
+@HAVE_PROTOBUF_TRUE@am__append_13 = \
 @HAVE_PROTOBUF_TRUE@	-lseeksuserdb -lseeksuserdbfix
 
-@USE_PERL_TRUE@am__append_11 = `perl -MExtUtils::Embed -e ldopts`
+@USE_PERL_TRUE@am__append_14 = `perl -MExtUtils::Embed -e ldopts`
 subdir = src/plugins/udb_service/tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
@@ -95,12 +106,13 @@ test_bqc_OBJECTS = $(am_test_bqc_OBJECTS)
 test_bqc_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
 test_bqc_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_ut_udb_server_OBJECTS = ut-udb-server.$(OBJEXT)
 ut_udb_server_OBJECTS = $(am_ut_udb_server_OBJECTS)
 ut_udb_server_LDADD = $(LDADD)
 ut_udb_server_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -313,23 +325,26 @@ with_gtest = @with_gtest@
 TESTS = $(check_PROGRAMS)
 test_bqc_SOURCES = test-bqc.cpp
 ut_udb_server_SOURCES = ut-udb-server.cpp
-AM_CPPFLAGS = $(am__append_1) $(am__append_4) $(am__append_6) \
-	$(am__append_8) -Wall -g -Wno-deprecated -pipe -I${srcdir} \
-	-I${srcdir}/.. -I${top_srcdir}/src/dht -I${top_srcdir}/src/lsh \
-	-I${top_srcdir}/src/proxy -I${top_srcdir}/src/utils \
-	-I$(top_srcdir)/src/plugins/websearch @PCRE_CFLAGS@ \
+AM_CPPFLAGS = $(am__append_1) $(am__append_4) $(am__append_7) \
+	$(am__append_9) $(am__append_11) -Wall -g -Wno-deprecated \
+	-pipe -I${srcdir} -I${srcdir}/.. -I${top_srcdir}/src/dht \
+	-I${top_srcdir}/src/lsh -I${top_srcdir}/src/proxy \
+	-I${top_srcdir}/src/utils \
+	-I$(top_srcdir)/src/plugins/websearch \
+	-I$(top_srcdir)/src/plugins/websearch_api_compat @PCRE_CFLAGS@ \
 	@XML2_CFLAGS@ @ICU_CFLAGS@ $(GTEST_CPPFLAGS) -I../../../proxy/
-AM_LDFLAGS = $(am__append_2) $(am__append_5) $(am__append_7) \
-	$(am__append_9) -L.. -L$(top_builddir)/src/dht \
-	-L$(top_builddir)/src/lsh -L$(top_builddir)/src/proxy \
-	-L$(top_builddir)/src/utils \
-	-L$(top_builddir)/src/plugins/websearch $(GTEST_LDFLAGS) \
-	$(am__append_11)
-LDADD = $(am__append_3) $(am__append_10) -lseeksdht -lseekslsh \
-	-lseeksproxy -lseeksplugins -lseeksutils \
-	-lseekswebsearchplugin -lrmd160 @XML2_LDADD@ @CURL_LDADD@ \
-	@ICU_LDADD@ -lpthread -lpcreposix -lpcre -lz @LCOV_LIBS@ \
-	$(GTEST_LIBS)
+AM_LDFLAGS = $(am__append_2) $(am__append_5) $(am__append_8) \
+	$(am__append_10) $(am__append_12) -L.. \
+	-L$(top_builddir)/src/dht -L$(top_builddir)/src/lsh \
+	-L$(top_builddir)/src/proxy -L$(top_builddir)/src/utils \
+	-L$(top_builddir)/src/plugins/websearch \
+	-L$(top_builddir)/src/plugins/websearch_api_compat \
+	$(GTEST_LDFLAGS) $(am__append_14)
+LDADD = $(am__append_3) $(am__append_6) $(am__append_13) -lseeksdht \
+	-lseekslsh -lseeksproxy -lseeksplugins -lseeksutils \
+	-lseekswebsearchplugin -lseekswebsearchapicompatplugin \
+	-lrmd160 @XML2_LDADD@ @CURL_LDADD@ @ICU_LDADD@ -lpthread \
+	-lpcreposix -lpcre -lz @LCOV_LIBS@ $(GTEST_LIBS)
 all: all-am
 
 .SUFFIXES:
