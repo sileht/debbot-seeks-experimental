@@ -19996,7 +19996,7 @@ esac
 ######################################################################
 
 
-ac_config_files="$ac_config_files Makefile doc/Makefile src/Makefile src/lsh/Makefile src/lsh/tests/Makefile src/dht/Makefile src/dht/tests/Makefile src/proxy/Makefile src/proxy/tests/Makefile src/plugins/Makefile src/plugins/websearch/Makefile src/plugins/websearch/tests/Makefile src/plugins/websearch_api_compat/Makefile src/plugins/img_websearch/Makefile src/plugins/img_websearch/tests/Makefile src/plugins/httpserv/Makefile src/plugins/blocker/Makefile src/plugins/no_tracking/Makefile src/plugins/uri_capture/Makefile src/plugins/uri_capture/tests/Makefile src/plugins/query_capture/Makefile src/plugins/query_capture/tests/Makefile src/plugins/cf/Makefile src/plugins/cf/tests/Makefile src/plugins/udb_service/Makefile src/plugins/udb_service/tests/Makefile src/utils/Makefile src/utils/tests/Makefile"
+ac_config_files="$ac_config_files Makefile doc/Makefile src/Makefile src/lsh/Makefile src/lsh/tests/Makefile src/dht/Makefile src/dht/tests/Makefile src/proxy/Makefile src/proxy/tests/Makefile src/plugins/Makefile src/plugins/websearch/Makefile src/plugins/websearch/tests/Makefile src/plugins/websearch_api_compat/Makefile src/plugins/img_websearch/Makefile src/plugins/img_websearch/tests/Makefile src/plugins/httpserv/Makefile src/plugins/blocker/Makefile src/plugins/no_tracking/Makefile src/plugins/uri_capture/Makefile src/plugins/uri_capture/tests/Makefile src/plugins/query_capture/Makefile src/plugins/query_capture/tests/Makefile src/plugins/cf/Makefile src/plugins/cf/tests/Makefile src/plugins/udb_service/Makefile src/plugins/udb_service/tests/Makefile src/cli/Makefile src/utils/Makefile src/utils/tests/Makefile"
 
 
 cat >confcache <<\_ACEOF
@@ -21330,6 +21330,7 @@ do
     "src/plugins/cf/tests/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/cf/tests/Makefile" ;;
     "src/plugins/udb_service/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/udb_service/Makefile" ;;
     "src/plugins/udb_service/tests/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/udb_service/tests/Makefile" ;;
+    "src/cli/Makefile") CONFIG_FILES="$CONFIG_FILES src/cli/Makefile" ;;
     "src/utils/Makefile") CONFIG_FILES="$CONFIG_FILES src/utils/Makefile" ;;
     "src/utils/tests/Makefile") CONFIG_FILES="$CONFIG_FILES src/utils/tests/Makefile" ;;
 
