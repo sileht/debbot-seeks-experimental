@@ -365,7 +365,7 @@ LDADD = -lseekswebsearchplugin -lseekswebsearchapicompatplugin \
 	-lseeksproxy -lseeksplugins $(am__append_12) -lpcre \
 	-lpcreposix -lseekslsh -lseeksdht -lrmd160 -lpthread -lz \
 	@CURL_LDADD@ $(am__append_13)
-SUBDIRS = utils proxy lsh dht plugins proxy/tests lsh/tests .
+SUBDIRS = utils proxy lsh dht plugins proxy/tests lsh/tests . cli
 configdir = $(sysconfdir)/seeks
 dist_config_DATA = config \
 		 lsh/lsh-config
