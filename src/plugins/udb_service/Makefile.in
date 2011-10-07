@@ -17,6 +17,7 @@
 
 #automake for udb_service plugin.
 
+
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
@@ -37,7 +38,8 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 subdir = src/plugins/udb_service
-DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
+DIST_COMMON = $(dist_udbservicepluginconfig_DATA) \
+	$(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
 	$(top_srcdir)/configure.in
@@ -68,11 +70,12 @@ am__nobase_list = $(am__nobase_strip_setup); \
 am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-am__installdirs = "$(DESTDIR)$(udbservicepluginlibdir)"
+am__installdirs = "$(DESTDIR)$(udbservicepluginlibdir)" \
+	"$(DESTDIR)$(udbservicepluginconfigdir)"
 LTLIBRARIES = $(udbservicepluginlib_LTLIBRARIES)
 libudbserviceplugin_la_LIBADD =
 am_libudbserviceplugin_la_OBJECTS = udb_service.lo udb_server.lo \
-	udb_client.lo halo_msg_wrapper.lo
+	udb_client.lo halo_msg_wrapper.lo udb_service_configuration.lo
 @HAVE_PROTOBUF_TRUE@am__objects_1 = halo_msg.pb.lo
 @HAVE_PROTOBUF_TRUE@nodist_libudbserviceplugin_la_OBJECTS =  \
 @HAVE_PROTOBUF_TRUE@	$(am__objects_1)
@@ -103,6 +106,7 @@ LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 SOURCES = $(libudbserviceplugin_la_SOURCES) \
 	$(nodist_libudbserviceplugin_la_SOURCES)
 DIST_SOURCES = $(libudbserviceplugin_la_SOURCES)
+DATA = $(dist_udbservicepluginconfig_DATA)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -309,11 +313,12 @@ ACLOCAL_AMFLAGS = -I m4
 @HAVE_PROTOBUF_TRUE@nodist_libudbserviceplugin_la_SOURCES = $(protoc_outputs)
 udbservicepluginlib_LTLIBRARIES = libudbserviceplugin.la
 libudbserviceplugin_la_SOURCES = udb_service.cpp udb_server.cpp udb_client.cpp \
-			       halo_msg_wrapper.cpp \
+			       halo_msg_wrapper.cpp udb_service_configuration.cpp \
 	                       udb_service.h udb_server.h udb_client.h \
-	                       halo_msg_wrapper.h udbs_err.h
+	                       halo_msg_wrapper.h udbs_err.h udb_service_configuration.h
 
 udbservicepluginconfigdir = $(sysconfdir)/seeks
+dist_udbservicepluginconfig_DATA = udb-service-config
 BUILT_SOURCES = $(protoc_outputs)
 EXTRA_DIST = $(protoc_inputs)
 all: $(BUILT_SOURCES)
@@ -396,6 +401,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/udb_client.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/udb_server.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/udb_service.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/udb_service_configuration.Plo@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -444,6 +450,26 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
+install-dist_udbservicepluginconfigDATA: $(dist_udbservicepluginconfig_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(udbservicepluginconfigdir)" || $(MKDIR_P) "$(DESTDIR)$(udbservicepluginconfigdir)"
+	@list='$(dist_udbservicepluginconfig_DATA)'; test -n "$(udbservicepluginconfigdir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(udbservicepluginconfigdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(udbservicepluginconfigdir)" || exit $$?; \
+	done
+
+uninstall-dist_udbservicepluginconfigDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(dist_udbservicepluginconfig_DATA)'; test -n "$(udbservicepluginconfigdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(udbservicepluginconfigdir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(udbservicepluginconfigdir)" && rm -f $$files
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -530,9 +556,9 @@ distdir: $(DISTFILES)
 check-am: all-am
 check: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) check-am
-all-am: Makefile $(LTLIBRARIES)
+all-am: Makefile $(LTLIBRARIES) $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(udbservicepluginlibdir)"; do \
+	for dir in "$(DESTDIR)$(udbservicepluginlibdir)" "$(DESTDIR)$(udbservicepluginconfigdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -585,7 +611,8 @@ info: info-am
 
 info-am:
 
-install-data-am: install-udbservicepluginlibLTLIBRARIES
+install-data-am: install-dist_udbservicepluginconfigDATA \
+	install-udbservicepluginlibLTLIBRARIES
 
 install-dvi: install-dvi-am
 
@@ -631,7 +658,8 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-udbservicepluginlibLTLIBRARIES
+uninstall-am: uninstall-dist_udbservicepluginconfigDATA \
+	uninstall-udbservicepluginlibLTLIBRARIES
 
 .MAKE: all check install install-am install-strip
 
@@ -640,15 +668,17 @@ uninstall-am: uninstall-udbservicepluginlibLTLIBRARIES
 	ctags distclean distclean-compile distclean-generic \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip \
+	install-data-am install-dist_udbservicepluginconfigDATA \
+	install-dvi install-dvi-am install-exec install-exec-am \
+	install-html install-html-am install-info install-info-am \
+	install-man install-pdf install-pdf-am install-ps \
+	install-ps-am install-strip \
 	install-udbservicepluginlibLTLIBRARIES installcheck \
 	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags uninstall uninstall-am \
+	uninstall-dist_udbservicepluginconfigDATA \
 	uninstall-udbservicepluginlibLTLIBRARIES
 
 

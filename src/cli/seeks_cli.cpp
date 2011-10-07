@@ -17,35 +17,37 @@
  */
 
 #include "cli.h"
+#include "miscutil.h"
 #include "errlog.h"
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/times.h>
 
+#include <vector>
 #include <map>
 #include <string>
 #include <iostream>
 
 using namespace seekscli;
+using sp::miscutil;
 using sp::errlog;
 
 void print_usage()
 {
-  //TODO: options before command.
-  std::cout << "usage: seeks_cli [--x <get,put,delete,post>] <command> <url> [<query>] [<args>]\n";
+  std::cout << "usage: seeks_cli [--timeout <seconds>] [--proxy <addr:port>] [--output <html,json,xml> [--x <get,put,delete,post>] <command> <url> [<query>] [<args>]\n";
   std::cout << "seeks_cli info <url>\n";
   std::cout << "seeks_cli peers <url>\n";
   std::cout << "seeks_cli [--x <get>] recommend <url> <query> [--nreco <nreco>] [--radius <radius>] [--peers <local|ring>] [--lang <lang>] [--order <rank|new-date|old-date|new-activity|old-activity>]\n";
   std::cout << "seeks_cli --x <post> recommend <url> <query> --title <title> [--radius <radius>] [--peers <local|ring>] [--lang <lang>] [--url-check <0|1>]\n";
   std::cout << "seeks_cli --x <delete> recommend <url> <query> --url <url> [--lang <lang>]\n";
   std::cout << "seeks_cli suggest <url> <query> [--nsugg <nsugg>] [--radius <radius>] [--peers <local|ring>]\n";
-  std::cout << "seeks_cli [--x <get,put,delete,post>] search <url> <query> [--sid <snippet_id>] [--engines <list of separated engines>] [--rpp <rpp>] [--page <page>] [--prs <on|off>] [--lang <lang>] [--thumbs <on|off>] [--expansion <expansion>] [--peers <local|ring>] [--order <rank|new-date|old-date|new-activity|old-activity>] [--redirect <url>] [--cpost <url>]\n";
-  std::cout << "seeks_cli words <url> <query> [--sid <snippet_id>] [--lang <lang>]\n";
+  std::cout << "seeks_cli [--x <get,put,delete,post>] search <url> <query> [--sid <snippet_id> | --surl <url>] [--engines <list of separated engines>] [--rpp <rpp>] [--page <page>] [--prs <on|off>] [--lang <lang>] [--thumbs <on|off>] [--expansion <expansion>] [--peers <local|ring>] [--order <rank|new-date|old-date|new-activity|old-activity>] [--redirect <url>] [--cpost <url>]\n";
+  std::cout << "seeks_cli words <url> <query> [--sid <snippet_id> | --surl <url>] [--lang <lang>]\n";
   std::cout << "seeks_cli recent_queries <url> [--nq <nq>]\n";
   std::cout << "seeks_cli cluster_types <url> <query> [--lang <lang>]\n";
   std::cout << "seeks_cli cluster_auto <url> <query> [--nclusters <nclusters>] [--lang <lang>]\n";
-  std::cout << "seeks_cli similar <url> <query> [--sid <snippet_id>] [--lang <lang>]\n";
+  std::cout << "seeks_cli similar <url> <query> [--sid <snippet_id> | --surl <url>] [--lang <lang>]\n";
   std::cout << "seeks_cli cache <url> <query> --url <url> [--lang <lang>]\n";
 
   //TODO: examples.
@@ -63,7 +65,11 @@ int main(int argc, char **argv)
   errlog::set_debug_level(LOG_LEVEL_FATAL | LOG_LEVEL_ERROR | LOG_LEVEL_INFO | LOG_LEVEL_DEBUG);
 
   // catch options.
+  int timeout = 5;
+  std::string output = "json";
   std::string http_method = "get";
+  std::string proxy_addr = "";
+  short proxy_port = 0;
   int i = 0;
   while(++i < argc)
     {
@@ -89,6 +95,58 @@ int main(int argc, char **argv)
               exit(-1);
             }
         }
+      else if (o == "--output")
+        {
+          const char *ou = argv[++i];
+          if (ou)
+            {
+              output = ou;
+              if (output != "json" && output != "html" && output != "xml")
+                {
+                  std::cout << "wrong argument: --output " + output << std::endl;
+                  exit(-1);
+                }
+            }
+          else
+            {
+              std::cout << "missing argument: --output\n";
+              exit(-1);
+            }
+        }
+      else if (o == "--timeout")
+        {
+          const char *tm = argv[++i];
+          if (tm)
+            {
+              timeout = atoi(tm);
+            }
+          else
+            {
+              std::cout << "missing argument: --timeout\n";
+              exit(-1);
+            }
+        }
+      else if (o == "--proxy")
+        {
+          const char *p = argv[++i];
+          if (p)
+            {
+              std::string params = p;
+              std::vector<std::string> vec;
+              miscutil::tokenize(params,vec,":");
+              if (vec.size()!=2)
+                {
+                  std::cout << "wrong argument: --proxy " + params << std::endl;
+                  exit(-1);
+                }
+              else
+                {
+                  proxy_addr = vec.at(0);
+                  proxy_port = atoi(vec.at(1).c_str());
+                  cli::set_proxy(proxy_addr,proxy_port);
+                }
+            }
+        }
     }
 
   std::string command = argv[i];
@@ -109,7 +167,7 @@ int main(int argc, char **argv)
           || p == "--nclusters" || p == "--sid" || p == "--engines"
           || p == "--rpp" || p == "--page" || p == "--prs"
           || p == "--thumbs" || p == "--nq" || p == "--redirect"
-          || p == "--cpost")
+          || p == "--cpost" || p == "--surl")
         {
           std::string v = argv[++i];
           params.insert(std::pair<std::string,std::string>(p,v));
@@ -126,17 +184,16 @@ int main(int argc, char **argv)
   struct tms en_cpu;
   clock_t start_time = times(&st_cpu);
 
-  int timeout = 5; // default.
   std::map<std::string,std::string>::const_iterator mit;
   std::string *result = NULL;
   int err = 0;
   if (command == "info")
     {
-      err = cli::get_info(node,true,timeout,result);
+      err = cli::get_info(node,output,timeout,result);
     }
   else if (command == "peers")
     {
-      err = cli::get_peers(node,true,timeout,result);
+      err = cli::get_peers(node,output,timeout,result);
     }
   else if (command == "recommend")
     {
@@ -158,13 +215,13 @@ int main(int argc, char **argv)
       if ((mit=params.find("--url_check"))!=params.end())
         url_check = (*mit).second;
       if (http_method == "get")
-        err = cli::get_recommendation(node,true,timeout,
+        err = cli::get_recommendation(node,output,timeout,
                                       query,nreco,radius,peers,lang,order,
                                       result);
       else if (http_method == "delete")
-        err = cli::delete_recommendation(node,true,timeout,query,purl,lang,result);
+        err = cli::delete_recommendation(node,output,timeout,query,purl,lang,result);
       else if (http_method == "post")
-        err = cli::post_recommendation(node,true,timeout,query,purl,title,
+        err = cli::post_recommendation(node,output,timeout,query,purl,title,
                                        radius,url_check,lang,result);
     }
   else if (command == "suggest")
@@ -176,15 +233,17 @@ int main(int argc, char **argv)
         nsugg = (*mit).second;
       if ((mit=params.find("--radius"))!=params.end())
         radius = (*mit).second;
-      err = cli::get_suggestion(node,true,timeout,
+      err = cli::get_suggestion(node,output,timeout,
                                 query,nsugg,radius,peers,result);
     }
   else if (command == "search")
     {
       std::string sid,rpp,peers,expansion,engines,page,prs,
-          lang,thumbs,order,redirect,cpost;
+          lang,thumbs,order,redirect,cpost,surl;
       if ((mit=params.find("--sid"))!=params.end())
         sid = (*mit).second;
+      else if ((mit=params.find("--surl"))!=params.end())
+        surl = (*mit).second;
       if ((mit=params.find("--peers"))!=params.end())
         peers = (*mit).second;
       if ((mit=params.find("--rpp"))!=params.end())
@@ -209,54 +268,56 @@ int main(int argc, char **argv)
         cpost = (*mit).second;
       if (http_method == "get")
         {
-          if (sid.empty())
-            err = cli::get_search_txt_query(node,true,timeout,
+          if (sid.empty() && surl.empty())
+            err = cli::get_search_txt_query(node,output,timeout,
                                             query,engines,rpp,page,lang,thumbs,
                                             expansion,peers,order,result);
-          else err = cli::get_search_txt_snippet(node,true,timeout,
-                                                   query,sid,lang,result);
+          else err = cli::get_search_txt_snippet(node,output,timeout,
+                                                   query,sid,surl,lang,result);
         }
       else if (http_method == "put")
         {
-          err = cli::put_search_txt_query(node,true,timeout,
+          err = cli::put_search_txt_query(node,output,timeout,
                                           query,engines,rpp,page,lang,thumbs,
                                           expansion,peers,order,result);
         }
-      else if (http_method == "post" && !sid.empty())
+      else if (http_method == "post" && (!sid.empty() || !surl.empty()))
         {
-          err = cli::post_search_snippet(node,true,timeout,
-                                         query,sid,lang,redirect,cpost,result);
+          err = cli::post_search_snippet(node,output,timeout,
+                                         query,sid,surl,lang,redirect,cpost,result);
         }
-      else if (http_method == "delete" && !sid.empty())
+      else if (http_method == "delete" && (!sid.empty() || !surl.empty()))
         {
-          err = cli::delete_search_snippet(node,true,timeout,
-                                           query,sid,lang,result);
+          err = cli::delete_search_snippet(node,output,timeout,
+                                           query,sid,surl,lang,result);
         }
       else
         {
           std::cout << "wrong combination of http method " << http_method
-                    << " and parameters, maybe a missing --sid <snippet_id> ?\n";
+                    << " and parameters, maybe a missing --sid <snippet_id> or --surl <url> ?\n";
         }
     }
   else if (command == "words")
     {
-      std::string lang,sid;
+      std::string lang,sid,surl;
       if ((mit=params.find("--sid"))!=params.end())
         sid = (*mit).second;
+      if ((mit=params.find("--surl"))!=params.end())
+        surl = (*mit).second;
       if ((mit=params.find("--lang"))!=params.end())
         lang = (*mit).second;
-      if (sid.empty())
-        err = cli::get_words_query(node,true,timeout,
+      if (sid.empty() && surl.empty())
+        err = cli::get_words_query(node,output,timeout,
                                    query,lang,result);
-      else err = cli::get_words_snippet(node,true,timeout,
-                                          query,sid,lang,result);
+      else err = cli::get_words_snippet(node,output,timeout,
+                                          query,sid,surl,lang,result);
     }
   else if (command == "recent_queries")
     {
       std::string nq;
       if ((mit=params.find("--nq"))!=params.end())
         nq = (*mit).second;
-      err = cli::get_recent_queries(node,true,timeout,
+      err = cli::get_recent_queries(node,output,timeout,
                                     nq,result);
     }
   else if (command == "cluster_types")
@@ -264,7 +325,7 @@ int main(int argc, char **argv)
       std::string lang;
       if ((mit=params.find("--lang"))!=params.end())
         lang = (*mit).second;
-      err = cli::get_cluster_types(node,true,timeout,
+      err = cli::get_cluster_types(node,output,timeout,
                                    query,lang,result);
     }
   else if (command == "cluster_auto")
@@ -274,18 +335,20 @@ int main(int argc, char **argv)
         lang = (*mit).second;
       if ((mit=params.find("--nclusters"))!=params.end())
         nclusters = (*mit).second;
-      err = cli::get_cluster_auto(node,true,timeout,
+      err = cli::get_cluster_auto(node,output,timeout,
                                   query,lang,nclusters,result);
     }
   else if (command == "similar")
     {
-      std::string sid,lang;
+      std::string sid,lang,surl;
       if ((mit=params.find("--lang"))!=params.end())
         lang = (*mit).second;
       if ((mit=params.find("--sid"))!=params.end())
         sid = (*mit).second;
-      err = cli::get_similar_txt_snippet(node,true,timeout,
-                                         query,sid,lang,result);
+      if ((mit=params.find("--surl"))!=params.end())
+        surl = (*mit).second;
+      err = cli::get_similar_txt_snippet(node,output,timeout,
+                                         query,sid,surl,lang,result);
     }
   else if (command == "cache")
     {
@@ -294,7 +357,7 @@ int main(int argc, char **argv)
         lang = (*mit).second;
       if ((mit=params.find("--url"))!=params.end())
         url = (*mit).second;
-      err = cli::get_cache_txt(node,true,timeout,
+      err = cli::get_cache_txt(node,output,timeout,
                                query,url,lang,result);
     }
   else

@@ -19,15 +19,21 @@
 #include "cli.h"
 #include "curl_mget.h"
 #include "encode.h"
+#include "miscutil.h"
+#include "superfasthash.h"
 
 #include <cstdlib>
 #include <iostream>
 
 using sp::curl_mget;
 using sp::encode;
+using sp::miscutil;
 
 namespace seekscli
 {
+  std::string cli::_proxy_addr = "";
+  short cli::_proxy_port = 0;
+
   void cli::make_call(const int &timeout,
                       const std::string &url,
                       const std::string &http_method,
@@ -35,7 +41,8 @@ namespace seekscli
                       std::string *&result)
   {
     curl_mget cmg(1,timeout,0,timeout,0);
-    result = cmg.www_simple(url,status,http_method);
+    result = cmg.www_simple(url,status,http_method,NULL,-1,"",
+                            cli::_proxy_addr,cli::_proxy_port);
   }
 
   std::string cli::url_encode(const std::string &str)
@@ -46,8 +53,38 @@ namespace seekscli
     return enc_str;
   }
 
+  std::string cli::strip_url(const std::string &url)
+  {
+    std::string surl = url;
+    if (strncmp(surl.c_str(),"http://",7)==0)
+      surl = surl.substr(7);
+    else if (strncmp(surl.c_str(),"https://",8)==0)
+      surl = surl.substr(8);
+    if (miscutil::strncmpic(surl.c_str(),"www.",4)==0)
+      surl = surl.substr(4);
+    if (surl[surl.length()-1]=='/') // remove trailing '/'.
+      surl = surl.substr(0,surl.length()-1);
+    return surl;
+  }
+
+  std::string cli::url_to_id(const std::string &url)
+  {
+    std::string url_lc = url;
+    miscutil::to_lower(url_lc);
+    url_lc = cli::strip_url(url_lc);
+    uint32_t id = SuperFastHash(url_lc.c_str(),url_lc.size());
+    return miscutil::to_string(id);
+  }
+
+  void cli::set_proxy(const std::string &proxy_addr,
+                      const short &proxy_port)
+  {
+    cli::_proxy_addr = proxy_addr;
+    cli::_proxy_port = proxy_port;
+  }
+
   int cli::get_info(const std::string &seeks_url,
-                    const bool &output,
+                    const std::string &output,
                     const int &timeout,
                     std::string *&result)
   {
@@ -58,11 +95,12 @@ namespace seekscli
   }
 
   int cli::get_search_txt(const std::string &seeks_url,
-                          const bool &output,
+                          const std::string &output,
                           const int &timeout,
                           const std::string &http_method,
                           const std::string &query,
                           const std::string &snippet_id,
+                          const std::string &snippet_url,
                           const std::string &engines,
                           const std::string &rpp,
                           const std::string &page,
@@ -79,7 +117,9 @@ namespace seekscli
     std::string url = seeks_url + "/search/txt/" + enc_query;
     if (!snippet_id.empty())
       url += "/" + snippet_id;
-    url += "?output=json";
+    else if (!snippet_url.empty())
+      url += "/" + cli::url_to_id(snippet_url);
+    url += "?output=" + output;
     if (!engines.empty())
       url += "&engines=" + engines;
     if (!rpp.empty())
@@ -109,7 +149,7 @@ namespace seekscli
   }
 
   int cli::get_search_txt_query(const std::string &seeks_url,
-                                const bool &output,
+                                const std::string &output,
                                 const int &timeout,
                                 const std::string &query,
                                 const std::string &engines,
@@ -122,13 +162,13 @@ namespace seekscli
                                 const std::string &order,
                                 std::string *&result)
   {
-    return cli::get_search_txt(seeks_url,output,timeout,"GET",query,"",engines,
+    return cli::get_search_txt(seeks_url,output,timeout,"GET",query,"","",engines,
                                rpp,page,lang,thumbs,expansion,peers,order,
                                "","",result);
   }
 
   int cli::put_search_txt_query(const std::string &seeks_url,
-                                const bool &output,
+                                const std::string &output,
                                 const int &timeout,
                                 const std::string &query,
                                 const std::string &engines,
@@ -141,54 +181,58 @@ namespace seekscli
                                 const std::string &order,
                                 std::string *&result)
   {
-    return cli::get_search_txt(seeks_url,output,timeout,"PUT",query,"",engines,
+    return cli::get_search_txt(seeks_url,output,timeout,"PUT",query,"","",engines,
                                rpp,page,lang,thumbs,expansion,peers,order,
                                "","",result);
   }
 
   int cli::get_search_txt_snippet(const std::string &seeks_url,
-                                  const bool &output,
+                                  const std::string &output,
                                   const int &timeout,
                                   const std::string &query,
                                   const std::string &snippet_id,
+                                  const std::string &snippet_url,
                                   const std::string &lang,
                                   std::string *&result)
   {
     return cli::get_search_txt(seeks_url,output,timeout,"GET",query,snippet_id,
-                               "","","",lang,"","","","","","",result);
+                               snippet_url,"","","",lang,"","","","","","",result);
   }
 
   int cli::post_search_snippet(const std::string &seeks_url,
-                               const bool &output,
+                               const std::string &output,
                                const int &timeout,
                                const std::string &query,
                                const std::string &snippet_id,
+                               const std::string &snippet_url,
                                const std::string &lang,
                                const std::string &redirect,
                                const std::string &cpost,
                                std::string *&result)
   {
     return cli::get_search_txt(seeks_url,output,timeout,"POST",query,snippet_id,
-                               "","","",lang,"","","","",redirect,cpost,result);
+                               snippet_url,"","","",lang,"","","","",redirect,cpost,result);
   }
 
   int cli::delete_search_snippet(const std::string &seeks_url,
-                                 const bool &output,
+                                 const std::string &output,
                                  const int &timeout,
                                  const std::string &query,
                                  const std::string &snippet_id,
+                                 const std::string &snippet_url,
                                  const std::string &lang,
                                  std::string *&result)
   {
     return cli::get_search_txt(seeks_url,output,timeout,"DELETE",query,snippet_id,
-                               "","","",lang,"","","","","","",result);
+                               snippet_url,"","","",lang,"","","","","","",result);
   }
 
   int cli::get_words(const std::string &seeks_url,
-                     const bool &output,
+                     const std::string &output,
                      const int &timeout,
                      const std::string &query,
                      const std::string &snippet_id,
+                     const std::string &snippet_url,
                      const std::string &lang,
                      std::string *&result)
   {
@@ -196,7 +240,9 @@ namespace seekscli
     std::string url = seeks_url + "/words/" + enc_query;
     if (!snippet_id.empty())
       url += "/" + snippet_id;
-    url += "?output=json";
+    else if (!snippet_url.empty())
+      url += "/" + cli::url_to_id(snippet_url);
+    url += "?output=" + output;
     if (!lang.empty())
       url += "&lang=" + lang;
     int status = 0;
@@ -205,35 +251,36 @@ namespace seekscli
   }
 
   int cli::get_words_query(const std::string &seeks_url,
-                           const bool &output,
+                           const std::string &output,
                            const int &timeout,
                            const std::string &query,
                            const std::string &lang,
                            std::string *&result)
   {
-    return cli::get_words(seeks_url,output,timeout,query,"",
+    return cli::get_words(seeks_url,output,timeout,query,"","",
                           lang,result);
   }
 
   int cli::get_words_snippet(const std::string &seeks_url,
-                             const bool &output,
+                             const std::string &output,
                              const int &timeout,
                              const std::string &query,
                              const std::string &snippet_id,
+                             const std::string &snippet_url,
                              const std::string &lang,
                              std::string *&result)
   {
     return cli::get_words(seeks_url,output,timeout,query,snippet_id,
-                          lang,result);
+                          snippet_url,lang,result);
   }
 
   int cli::get_recent_queries(const std::string &seeks_url,
-                              const bool &output,
+                              const std::string &output,
                               const int &timeout,
                               const std::string &nq,
                               std::string *&result)
   {
-    std::string url = seeks_url + "/recent/queries?output=json";
+    std::string url = seeks_url + "/recent/queries?output=" + output;
     if (!nq.empty())
       url += "&nq=" + nq;
     int status = 0;
@@ -242,7 +289,7 @@ namespace seekscli
   }
 
   int cli::get_cluster(const std::string &seeks_url,
-                       const bool &output,
+                       const std::string &output,
                        const int &timeout,
                        const std::string &cluster_type,
                        const std::string &query,
@@ -252,18 +299,18 @@ namespace seekscli
   {
     std::string enc_query = cli::url_encode(query);
     std::string url = seeks_url + "/cluster/" + cluster_type + "/"
-                      + enc_query + "?output=json";
+                      + enc_query + "?output=" + output;
     if (!lang.empty())
       url += "&lang=" + lang;
     if (!nclusters.empty())
-      url += "&nclusters=" + nclusters;
+      url += "&clusters=" + nclusters;
     int status = 0;
     cli::make_call(timeout,url,"GET",status,result);
     return status;
   }
 
   int cli::get_cluster_types(const std::string &seeks_url,
-                             const bool &output,
+                             const std::string &output,
                              const int &timeout,
                              const std::string &query,
                              const std::string &lang,
@@ -274,7 +321,7 @@ namespace seekscli
   }
 
   int cli::get_cluster_auto(const std::string &seeks_url,
-                            const bool &output,
+                            const std::string &output,
                             const int &timeout,
                             const std::string &query,
                             const std::string &lang,
@@ -286,10 +333,11 @@ namespace seekscli
   }
 
   int cli::get_similar_txt_snippet(const std::string &seeks_url,
-                                   const bool &output,
+                                   const std::string &output,
                                    const int &timeout,
                                    const std::string &query,
                                    const std::string &snippet_id,
+                                   const std::string &snippet_url,
                                    const std::string &lang,
                                    std::string *&result)
   {
@@ -297,7 +345,9 @@ namespace seekscli
     std::string url = seeks_url + "/similar/txt/" + enc_query;
     if (!snippet_id.empty())
       url += "/" + snippet_id;
-    url += "?output=json";
+    else if (!snippet_url.empty())
+      url += "/" + cli::url_to_id(snippet_url);
+    url += "?output=" + output;
     if (!lang.empty())
       url += "&lang=" + lang;
     int status = 0;
@@ -306,7 +356,7 @@ namespace seekscli
   }
 
   int cli::get_cache_txt(const std::string &seeks_url,
-                         const bool &output,
+                         const std::string &output,
                          const int &timeout,
                          const std::string &query,
                          const std::string &url,
@@ -314,7 +364,7 @@ namespace seekscli
                          std::string *&result)
   {
     std::string enc_query = cli::url_encode(query);
-    std::string rurl = seeks_url + "/cache/txt/" + enc_query + "?output=json";
+    std::string rurl = seeks_url + "/cache/txt/" + enc_query + "?output=" + output;
     if (!lang.empty())
       rurl += "&lang=" + lang;
     if (!url.empty())
@@ -328,7 +378,7 @@ namespace seekscli
   }
 
   int cli::get_peers(const std::string &seeks_url,
-                     const bool &output,
+                     const std::string &output,
                      const int &timeout,
                      std::string *&result)
   {
@@ -339,7 +389,7 @@ namespace seekscli
   }
 
   int cli::recommendation(const std::string &seeks_url,
-                          const bool &output,
+                          const std::string &output,
                           const int &timeout,
                           const std::string &http_method,
                           const std::string &query,
@@ -354,7 +404,7 @@ namespace seekscli
                           std::string *&result)
   {
     std::string enc_query = cli::url_encode(query);
-    std::string rurl = seeks_url + "/recommendation/" + enc_query + "?output=json";
+    std::string rurl = seeks_url + "/recommendation/" + enc_query + "?output=" + output;
     if (!nreco.empty())
       rurl += "&nreco=" + nreco;
     if (!radius.empty())
@@ -383,7 +433,7 @@ namespace seekscli
   }
 
   int cli::get_recommendation(const std::string &seeks_url,
-                              const bool &output,
+                              const std::string &output,
                               const int &timeout,
                               const std::string &query,
                               const std::string &nreco,
@@ -398,7 +448,7 @@ namespace seekscli
   }
 
   int cli::post_recommendation(const std::string &seeks_url,
-                               const bool &output,
+                               const std::string &output,
                                const int &timeout,
                                const std::string &query,
                                const std::string &url,
@@ -413,7 +463,7 @@ namespace seekscli
   }
 
   int cli::delete_recommendation(const std::string &seeks_url,
-                                 const bool &output,
+                                 const std::string &output,
                                  const int &timeout,
                                  const std::string &query,
                                  const std::string &url,
@@ -425,7 +475,7 @@ namespace seekscli
   }
 
   int cli::get_suggestion(const std::string &seeks_url,
-                          const bool &output,
+                          const std::string &output,
                           const int &timeout,
                           const std::string &query,
                           const std::string &nsugg,
@@ -434,7 +484,7 @@ namespace seekscli
                           std::string *&result)
   {
     std::string enc_query = cli::url_encode(query);
-    std::string url = seeks_url + "/suggestion/" + enc_query + "?output=json";
+    std::string url = seeks_url + "/suggestion/" + enc_query + "?output=" + output;
     if (!nsugg.empty())
       url += "&nsugg=" + nsugg;
     if (!radius.empty())
