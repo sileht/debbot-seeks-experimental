@@ -75,7 +75,8 @@ LIBRARIES = $(seeksclilib_LIBRARIES)
 ARFLAGS = cru
 libseekscli_a_AR = $(AR) $(ARFLAGS)
 libseekscli_a_LIBADD =
-am_libseekscli_a_OBJECTS = cli.$(OBJEXT) encode.$(OBJEXT)
+am_libseekscli_a_OBJECTS = cli.$(OBJEXT) encode.$(OBJEXT) \
+	miscutil.$(OBJEXT)
 libseekscli_a_OBJECTS = $(am_libseekscli_a_OBJECTS)
 PROGRAMS = $(bin_PROGRAMS)
 am_seeks_cli_OBJECTS = seeks_cli.$(OBJEXT) curl_mget.$(OBJEXT) \
@@ -293,11 +294,11 @@ with_gtest = @with_gtest@
 seeksclilibdir = $(libdir)/seeks/cli
 seeksclidatadir = $(datadir)/seeks/cli
 AM_CXXFLAGS = -Wall -g -pipe
-AM_CPPFLAGS = -I${srcdir} -I${srcdir}/../proxy -I${srcdir}/../utils \
+AM_CPPFLAGS = -I${srcdir} -I${srcdir}/../proxy -I${srcdir}/../utils -I${srcdir}/../lsh \
             @CURL_CFLAGS@
 
 seeksclilib_LIBRARIES = libseekscli.a
-libseekscli_a_SOURCES = cli.cpp ../proxy/encode.cpp
+libseekscli_a_SOURCES = cli.cpp ../proxy/encode.cpp ../utils/miscutil.cpp
 seeks_cli_SOURCES = seeks_cli.cpp ../proxy/curl_mget.cpp ../proxy/errlog.cpp
 AM_LDFLAGS = -L${srcdir} -L${srcdir}/../proxy -L${srcdir}/../utils
 LDADD = -lseekscli -lseeksutils @CURL_LDADD@
@@ -428,6 +429,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/curl_mget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/encode.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/errlog.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/miscutil.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/seeks_cli.Po@am__quote@
 
 .cpp.o:
@@ -464,6 +466,20 @@ encode.obj: ../proxy/encode.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='../proxy/encode.cpp' object='encode.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o encode.obj `if test -f '../proxy/encode.cpp'; then $(CYGPATH_W) '../proxy/encode.cpp'; else $(CYGPATH_W) '$(srcdir)/../proxy/encode.cpp'; fi`
+
+miscutil.o: ../utils/miscutil.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT miscutil.o -MD -MP -MF $(DEPDIR)/miscutil.Tpo -c -o miscutil.o `test -f '../utils/miscutil.cpp' || echo '$(srcdir)/'`../utils/miscutil.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/miscutil.Tpo $(DEPDIR)/miscutil.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='../utils/miscutil.cpp' object='miscutil.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o miscutil.o `test -f '../utils/miscutil.cpp' || echo '$(srcdir)/'`../utils/miscutil.cpp
+
+miscutil.obj: ../utils/miscutil.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT miscutil.obj -MD -MP -MF $(DEPDIR)/miscutil.Tpo -c -o miscutil.obj `if test -f '../utils/miscutil.cpp'; then $(CYGPATH_W) '../utils/miscutil.cpp'; else $(CYGPATH_W) '$(srcdir)/../utils/miscutil.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/miscutil.Tpo $(DEPDIR)/miscutil.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='../utils/miscutil.cpp' object='miscutil.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o miscutil.obj `if test -f '../utils/miscutil.cpp'; then $(CYGPATH_W) '../utils/miscutil.cpp'; else $(CYGPATH_W) '$(srcdir)/../utils/miscutil.cpp'; fi`
 
 curl_mget.o: ../proxy/curl_mget.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT curl_mget.o -MD -MP -MF $(DEPDIR)/curl_mget.Tpo -c -o curl_mget.o `test -f '../proxy/curl_mget.cpp' || echo '$(srcdir)/'`../proxy/curl_mget.cpp
