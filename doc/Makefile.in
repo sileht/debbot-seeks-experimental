@@ -35,7 +35,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@HAVE_DOCBOOK2X_TRUE@am__append_1 = seeks.1
+@HAVE_DOCBOOK2X_TRUE@am__append_1 = seeks.1 seeks_cli.1
 subdir = doc
 DIST_COMMON = $(dist_man_MANS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -266,7 +266,7 @@ udbservice = @udbservice@
 uricapture = @uricapture@
 with_gtest = @with_gtest@
 dist_man_MANS = $(am__append_1)
-EXTRA_DIST = seeks.1.docbook
+EXTRA_DIST = seeks.1.docbook seeks_cli.1.docbook
 all: all-am
 
 .SUFFIXES:
@@ -510,6 +510,8 @@ uninstall-man: uninstall-man1
 
 seeks.1:
 	docbook2x-man ${srcdir}/seeks.1.docbook
+seeks_cli.1:
+	docbook2x-man ${srcdir}/seeks_cli.1.docbook
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
