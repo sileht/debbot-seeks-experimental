@@ -687,6 +687,7 @@ HAVE_TC_FALSE
 HAVE_TC_TRUE
 tokyocabinet_LIBS
 tokyocabinet_CFLAGS
+personalization
 HAVE_PROTOBUF_FALSE
 HAVE_PROTOBUF_TRUE
 protobuf_LIBS
@@ -17516,6 +17517,8 @@ fi
 
        udbservice=false
 
+       personalization=false
+
     fi
 
  # check on tokyo cabinet.
@@ -17700,6 +17703,8 @@ fi
       cf=false
 
       udbservice=false
+
+      personalization=false
 
    fi
  fi
