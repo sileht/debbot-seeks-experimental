@@ -363,6 +363,7 @@ opencv2 = @opencv2@
 opencv_CFLAGS = @opencv_CFLAGS@
 opencv_LIBS = @opencv_LIBS@
 pdfdir = @pdfdir@
+personalization = @personalization@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 protobuf_CFLAGS = @protobuf_CFLAGS@
