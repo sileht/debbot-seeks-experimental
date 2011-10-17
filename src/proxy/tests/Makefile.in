@@ -93,6 +93,16 @@ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 @HAVE_PROTOBUF_TRUE@	-lseeksuserdb -lseeksuserdbfix
 
 @USE_PERL_TRUE@am__append_16 = `perl -MExtUtils::Embed -e ldopts`
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_17 = -I${top_srcdir}/src/plugins/xsl_serializer \
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@     @XSLT_CFLAGS@ 
+
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_18 = \
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@	-L$(top_builddir)/src/plugins/xsl_serializer 
+
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_19 = \
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@      -lseeksxslserializerplugin \
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@      @XSLT_LDADD@
+
 subdir = src/proxy/tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
@@ -118,13 +128,14 @@ shash_OBJECTS = $(am_shash_OBJECTS)
 shash_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
 shash_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_curl_mget_OBJECTS = test-curl-mget.$(OBJEXT)
 test_curl_mget_OBJECTS = $(am_test_curl_mget_OBJECTS)
 test_curl_mget_LDADD = $(LDADD)
 test_curl_mget_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am__user_db_clear_SOURCES_DIST = user-db-clear.cpp
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am_user_db_clear_OBJECTS =  \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	user-db-clear.$(OBJEXT)
@@ -132,7 +143,7 @@ user_db_clear_OBJECTS = $(am_user_db_clear_OBJECTS)
 user_db_clear_LDADD = $(LDADD)
 user_db_clear_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am__user_db_export_SOURCES_DIST = user-db-export.cpp
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am_user_db_export_OBJECTS =  \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	user-db-export.$(OBJEXT)
@@ -140,7 +151,7 @@ user_db_export_OBJECTS = $(am_user_db_export_OBJECTS)
 user_db_export_LDADD = $(LDADD)
 user_db_export_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am__user_db_find_key_SOURCES_DIST = user-db-find-key.cpp
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am_user_db_find_key_OBJECTS =  \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	user-db-find-key.$(OBJEXT)
@@ -148,14 +159,15 @@ user_db_find_key_OBJECTS = $(am_user_db_find_key_OBJECTS)
 user_db_find_key_LDADD = $(LDADD)
 user_db_find_key_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am__user_db_ops_SOURCES_DIST = user-db-ops.cpp
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am_user_db_ops_OBJECTS =  \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	user-db-ops.$(OBJEXT)
 user_db_ops_OBJECTS = $(am_user_db_ops_OBJECTS)
 user_db_ops_LDADD = $(LDADD)
 user_db_ops_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am__user_db_print_SOURCES_DIST = user-db-print.cpp
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am_user_db_print_OBJECTS =  \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	user-db-print.$(OBJEXT)
@@ -163,7 +175,7 @@ user_db_print_OBJECTS = $(am_user_db_print_OBJECTS)
 user_db_print_LDADD = $(LDADD)
 user_db_print_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am__user_db_remove_SOURCES_DIST = user-db-remove.cpp
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am_user_db_remove_OBJECTS =  \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	user-db-remove.$(OBJEXT)
@@ -171,25 +183,27 @@ user_db_remove_OBJECTS = $(am_user_db_remove_OBJECTS)
 user_db_remove_LDADD = $(LDADD)
 user_db_remove_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_ut_plugin_manager_OBJECTS = ut-plugin-manager.$(OBJEXT)
 ut_plugin_manager_OBJECTS = $(am_ut_plugin_manager_OBJECTS)
 ut_plugin_manager_LDADD = $(LDADD)
 ut_plugin_manager_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_ut_urlmatch_OBJECTS = ut-urlmatch.$(OBJEXT)
 ut_urlmatch_OBJECTS = $(am_ut_urlmatch_OBJECTS)
 ut_urlmatch_LDADD = $(LDADD)
 ut_urlmatch_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am__ut_user_db_SOURCES_DIST = ut-user-db.cpp
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am_ut_user_db_OBJECTS =  \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@	ut-user-db.$(OBJEXT)
 ut_user_db_OBJECTS = $(am_ut_user_db_OBJECTS)
 ut_user_db_LDADD = $(LDADD)
 ut_user_db_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -343,6 +357,9 @@ VERSION = @VERSION@
 XML2_CFLAGS = @XML2_CFLAGS@
 XML2_CONFIG = @XML2_CONFIG@
 XML2_LDADD = @XML2_LDADD@
+XSLT_CFLAGS = @XSLT_CFLAGS@
+XSLT_CONFIG = @XSLT_CONFIG@
+XSLT_LDADD = @XSLT_LDADD@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -432,19 +449,21 @@ AM_CPPFLAGS = $(am__append_3) $(am__append_6) $(am__append_9) \
 	-I${top_srcdir}/src/utils \
 	-I$(top_srcdir)/src/plugins/websearch \
 	-I$(top_srcdir)/src/plugins/websearch_api_compat @PCRE_CFLAGS@ \
-	@XML2_CFLAGS@ @ICU_CFLAGS@ $(GTEST_CPPFLAGS) -I../
+	@XML2_CFLAGS@ @ICU_CFLAGS@ $(GTEST_CPPFLAGS) $(am__append_17) \
+	-I../
 AM_LDFLAGS = $(am__append_4) $(am__append_7) $(am__append_10) \
 	$(am__append_12) $(am__append_14) -L.. \
 	-L$(top_builddir)/src/dht -L$(top_builddir)/src/lsh \
 	-L$(top_builddir)/src/proxy -L$(top_builddir)/src/utils \
 	-L$(top_builddir)/src/plugins/websearch \
 	-L$(top_builddir)/src/plugins/websearch_api_compat \
-	$(GTEST_LDFLAGS) $(am__append_16)
+	$(GTEST_LDFLAGS) $(am__append_16) $(am__append_18)
 LDADD = $(am__append_5) $(am__append_8) $(am__append_15) -lseeksdht \
 	-lseekslsh -lseeksproxy -lseeksplugins -lseeksutils \
 	-lseekswebsearchplugin -lseekswebsearchapicompatplugin \
 	-lrmd160 @XML2_LDADD@ @CURL_LDADD@ @ICU_LDADD@ -lpthread \
-	-lpcreposix -lpcre -lz @LCOV_LIBS@ $(GTEST_LIBS)
+	-lpcreposix -lpcre -lz @LCOV_LIBS@ $(GTEST_LIBS) \
+	$(am__append_19)
 all: all-am
 
 .SUFFIXES:

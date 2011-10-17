@@ -97,6 +97,15 @@ CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
 SOURCES = $(libseekscli_a_SOURCES) $(seeks_cli_SOURCES)
 DIST_SOURCES = $(libseekscli_a_SOURCES) $(seeks_cli_SOURCES)
 ETAGS = etags
@@ -222,6 +231,9 @@ VERSION = @VERSION@
 XML2_CFLAGS = @XML2_CFLAGS@
 XML2_CONFIG = @XML2_CONFIG@
 XML2_LDADD = @XML2_LDADD@
+XSLT_CFLAGS = @XSLT_CFLAGS@
+XSLT_CONFIG = @XSLT_CONFIG@
+XSLT_LDADD = @XSLT_LDADD@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -299,7 +311,7 @@ AM_CPPFLAGS = -I${srcdir} -I${srcdir}/../proxy -I${srcdir}/../utils -I${srcdir}/
             @CURL_CFLAGS@
 
 seeksclilib_LIBRARIES = libseekscli.a
-libseekscli_a_SOURCES = cli.cpp ../proxy/encode.cpp ../utils/miscutil.cpp
+libseekscli_a_SOURCES = cli.cpp ../proxy/encode.cpp ../utils/miscutil.cpp cli.h
 seeks_cli_SOURCES = seeks_cli.cpp ../proxy/curl_mget.cpp ../proxy/errlog.cpp
 AM_LDFLAGS = -L${srcdir} -L${srcdir}/../proxy -L${srcdir}/../utils
 LDADD = -lseekscli -lseeksutils @CURL_LDADD@

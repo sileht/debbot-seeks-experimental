@@ -43,7 +43,9 @@ host_triplet = @host@
 
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_3 = `pkg-config --cflags tokyocabinet`
 @HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_4 = `pkg-config --cflags tokyotyrant`
-@USE_PERL_TRUE@am__append_5 = `perl -MExtUtils::Embed -e ccopts`
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_5 = -I${srcdir}/../xsl_serializer
+@HAVE_OPENCV2_TRUE@am__append_6 = `pkg-config opencv --cflags`
+@USE_PERL_TRUE@am__append_7 = `perl -MExtUtils::Embed -e ccopts`
 subdir = src/plugins/websearch
 DIST_COMMON = $(dist_websearchconfig_DATA) \
 	$(nobase_dist_websearchplugindata_DATA) $(srcdir)/Makefile.am \
@@ -270,6 +272,9 @@ VERSION = @VERSION@
 XML2_CFLAGS = @XML2_CFLAGS@
 XML2_CONFIG = @XML2_CONFIG@
 XML2_LDADD = @XML2_LDADD@
+XSLT_CFLAGS = @XSLT_CFLAGS@
+XSLT_CONFIG = @XSLT_CONFIG@
+XSLT_LDADD = @XSLT_LDADD@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -345,7 +350,8 @@ websearchplugindatadir = $(datadir)/seeks/plugins/websearch
 AM_CPPFLAGS = -Wno-deprecated -Wall -g -pipe -I${srcdir} \
 	-I${srcdir}/../../utils -I${srcdir}/../../lsh \
 	-I${srcdir}/../../proxy -I${srcdir}/../../dht $(am__append_1) \
-	$(am__append_2) $(am__append_3) $(am__append_4)
+	$(am__append_2) $(am__append_3) $(am__append_4) \
+	$(am__append_5) $(am__append_6)
 ACLOCAL_AMFLAGS = -I m4
 websearchpluginlib_LTLIBRARIES = libseekswebsearchplugin.la
 libseekswebsearchplugin_la_SOURCES = websearch.cpp se_handler.cpp search_snippet.cpp static_renderer.cpp \
@@ -367,7 +373,7 @@ libseekswebsearchplugin_la_SOURCES = websearch.cpp se_handler.cpp search_snippet
 
 libseekswebsearchplugin_la_CXXFLAGS = -Wall -g -I${srcdir}/../../ \
 	@PCRE_CFLAGS@ @CURL_CFLAGS@ @XML2_CFLAGS@ @LCOV_CFLAGS@ \
-	-DSEEKS_CONFIGDIR='"$(sysconfdir)/seeks/"' $(am__append_5)
+	-DSEEKS_CONFIGDIR='"$(sysconfdir)/seeks/"' $(am__append_7)
 
 #SUBDIRS=. tests
 websearchconfigdir = $(sysconfdir)/seeks

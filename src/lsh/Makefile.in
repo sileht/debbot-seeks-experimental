@@ -228,6 +228,9 @@ VERSION = @VERSION@
 XML2_CFLAGS = @XML2_CFLAGS@
 XML2_CONFIG = @XML2_CONFIG@
 XML2_LDADD = @XML2_LDADD@
+XSLT_CFLAGS = @XSLT_CFLAGS@
+XSLT_CONFIG = @XSLT_CONFIG@
+XSLT_LDADD = @XSLT_LDADD@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -309,7 +312,7 @@ libseekslsh_la_SOURCES = mrf.cpp LSHSystemHamming.cpp LSHFunction.cpp \
 		       Bucket.h BucketOperations.h lsh_configuration.h \
 		       LSHFunction.h LSHSystem.h LSHSystemHamming.h \
 		       LSHUniformHashTable.h LSHUniformHashTableHamming.h \
-		       mrf.h Random.h stopwordlist.h qprocess.h
+		       mrf.h Random.h stopwordlist.h qprocess.h superfasthash.h
 
 all: all-am
 

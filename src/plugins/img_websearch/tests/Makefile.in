@@ -45,13 +45,16 @@ noinst_PROGRAMS = test_bing_img_parser$(EXEEXT) \
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_3 = `pkg-config --cflags tokyocabinet`
 @HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_4 = `pkg-config --cflags tokyotyrant`
 @HAVE_OPENCV2_TRUE@am__append_5 = `pkg-config opencv --cflags`
-@HAVE_PROTOBUF_TRUE@am__append_6 = -L../../query_capture -L../../uri_capture -L../../cf -L../../udb_service \
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_6 = @XSLT_CFLAGS@
+@HAVE_PROTOBUF_TRUE@am__append_7 = -L../../query_capture -L../../uri_capture -L../../cf -L../../udb_service \
 @HAVE_PROTOBUF_TRUE@	      `pkg-config --libs protobuf`
 
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_7 = `pkg-config --libs tokyocabinet`
-@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_8 = `pkg-config --libs tokyotyrant`
-@HAVE_OPENCV2_TRUE@am__append_9 = `pkg-config opencv --libs`
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_10 = -lquerycaptureplugin -luricaptureplugin -lseeksuserdb -lcfplugin -ludbserviceplugin
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_8 = `pkg-config --libs tokyocabinet`
+@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_9 = `pkg-config --libs tokyotyrant`
+@HAVE_OPENCV2_TRUE@am__append_10 = `pkg-config opencv --libs`
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_11 = -L../../xsl_serializer
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_12 = -lquerycaptureplugin -luricaptureplugin -lseeksuserdb -lcfplugin -ludbserviceplugin
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_13 = -lseeksxslserializerplugin @XSLT_LDADD@
 subdir = src/plugins/img_websearch/tests
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -69,28 +72,34 @@ am_test_bing_img_parser_OBJECTS = test-bing-img-parser.$(OBJEXT)
 test_bing_img_parser_OBJECTS = $(am_test_bing_img_parser_OBJECTS)
 test_bing_img_parser_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
-test_bing_img_parser_DEPENDENCIES = $(am__DEPENDENCIES_1)
+test_bing_img_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_flickr_parser_OBJECTS = test-flickr-parser.$(OBJEXT)
 test_flickr_parser_OBJECTS = $(am_test_flickr_parser_OBJECTS)
 test_flickr_parser_LDADD = $(LDADD)
-test_flickr_parser_DEPENDENCIES = $(am__DEPENDENCIES_1)
+test_flickr_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_ggle_img_parser_OBJECTS = test-ggle-img-parser.$(OBJEXT)
 test_ggle_img_parser_OBJECTS = $(am_test_ggle_img_parser_OBJECTS)
 test_ggle_img_parser_LDADD = $(LDADD)
-test_ggle_img_parser_DEPENDENCIES = $(am__DEPENDENCIES_1)
+test_ggle_img_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am__test_surf_sim_SOURCES_DIST = test-surf-sim.cpp
 @HAVE_OPENCV2_TRUE@am_test_surf_sim_OBJECTS = test-surf-sim.$(OBJEXT)
 test_surf_sim_OBJECTS = $(am_test_surf_sim_OBJECTS)
 test_surf_sim_LDADD = $(LDADD)
-test_surf_sim_DEPENDENCIES = $(am__DEPENDENCIES_1)
+test_surf_sim_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_wcommons_parser_OBJECTS = test-wcommons-parser.$(OBJEXT)
 test_wcommons_parser_OBJECTS = $(am_test_wcommons_parser_OBJECTS)
 test_wcommons_parser_LDADD = $(LDADD)
-test_wcommons_parser_DEPENDENCIES = $(am__DEPENDENCIES_1)
+test_wcommons_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_test_yahoo_img_parser_OBJECTS = test-yahoo-img-parser.$(OBJEXT)
 test_yahoo_img_parser_OBJECTS = $(am_test_yahoo_img_parser_OBJECTS)
 test_yahoo_img_parser_LDADD = $(LDADD)
-test_yahoo_img_parser_DEPENDENCIES = $(am__DEPENDENCIES_1)
+test_yahoo_img_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -236,6 +245,9 @@ VERSION = @VERSION@
 XML2_CFLAGS = @XML2_CFLAGS@
 XML2_CONFIG = @XML2_CONFIG@
 XML2_LDADD = @XML2_LDADD@
+XSLT_CFLAGS = @XSLT_CFLAGS@
+XSLT_CONFIG = @XSLT_CONFIG@
+XSLT_LDADD = @XSLT_LDADD@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -317,14 +329,15 @@ AM_CPPFLAGS = -Wall -g -Wno-deprecated -pipe \
 	-I${srcdir}/../../../utils -I${srcdir}/../../../lsh \
 	-I${srcdir}/../../../proxy @PCRE_CFLAGS@ @XML2_CFLAGS@ \
 	-I${srcdir}/../../../dht $(am__append_2) $(am__append_3) \
-	$(am__append_4) $(am__append_5)
+	$(am__append_4) $(am__append_5) $(am__append_6)
 AM_LDFLAGS = -L../ -L../../../utils -L../../../lsh -L../../../proxy \
-	-L../../websearch -L../../../dht $(am__append_6) \
-	$(am__append_7) $(am__append_8) $(am__append_9)
+	-L../../websearch -L../../../dht $(am__append_7) \
+	$(am__append_8) $(am__append_9) $(am__append_10) \
+	$(am__append_11)
 LDADD = -lseeksimgwebsearchplugin -lseekswebsearchplugin \
-	$(am__append_10) -lseekslsh -lseeksutils -lseeksproxy \
-	-lseeksplugins -lseeksdht -lrmd160 @XML2_LDADD@ @CURL_LDADD@ \
-	@ICU_LDADD@ -lpthread -lpcreposix -lpcre -lz
+	$(am__append_12) $(am__append_13) -lseekslsh -lseeksutils \
+	-lseeksproxy -lseeksplugins -lseeksdht -lrmd160 @XML2_LDADD@ \
+	@CURL_LDADD@ @ICU_LDADD@ -lpthread -lpcreposix -lpcre -lz
 all: all-am
 
 .SUFFIXES:

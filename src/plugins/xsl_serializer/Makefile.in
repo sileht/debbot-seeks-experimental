@@ -14,6 +14,10 @@
 # PARTICULAR PURPOSE.
 
 @SET_MAKE@
+
+#automake for xsl_serializer plugin.
+
+
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
@@ -33,15 +37,18 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_1 = query_capture uri_capture cf udb_service
-@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_2 = xsl_serializer
-@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_3 = img_websearch
-@HAVE_HTTPSERV_PLUGIN_TRUE@am__append_4 = httpserv
-@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_5 = img_websearch/tests
-@HAVE_PROTOBUF_TRUE@am__append_6 = query_capture/tests \
-@HAVE_PROTOBUF_TRUE@	udb_service/tests
-subdir = src/plugins
-DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_1 = -I${srcdir}/../img_websearch
+@HAVE_PROTOBUF_TRUE@am__append_2 = -I${srcdir}/../query_capture -I${srcdir}/../cf -I../../proxy \
+@HAVE_PROTOBUF_TRUE@               `pkg-config --cflags protobuf`
+
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_3 = `pkg-config --cflags tokyocabinet`
+@HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_4 = `pkg-config --cflags tokyotyrant`
+@HAVE_OPENCV2_TRUE@am__append_5 = `pkg-config opencv --cflags`
+@USE_PERL_TRUE@am__append_6 = `perl -MExtUtils::Embed -e ccopts`
+subdir = src/plugins/xsl_serializer
+DIST_COMMON = $(dist_xslserializerconfig_DATA) \
+	$(nobase_dist_xslserializerplugindata_DATA) \
+	$(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
 	$(top_srcdir)/configure.in
@@ -51,8 +58,66 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-SOURCES =
-DIST_SOURCES =
+am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
+am__vpath_adj = case $$p in \
+    $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
+    *) f=$$p;; \
+  esac;
+am__strip_dir = f=`echo $$p | sed -e 's|^.*/||'`;
+am__install_max = 40
+am__nobase_strip_setup = \
+  srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*|]/\\\\&/g'`
+am__nobase_strip = \
+  for p in $$list; do echo "$$p"; done | sed -e "s|$$srcdirstrip/||"
+am__nobase_list = $(am__nobase_strip_setup); \
+  for p in $$list; do echo "$$p $$p"; done | \
+  sed "s| $$srcdirstrip/| |;"' / .*\//!s/ .*/ ./; s,\( .*\)/[^/]*$$,\1,' | \
+  $(AWK) 'BEGIN { files["."] = "" } { files[$$2] = files[$$2] " " $$1; \
+    if (++n[$$2] == $(am__install_max)) \
+      { print $$2, files[$$2]; n[$$2] = 0; files[$$2] = "" } } \
+    END { for (dir in files) print dir, files[dir] }'
+am__base_list = \
+  sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
+  sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
+am__installdirs = "$(DESTDIR)$(xslserializerpluginlibdir)" \
+	"$(DESTDIR)$(xslserializerconfigdir)" \
+	"$(DESTDIR)$(xslserializerplugindatadir)"
+LTLIBRARIES = $(xslserializerpluginlib_LTLIBRARIES)
+libseeksxslserializerplugin_la_LIBADD =
+am_libseeksxslserializerplugin_la_OBJECTS =  \
+	libseeksxslserializerplugin_la-xml_renderer.lo \
+	libseeksxslserializerplugin_la-xsl_serializer.lo \
+	libseeksxslserializerplugin_la-xsl_serializer_configuration.lo
+libseeksxslserializerplugin_la_OBJECTS =  \
+	$(am_libseeksxslserializerplugin_la_OBJECTS)
+libseeksxslserializerplugin_la_LINK = $(LIBTOOL) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(libseeksxslserializerplugin_la_CXXFLAGS) $(CXXFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
+depcomp = $(SHELL) $(top_srcdir)/depcomp
+am__depfiles_maybe = depfiles
+am__mv = mv -f
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+LTCXXCOMPILE = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
+SOURCES = $(libseeksxslserializerplugin_la_SOURCES)
+DIST_SOURCES = $(libseeksxslserializerplugin_la_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-dvi-recursive install-exec-recursive \
@@ -60,6 +125,8 @@ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	install-pdf-recursive install-ps-recursive install-recursive \
 	installcheck-recursive installdirs-recursive pdf-recursive \
 	ps-recursive uninstall-recursive
+DATA = $(dist_xslserializerconfig_DATA) \
+	$(nobase_dist_xslserializerplugindata_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -67,10 +134,7 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
 	distdir
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = query_capture uri_capture cf udb_service xsl_serializer \
-	websearch_api_compat websearch blocker no_tracking \
-	img_websearch httpserv websearch/tests img_websearch/tests \
-	query_capture/tests udb_service/tests
+DIST_SUBDIRS = $(SUBDIRS)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 am__relativize = \
   dir0=`pwd`; \
@@ -290,12 +354,30 @@ top_srcdir = @top_srcdir@
 udbservice = @udbservice@
 uricapture = @uricapture@
 with_gtest = @with_gtest@
-SUBDIRS = $(am__append_1) $(am__append_2) websearch_api_compat \
-	websearch blocker no_tracking $(am__append_3) $(am__append_4) \
-	websearch/tests $(am__append_5) $(am__append_6)
+xslserializerpluginlibdir = $(libdir)/seeks/plugins/xsl_serializer
+xslserializerplugindatadir = $(datadir)/seeks/plugins/xsl_serializer
+AM_CPPFLAGS = -Wno-deprecated -Wall -g -pipe -I${srcdir} \
+	-I${srcdir}/../../utils -I${srcdir}/../../lsh \
+	-I${srcdir}/../../proxy -I${srcdir}/../../dht \
+	-I${srcdir}/../websearch $(am__append_1) $(am__append_2) \
+	$(am__append_3) $(am__append_4) $(am__append_5)
+ACLOCAL_AMFLAGS = -I m4
+xslserializerpluginlib_LTLIBRARIES = libseeksxslserializerplugin.la
+libseeksxslserializerplugin_la_SOURCES = xml_renderer.cpp xsl_serializer.cpp xsl_serializer_configuration.cpp \
+				       xml_renderer.h   xsl_serializer.h xsl_serializer_configuration.h 
+
+libseeksxslserializerplugin_la_CXXFLAGS = -Wall -g -I${srcdir}/../../ \
+	@PCRE_CFLAGS@ @CURL_CFLAGS@ @XML2_CFLAGS@ @XSLT_CFLAGS@ \
+	@LCOV_CFLAGS@ -DSEEKS_CONFIGDIR='"$(sysconfdir)/seeks/"' \
+	$(am__append_6)
+SUBDIRS = . 
+xslserializerconfigdir = $(sysconfdir)/seeks
+dist_xslserializerconfig_DATA = xslserializer-config
+nobase_dist_xslserializerplugindata_DATA = 
 all: all-recursive
 
 .SUFFIXES:
+.SUFFIXES: .cpp .lo .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -305,9 +387,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/plugins/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu src/plugins/xsl_serializer/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu src/plugins/Makefile
+	  $(AUTOMAKE) --gnu src/plugins/xsl_serializer/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -326,12 +408,140 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
+install-xslserializerpluginlibLTLIBRARIES: $(xslserializerpluginlib_LTLIBRARIES)
+	@$(NORMAL_INSTALL)
+	test -z "$(xslserializerpluginlibdir)" || $(MKDIR_P) "$(DESTDIR)$(xslserializerpluginlibdir)"
+	@list='$(xslserializerpluginlib_LTLIBRARIES)'; test -n "$(xslserializerpluginlibdir)" || list=; \
+	list2=; for p in $$list; do \
+	  if test -f $$p; then \
+	    list2="$$list2 $$p"; \
+	  else :; fi; \
+	done; \
+	test -z "$$list2" || { \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(xslserializerpluginlibdir)'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(xslserializerpluginlibdir)"; \
+	}
+
+uninstall-xslserializerpluginlibLTLIBRARIES:
+	@$(NORMAL_UNINSTALL)
+	@list='$(xslserializerpluginlib_LTLIBRARIES)'; test -n "$(xslserializerpluginlibdir)" || list=; \
+	for p in $$list; do \
+	  $(am__strip_dir) \
+	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(xslserializerpluginlibdir)/$$f'"; \
+	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(xslserializerpluginlibdir)/$$f"; \
+	done
+
+clean-xslserializerpluginlibLTLIBRARIES:
+	-test -z "$(xslserializerpluginlib_LTLIBRARIES)" || rm -f $(xslserializerpluginlib_LTLIBRARIES)
+	@list='$(xslserializerpluginlib_LTLIBRARIES)'; for p in $$list; do \
+	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
+	  test "$$dir" != "$$p" || dir=.; \
+	  echo "rm -f \"$${dir}/so_locations\""; \
+	  rm -f "$${dir}/so_locations"; \
+	done
+libseeksxslserializerplugin.la: $(libseeksxslserializerplugin_la_OBJECTS) $(libseeksxslserializerplugin_la_DEPENDENCIES) 
+	$(libseeksxslserializerplugin_la_LINK) -rpath $(xslserializerpluginlibdir) $(libseeksxslserializerplugin_la_OBJECTS) $(libseeksxslserializerplugin_la_LIBADD) $(LIBS)
+
+mostlyclean-compile:
+	-rm -f *.$(OBJEXT)
+
+distclean-compile:
+	-rm -f *.tab.c
+
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libseeksxslserializerplugin_la-xml_renderer.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libseeksxslserializerplugin_la-xsl_serializer.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libseeksxslserializerplugin_la-xsl_serializer_configuration.Plo@am__quote@
+
+.cpp.o:
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.lo:
+@am__fastdepCXX_TRUE@	$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
+
+libseeksxslserializerplugin_la-xml_renderer.lo: xml_renderer.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseeksxslserializerplugin_la_CXXFLAGS) $(CXXFLAGS) -MT libseeksxslserializerplugin_la-xml_renderer.lo -MD -MP -MF $(DEPDIR)/libseeksxslserializerplugin_la-xml_renderer.Tpo -c -o libseeksxslserializerplugin_la-xml_renderer.lo `test -f 'xml_renderer.cpp' || echo '$(srcdir)/'`xml_renderer.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libseeksxslserializerplugin_la-xml_renderer.Tpo $(DEPDIR)/libseeksxslserializerplugin_la-xml_renderer.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='xml_renderer.cpp' object='libseeksxslserializerplugin_la-xml_renderer.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseeksxslserializerplugin_la_CXXFLAGS) $(CXXFLAGS) -c -o libseeksxslserializerplugin_la-xml_renderer.lo `test -f 'xml_renderer.cpp' || echo '$(srcdir)/'`xml_renderer.cpp
+
+libseeksxslserializerplugin_la-xsl_serializer.lo: xsl_serializer.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseeksxslserializerplugin_la_CXXFLAGS) $(CXXFLAGS) -MT libseeksxslserializerplugin_la-xsl_serializer.lo -MD -MP -MF $(DEPDIR)/libseeksxslserializerplugin_la-xsl_serializer.Tpo -c -o libseeksxslserializerplugin_la-xsl_serializer.lo `test -f 'xsl_serializer.cpp' || echo '$(srcdir)/'`xsl_serializer.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libseeksxslserializerplugin_la-xsl_serializer.Tpo $(DEPDIR)/libseeksxslserializerplugin_la-xsl_serializer.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='xsl_serializer.cpp' object='libseeksxslserializerplugin_la-xsl_serializer.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseeksxslserializerplugin_la_CXXFLAGS) $(CXXFLAGS) -c -o libseeksxslserializerplugin_la-xsl_serializer.lo `test -f 'xsl_serializer.cpp' || echo '$(srcdir)/'`xsl_serializer.cpp
+
+libseeksxslserializerplugin_la-xsl_serializer_configuration.lo: xsl_serializer_configuration.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseeksxslserializerplugin_la_CXXFLAGS) $(CXXFLAGS) -MT libseeksxslserializerplugin_la-xsl_serializer_configuration.lo -MD -MP -MF $(DEPDIR)/libseeksxslserializerplugin_la-xsl_serializer_configuration.Tpo -c -o libseeksxslserializerplugin_la-xsl_serializer_configuration.lo `test -f 'xsl_serializer_configuration.cpp' || echo '$(srcdir)/'`xsl_serializer_configuration.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libseeksxslserializerplugin_la-xsl_serializer_configuration.Tpo $(DEPDIR)/libseeksxslserializerplugin_la-xsl_serializer_configuration.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='xsl_serializer_configuration.cpp' object='libseeksxslserializerplugin_la-xsl_serializer_configuration.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseeksxslserializerplugin_la_CXXFLAGS) $(CXXFLAGS) -c -o libseeksxslserializerplugin_la-xsl_serializer_configuration.lo `test -f 'xsl_serializer_configuration.cpp' || echo '$(srcdir)/'`xsl_serializer_configuration.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
+install-dist_xslserializerconfigDATA: $(dist_xslserializerconfig_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(xslserializerconfigdir)" || $(MKDIR_P) "$(DESTDIR)$(xslserializerconfigdir)"
+	@list='$(dist_xslserializerconfig_DATA)'; test -n "$(xslserializerconfigdir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(xslserializerconfigdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(xslserializerconfigdir)" || exit $$?; \
+	done
+
+uninstall-dist_xslserializerconfigDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(dist_xslserializerconfig_DATA)'; test -n "$(xslserializerconfigdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(xslserializerconfigdir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(xslserializerconfigdir)" && rm -f $$files
+install-nobase_dist_xslserializerplugindataDATA: $(nobase_dist_xslserializerplugindata_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(xslserializerplugindatadir)" || $(MKDIR_P) "$(DESTDIR)$(xslserializerplugindatadir)"
+	@list='$(nobase_dist_xslserializerplugindata_DATA)'; test -n "$(xslserializerplugindatadir)" || list=; \
+	$(am__nobase_list) | while read dir files; do \
+	  xfiles=; for file in $$files; do \
+	    if test -f "$$file"; then xfiles="$$xfiles $$file"; \
+	    else xfiles="$$xfiles $(srcdir)/$$file"; fi; done; \
+	  test -z "$$xfiles" || { \
+	    test "x$$dir" = x. || { \
+	      echo "$(MKDIR_P) '$(DESTDIR)$(xslserializerplugindatadir)/$$dir'"; \
+	      $(MKDIR_P) "$(DESTDIR)$(xslserializerplugindatadir)/$$dir"; }; \
+	    echo " $(INSTALL_DATA) $$xfiles '$(DESTDIR)$(xslserializerplugindatadir)/$$dir'"; \
+	    $(INSTALL_DATA) $$xfiles "$(DESTDIR)$(xslserializerplugindatadir)/$$dir" || exit $$?; }; \
+	done
+
+uninstall-nobase_dist_xslserializerplugindataDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(nobase_dist_xslserializerplugindata_DATA)'; test -n "$(xslserializerplugindatadir)" || list=; \
+	$(am__nobase_strip_setup); files=`$(am__nobase_strip)`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(xslserializerplugindatadir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(xslserializerplugindatadir)" && rm -f $$files
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -528,9 +738,12 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-recursive
-all-am: Makefile
+all-am: Makefile $(LTLIBRARIES) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
+	for dir in "$(DESTDIR)$(xslserializerpluginlibdir)" "$(DESTDIR)$(xslserializerconfigdir)" "$(DESTDIR)$(xslserializerplugindatadir)"; do \
+	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
+	done
 install: install-recursive
 install-exec: install-exec-recursive
 install-data: install-data-recursive
@@ -558,11 +771,14 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-recursive
 
-clean-am: clean-generic clean-libtool mostlyclean-am
+clean-am: clean-generic clean-libtool \
+	clean-xslserializerpluginlibLTLIBRARIES mostlyclean-am
 
 distclean: distclean-recursive
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
-distclean-am: clean-am distclean-generic distclean-tags
+distclean-am: clean-am distclean-compile distclean-generic \
+	distclean-tags
 
 dvi: dvi-recursive
 
@@ -576,7 +792,9 @@ info: info-recursive
 
 info-am:
 
-install-data-am:
+install-data-am: install-dist_xslserializerconfigDATA \
+	install-nobase_dist_xslserializerplugindataDATA \
+	install-xslserializerpluginlibLTLIBRARIES
 
 install-dvi: install-dvi-recursive
 
@@ -605,12 +823,14 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
+	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-recursive
 
-mostlyclean-am: mostlyclean-generic mostlyclean-libtool
+mostlyclean-am: mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool
 
 pdf: pdf-recursive
 
@@ -620,24 +840,32 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am:
+uninstall-am: uninstall-dist_xslserializerconfigDATA \
+	uninstall-nobase_dist_xslserializerplugindataDATA \
+	uninstall-xslserializerpluginlibLTLIBRARIES
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) ctags-recursive \
 	install-am install-strip tags-recursive
 
 .PHONY: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) CTAGS GTAGS \
 	all all-am check check-am clean clean-generic clean-libtool \
-	ctags ctags-recursive distclean distclean-generic \
+	clean-xslserializerpluginlibLTLIBRARIES ctags ctags-recursive \
+	distclean distclean-compile distclean-generic \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-recursive \
-	uninstall uninstall-am
+	install-data-am install-dist_xslserializerconfigDATA \
+	install-dvi install-dvi-am install-exec install-exec-am \
+	install-html install-html-am install-info install-info-am \
+	install-man install-nobase_dist_xslserializerplugindataDATA \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip install-xslserializerpluginlibLTLIBRARIES \
+	installcheck installcheck-am installdirs installdirs-am \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
+	uninstall-dist_xslserializerconfigDATA \
+	uninstall-nobase_dist_xslserializerplugindataDATA \
+	uninstall-xslserializerpluginlibLTLIBRARIES
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

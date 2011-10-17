@@ -89,6 +89,16 @@ DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 @HAVE_PROTOBUF_TRUE@	-lseeksuserdb -lseeksuserdbfix
 
 @USE_PERL_TRUE@am__append_14 = `perl -MExtUtils::Embed -e ldopts`
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_15 = -I${top_srcdir}/src/plugins/xsl_serializer \
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@     @XSLT_CFLAGS@ 
+
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_16 = \
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@	-L$(top_builddir)/src/plugins/xsl_serializer 
+
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_17 = \
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@      -lseeksxslserializerplugin \
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@      @XSLT_LDADD@
+
 subdir = src/plugins/query_capture/tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
@@ -107,13 +117,13 @@ test_dbqr_compression_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
 test_dbqr_compression_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_ut_query_capture_OBJECTS = ut-query-capture.$(OBJEXT)
 ut_query_capture_OBJECTS = $(am_ut_query_capture_OBJECTS)
 ut_query_capture_LDADD = $(LDADD)
 ut_query_capture_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -255,6 +265,9 @@ VERSION = @VERSION@
 XML2_CFLAGS = @XML2_CFLAGS@
 XML2_CONFIG = @XML2_CONFIG@
 XML2_LDADD = @XML2_LDADD@
+XSLT_CFLAGS = @XSLT_CFLAGS@
+XSLT_CONFIG = @XSLT_CONFIG@
+XSLT_LDADD = @XSLT_LDADD@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -335,20 +348,21 @@ AM_CPPFLAGS = $(am__append_1) $(am__append_4) $(am__append_7) \
 	-I${top_srcdir}/src/utils \
 	-I$(top_srcdir)/src/plugins/websearch \
 	-I$(top_srcdir)/src/plugins/websearch_api_compat @PCRE_CFLAGS@ \
-	@XML2_CFLAGS@ @ICU_CFLAGS@ $(GTEST_CPPFLAGS) -I../../../proxy/ \
-	-I../../websearch
+	@XML2_CFLAGS@ @ICU_CFLAGS@ $(GTEST_CPPFLAGS) $(am__append_15) \
+	-I../../../proxy/ -I../../websearch
 AM_LDFLAGS = $(am__append_2) $(am__append_5) $(am__append_8) \
 	$(am__append_10) $(am__append_12) -L.. \
 	-L$(top_builddir)/src/dht -L$(top_builddir)/src/lsh \
 	-L$(top_builddir)/src/proxy -L$(top_builddir)/src/utils \
 	-L$(top_builddir)/src/plugins/websearch \
 	-L$(top_builddir)/src/plugins/websearch_api_compat \
-	$(GTEST_LDFLAGS) $(am__append_14)
+	$(GTEST_LDFLAGS) $(am__append_14) $(am__append_16)
 LDADD = $(am__append_3) $(am__append_6) $(am__append_13) -lseeksdht \
 	-lseekslsh -lseeksproxy -lseeksplugins -lseeksutils \
 	-lseekswebsearchplugin -lseekswebsearchapicompatplugin \
 	-lrmd160 @XML2_LDADD@ @CURL_LDADD@ @ICU_LDADD@ -lpthread \
-	-lpcreposix -lpcre -lz @LCOV_LIBS@ $(GTEST_LIBS)
+	-lpcreposix -lpcre -lz @LCOV_LIBS@ $(GTEST_LIBS) \
+	$(am__append_17)
 all: all-am
 
 .SUFFIXES:
