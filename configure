@@ -698,6 +698,11 @@ querycapture
 uricapture
 HAVE_LIBEVENT_FALSE
 HAVE_LIBEVENT_TRUE
+XSLT_CFLAGS
+XSLT_LDADD
+XSLT_CONFIG
+HAVE_XSLSERIALIZER_PLUGIN_FALSE
+HAVE_XSLSERIALIZER_PLUGIN_TRUE
 opencv2
 HAVE_OPENCV2_FALSE
 HAVE_OPENCV2_TRUE
@@ -871,6 +876,7 @@ enable_zlib
 enable_httpserv_plugin
 enable_image_websearch_plugin
 enable_opencv
+enable_xslserializer_plugin
 with_libevent
 enable_libevent1
 enable_personalization
@@ -1561,6 +1567,8 @@ Optional Features:
                           YES)
   --disable-opencv        Don't use opencv (activates image similarity
                           analysis) (default is NO)
+  --enable-xslserializer-plugin
+                          Enable the Seeks XML/XSLT serializer (default is NO)
   --enable-libevent1      Forces the use of libevent-1.x (default is NO)
   --enable-personalization
                           Enable storage of past queries and results for
@@ -17252,6 +17260,93 @@ fi
 fi
 
 #====================================================
+# XML/XSL serialization  plugin activation.
+#====================================================
+# Check whether --enable-xslserializer-plugin was given.
+if test "${enable_xslserializer_plugin+set}" = set; then :
+  enableval=$enable_xslserializer_plugin; case "${enableval}" in
+        yes) xslserializerplugin=true ;;
+	        no) xslserializerplugin=false ;;
+                        *) as_fn_error $? "bad_value ${enableval} for
+--enable-xslserializer-plugin" "$LINENO" 5 ;;
+esac
+else
+  xslserializerplugin=false
+fi
+
+ if test x$xslserializerplugin = xtrue; then
+  HAVE_XSLSERIALIZER_PLUGIN_TRUE=
+  HAVE_XSLSERIALIZER_PLUGIN_FALSE='#'
+else
+  HAVE_XSLSERIALIZER_PLUGIN_TRUE='#'
+  HAVE_XSLSERIALIZER_PLUGIN_FALSE=
+fi
+
+if test x$xslserializerplugin = xtrue; then
+   #check for libxslt
+   # First, check for the xsl-config tool
+   for ac_prog in xslt-config
+do
+  # Extract the first word of "$ac_prog", so it can be a program name with args.
+set dummy $ac_prog; ac_word=$2
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
+$as_echo_n "checking for $ac_word... " >&6; }
+if ${ac_cv_path_XSLT_CONFIG+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  case $XSLT_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_XSLT_CONFIG="$XSLT_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+    for ac_exec_ext in '' $ac_executable_extensions; do
+  if { test -f "$as_dir/$ac_word$ac_exec_ext" && $as_test_x "$as_dir/$ac_word$ac_exec_ext"; }; then
+    ac_cv_path_XSLT_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+  done
+IFS=$as_save_IFS
+
+  ;;
+esac
+fi
+XSLT_CONFIG=$ac_cv_path_XSLT_CONFIG
+if test -n "$XSLT_CONFIG"; then
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $XSLT_CONFIG" >&5
+$as_echo "$XSLT_CONFIG" >&6; }
+else
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+fi
+
+
+  test -n "$XSLT_CONFIG" && break
+done
+test -n "$XSLT_CONFIG" || XSLT_CONFIG="no"
+
+   if test x$XSLT_CONFIG = xno; then
+      as_fn_error $? "xslt-config not found; verify that libxslt is installed on your system" "$LINENO" 5
+   fi
+
+   XSLT_LDADD=`$XSLT_CONFIG --libs`
+
+
+   XSLT_CFLAGS=`$XSLT_CONFIG --cflags`
+
+
+
+$as_echo "#define FEATURE_XSLSERIALIZER_PLUGIN 1" >>confdefs.h
+
+fi
+
+#====================================================
 # libevent detection.
 #====================================================
 trylibeventdir=""
@@ -20001,7 +20096,7 @@ esac
 ######################################################################
 
 
-ac_config_files="$ac_config_files Makefile doc/Makefile src/Makefile src/lsh/Makefile src/lsh/tests/Makefile src/dht/Makefile src/dht/tests/Makefile src/proxy/Makefile src/proxy/tests/Makefile src/plugins/Makefile src/plugins/websearch/Makefile src/plugins/websearch/tests/Makefile src/plugins/websearch_api_compat/Makefile src/plugins/img_websearch/Makefile src/plugins/img_websearch/tests/Makefile src/plugins/httpserv/Makefile src/plugins/blocker/Makefile src/plugins/no_tracking/Makefile src/plugins/uri_capture/Makefile src/plugins/uri_capture/tests/Makefile src/plugins/query_capture/Makefile src/plugins/query_capture/tests/Makefile src/plugins/cf/Makefile src/plugins/cf/tests/Makefile src/plugins/udb_service/Makefile src/plugins/udb_service/tests/Makefile src/cli/Makefile src/utils/Makefile src/utils/tests/Makefile"
+ac_config_files="$ac_config_files Makefile doc/Makefile src/Makefile src/lsh/Makefile src/lsh/tests/Makefile src/dht/Makefile src/dht/tests/Makefile src/proxy/Makefile src/proxy/tests/Makefile src/plugins/Makefile src/plugins/websearch/Makefile src/plugins/websearch/tests/Makefile src/plugins/websearch_api_compat/Makefile src/plugins/img_websearch/Makefile src/plugins/img_websearch/tests/Makefile src/plugins/httpserv/Makefile src/plugins/blocker/Makefile src/plugins/no_tracking/Makefile src/plugins/uri_capture/Makefile src/plugins/uri_capture/tests/Makefile src/plugins/query_capture/Makefile src/plugins/query_capture/tests/Makefile src/plugins/cf/Makefile src/plugins/cf/tests/Makefile src/plugins/udb_service/Makefile src/plugins/udb_service/tests/Makefile src/plugins/xsl_serializer/Makefile src/cli/Makefile src/utils/Makefile src/utils/tests/Makefile"
 
 
 cat >confcache <<\_ACEOF
@@ -20199,6 +20294,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_OPENCV2_TRUE}" && test -z "${HAVE_OPENCV2_FALSE}"; then
   as_fn_error $? "conditional \"HAVE_OPENCV2\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${HAVE_XSLSERIALIZER_PLUGIN_TRUE}" && test -z "${HAVE_XSLSERIALIZER_PLUGIN_FALSE}"; then
+  as_fn_error $? "conditional \"HAVE_XSLSERIALIZER_PLUGIN\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_LIBEVENT_TRUE}" && test -z "${HAVE_LIBEVENT_FALSE}"; then
@@ -21335,6 +21434,7 @@ do
     "src/plugins/cf/tests/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/cf/tests/Makefile" ;;
     "src/plugins/udb_service/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/udb_service/Makefile" ;;
     "src/plugins/udb_service/tests/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/udb_service/tests/Makefile" ;;
+    "src/plugins/xsl_serializer/Makefile") CONFIG_FILES="$CONFIG_FILES src/plugins/xsl_serializer/Makefile" ;;
     "src/cli/Makefile") CONFIG_FILES="$CONFIG_FILES src/cli/Makefile" ;;
     "src/utils/Makefile") CONFIG_FILES="$CONFIG_FILES src/utils/Makefile" ;;
     "src/utils/tests/Makefile") CONFIG_FILES="$CONFIG_FILES src/utils/tests/Makefile" ;;
@@ -23041,6 +23141,7 @@ fi
  URI capture:		  ${uricapture}
  Personalization:	  ${cf}
  User DB service:         ${udbservice}
+ XSL serializer:          ${xslserializerplugin}
 " >&5
 $as_echo "$as_me: Configured to build seeks:
 
@@ -23069,4 +23170,5 @@ $as_echo "$as_me: Configured to build seeks:
  URI capture:		  ${uricapture}
  Personalization:	  ${cf}
  User DB service:         ${udbservice}
+ XSL serializer:          ${xslserializerplugin}
 " >&6;}

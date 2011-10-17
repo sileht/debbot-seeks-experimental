@@ -42,13 +42,21 @@ bin_PROGRAMS = seeks$(EXEEXT)
 @HAVE_PROTOBUF_TRUE@am__append_4 = -Lplugins/cf `pkg-config --libs protobuf` 
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_5 = `pkg-config --libs tokyocabinet`
 @HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_6 = `pkg-config --libs tokyotyrant`
-@USE_PERL_TRUE@am__append_7 = `perl -MExtUtils::Embed -e ldopts`
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_8 = -lquerycaptureplugin -luricaptureplugin -lcfplugin -ludbserviceplugin
-@HAVE_HTTPSERV_PLUGIN_TRUE@am__append_9 = -levent
-@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_10 = -Lplugins/img_websearch
-@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_11 = -lseeksimgwebsearchplugin
-@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_12 = -lseeksuserdb -lseeksuserdbfix
-@HAVE_BSD_FALSE@am__append_13 = -ldl
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_7 = -I${top_srcdir}/src/plugins/xsl_serializer \
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@	@XSLT_CFLAGS@
+
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_8 = -Lplugins/xsl_serializer
+@USE_PERL_TRUE@am__append_9 = `perl -MExtUtils::Embed -e ldopts`
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_10 = -lquerycaptureplugin -luricaptureplugin -lcfplugin -ludbserviceplugin
+@HAVE_HTTPSERV_PLUGIN_TRUE@am__append_11 = -levent
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_12 = -Lplugins/img_websearch
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_13 = -lseeksimgwebsearchplugin
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_14 = -lseeksuserdb -lseeksuserdbfix
+@HAVE_PROTOBUF_TRUE@@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_15 = \
+@HAVE_PROTOBUF_TRUE@@HAVE_XSLSERIALIZER_PLUGIN_TRUE@	-lseeksxslserializerplugin \
+@HAVE_PROTOBUF_TRUE@@HAVE_XSLSERIALIZER_PLUGIN_TRUE@	@XSLT_LDADD@
+
+@HAVE_BSD_FALSE@am__append_16 = -ldl
 subdir = src
 DIST_COMMON = README $(dist_config_DATA) $(nobase_dist_proxy_DATA) \
 	$(nobase_dist_public_DATA) $(srcdir)/Makefile.am \
@@ -71,7 +79,7 @@ seeks_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
 seeks_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -271,6 +279,9 @@ VERSION = @VERSION@
 XML2_CFLAGS = @XML2_CFLAGS@
 XML2_CONFIG = @XML2_CONFIG@
 XML2_LDADD = @XML2_LDADD@
+XSLT_CFLAGS = @XSLT_CFLAGS@
+XSLT_CONFIG = @XSLT_CONFIG@
+XSLT_LDADD = @XSLT_LDADD@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -354,18 +365,19 @@ AM_CXXFLAGS = -Wall -Wno-deprecated -g -pipe -I${srcdir} \
 	-I${srcdir}/plugins/uri_capture -I${srcdir}/plugins/cf \
 	-I${srcdir}/plugins/udb_service -I${srcdir}/dht `pkg-config \
 	opencv --cflags` $(am__append_1) $(am__append_2) \
-	$(am__append_3)
+	$(am__append_3) $(am__append_7)
 AM_LDFLAGS = `pkg-config opencv --libs` -Lutils/ -Llsh/ -Lproxy/ \
 	@PCRE_LDADD@ @CURL_LDADD@ @XML2_LDADD@ @ICU_LDADD@ \
 	-Lplugins/websearch -Lplugins/websearch_api_compat \
 	-Lplugins/query_capture -Lplugins/uri_capture \
 	-Lplugins/udb_service -Ldht/ $(am__append_4) $(am__append_5) \
-	$(am__append_6) $(am__append_7) $(am__append_10)
+	$(am__append_6) $(am__append_8) $(am__append_9) \
+	$(am__append_12)
 LDADD = -lseekswebsearchplugin -lseekswebsearchapicompatplugin \
-	$(am__append_8) $(am__append_9) $(am__append_11) -lseeksutils \
-	-lseeksproxy -lseeksplugins $(am__append_12) -lpcre \
-	-lpcreposix -lseekslsh -lseeksdht -lrmd160 -lpthread -lz \
-	@CURL_LDADD@ $(am__append_13)
+	$(am__append_10) $(am__append_11) $(am__append_13) \
+	-lseeksutils -lseeksproxy -lseeksplugins $(am__append_14) \
+	$(am__append_15) -lpcre -lpcreposix -lseekslsh -lseeksdht \
+	-lrmd160 -lpthread -lz @CURL_LDADD@ $(am__append_16)
 SUBDIRS = utils proxy lsh dht plugins proxy/tests lsh/tests . cli
 configdir = $(sysconfdir)/seeks
 dist_config_DATA = config \
