@@ -1,3 +1,9 @@
+seeks-experimental (3:0.4~git201110112148-4) UNRELEASED; urgency=low
+
+  * Snapshot version 0.4~git201110112148
+
+ -- Abaakouk Mehdi <theli48@gmail.com>  Mon, 17 Oct 2011 18:34:46 +0200
+
 seeks-experimental (3:0.4~git201110112148-3) UNRELEASED; urgency=low
 
   * Snapshot version 0.4~git201110112148
