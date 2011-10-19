@@ -3,14 +3,13 @@
 #export DH_VERBOSE=1
 #export DH_OPTIONS=-v
 
-LDFLAGS="-Wl,--no-as-needed"
 
 %:
 	dh $@ --with autotools-dev
 
 
 override_dh_auto_configure:
-	dh_auto_configure -- --disable-opencv --enable-httpserv-plugin --enable-libevent1 --disable-external-gtest #--enable-image-websearch-plugin 
+	 LDFLAGS="-Wl,--no-as-needed" dh_auto_configure -- --disable-opencv --enable-httpserv-plugin --enable-libevent1 --disable-external-gtest #--enable-image-websearch-plugin 
 
 
 override_dh_auto_test:
