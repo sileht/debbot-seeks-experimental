@@ -3,6 +3,8 @@
 #export DH_VERBOSE=1
 #export DH_OPTIONS=-v
 
+LDFLAGS="-Wl,--no-as-needed"
+
 %:
 	dh $@ --with autotools-dev
 
