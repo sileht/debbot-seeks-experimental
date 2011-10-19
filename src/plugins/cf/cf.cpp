@@ -125,29 +125,29 @@ namespace seeks_plugins
     = cf_configuration::_config->_pl->_peers.begin();
 #ifdef FEATURE_XSLSERIALIZER_PLUGIN
     const char *output_str = miscutil::lookup(parameters,"output");
-    if (cf::_xs_plugin && cf::_xs_plugin_activated && !miscutil::strcmpic(output_str, "xml")) 
+    if (cf::_xs_plugin && cf::_xs_plugin_activated && !miscutil::strcmpic(output_str, "xml"))
       {
-	while(hit!=cf_configuration::_config->_pl->_peers.end())
-	  {
-	    peer *p = (*hit).second;
-	    l.push_back(p->_host + ((p->_port == -1) ? "" : (":" + miscutil::to_string(p->_port))) + p->_path);
-	    ++hit;
-	  }
-	return (static_cast<xsl_serializer*>(cf::_xs_plugin))->render_xsl_peers(csp,rsp,parameters, &l);
-      } 
+        while(hit!=cf_configuration::_config->_pl->_peers.end())
+          {
+            peer *p = (*hit).second;
+            l.push_back(p->_host + ((p->_port == -1) ? "" : (":" + miscutil::to_string(p->_port))) + p->_path);
+            ++hit;
+          }
+        return (static_cast<xsl_serializer*>(cf::_xs_plugin))->render_xsl_peers(csp,rsp,parameters, &l);
+      }
     else
       {
 #endif
-	while(hit!=cf_configuration::_config->_pl->_peers.end())
-	  {
-	    peer *p = (*hit).second;
-	    l.push_back("\"" + p->_host + ((p->_port == -1) ? "" : (":" + miscutil::to_string(p->_port))) + p->_path + "\"");
-	    ++hit;
-	  }
-	const std::string json_str = "{\"peers\":" + miscutil::join_string_list(",",l) + "}";
-	const std::string body = jsonp(json_str,miscutil::lookup(parameters,"callback"));
-	response(rsp,body);
-	return SP_ERR_OK;
+        while(hit!=cf_configuration::_config->_pl->_peers.end())
+          {
+            peer *p = (*hit).second;
+            l.push_back("\"" + p->_host + ((p->_port == -1) ? "" : (":" + miscutil::to_string(p->_port))) + p->_path + "\"");
+            ++hit;
+          }
+        const std::string json_str = "{\"peers\":[" + miscutil::join_string_list(",",l) + "]}";
+        const std::string body = jsonp(json_str,miscutil::lookup(parameters,"callback"));
+        response(rsp,body);
+        return SP_ERR_OK;
 #ifdef FEATURE_XSLSERIALIZER_PLUGIN
       }
 #endif
@@ -259,7 +259,7 @@ namespace seeks_plugins
     sp_err err=SP_ERR_OK;
 #ifdef FEATURE_XSLSERIALIZER_PLUGIN
     const char *output_str = miscutil::lookup(parameters,"output");
-    if (cf::_xs_plugin && cf::_xs_plugin_activated && !miscutil::strcmpic(output_str, "xml")) 
+    if (cf::_xs_plugin && cf::_xs_plugin_activated && !miscutil::strcmpic(output_str, "xml"))
       err = static_cast<xsl_serializer*>(cf::_xs_plugin)->render_xsl_suggested_queries(csp,rsp,parameters,qc);
     else
 #endif
@@ -367,7 +367,7 @@ namespace seeks_plugins
     sp_err err = SP_ERR_OK;
 #ifdef FEATURE_XSLSERIALIZER_PLUGIN
     const char *output_str = miscutil::lookup(parameters,"output");
-    if (cf::_xs_plugin && cf::_xs_plugin_activated && !miscutil::strcmpic(output_str, "xml")) 
+    if (cf::_xs_plugin && cf::_xs_plugin_activated && !miscutil::strcmpic(output_str, "xml"))
       err = static_cast<xsl_serializer*>(cf::_xs_plugin)->render_xsl_recommendations(csp,rsp,parameters,qc,qtime,radius,lang);
     else
 #endif
@@ -548,14 +548,47 @@ namespace seeks_plugins
     query = miscutil::lookup(parameters,"q");
 
     // check for missing parameters.
+    std::string url;
     const char *url_str = miscutil::lookup(parameters,"url");
-    if (!url_str)
-      return cgi::cgi_error_bad_param(csp,rsp,"json"); // 400 error.
-    std::string url = url_str;
+    if (url_str)
+      url = url_str;
 
     uint32_t hits = 0;
     std::string host;
     query_capture::process_url(url,host);
+
+    if (!url_str) // remove query with all attached urls.
+      {
+        int radius = cf_configuration::_config->_post_radius;
+        const char *radius_str = miscutil::lookup(parameters,"radius");
+        if (radius_str)
+          {
+            char *endptr;
+            int tmp = strtol(radius_str,&endptr,0);
+            if (!*endptr)
+              {
+                radius = tmp;
+              }
+          }
+
+        try
+          {
+            query_capture_element::remove_queries(query,"query-capture",radius);
+          }
+        catch(sp_exception &e)
+          {
+            return SP_ERR_MEMORY; // 500.
+          }
+
+        // remove query from cache if applicable.
+        query_context *qc = websearch::lookup_qc(parameters);
+        if (qc)
+          {
+            sweeper::unregister_sweepable(qc);
+            delete qc;
+          }
+        return SP_ERR_OK;
+      }
 
     hash_multimap<uint32_t,DHTKey,id_hash_uint> features;
     qprocess::generate_query_hashes(query,0,0,features);
