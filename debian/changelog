@@ -1,3 +1,13 @@
+seeks-experimental (3:0.4~git201110191530-1) UNRELEASED; urgency=low
+
+  [ Mehdi Abaakouk ]
+  * Always link lib for now
+  * Imported Upstream version 0.4~git201110191530
+
+  [ Abaakouk Mehdi ]
+
+ -- Abaakouk Mehdi <theli48@gmail.com>  Wed, 19 Oct 2011 17:28:06 +0200
+
 seeks-experimental (3:0.4~git201110171459-32) UNRELEASED; urgency=low
 
   * Snapshot version 0.4~git201110171459
