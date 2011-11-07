@@ -34,7 +34,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = user_db_ops$(EXEEXT)
+@HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@bin_PROGRAMS = user_db_ops$(EXEEXT)
 noinst_PROGRAMS = test_curl_mget$(EXEEXT) shash$(EXEEXT) \
 	$(am__EXEEXT_2)
 check_PROGRAMS = ut_plugin_manager$(EXEEXT) $(am__EXEEXT_1)
@@ -260,6 +260,7 @@ CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DOCBOOK = @DOCBOOK@
 DOXYGEN_PAPER_SIZE = @DOXYGEN_PAPER_SIZE@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -344,6 +345,7 @@ PERL = @PERL@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
+PTHREAD_LDADD = @PTHREAD_LDADD@
 RANLIB = @RANLIB@
 SED = @SED@
 SEEKS_CODE_STATUS = @SEEKS_CODE_STATUS@
@@ -383,7 +385,6 @@ builddir = @builddir@
 cf = @cf@
 datadir = @datadir@
 datarootdir = @datarootdir@
-docbook = @docbook@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
@@ -461,7 +462,7 @@ AM_LDFLAGS = $(am__append_4) $(am__append_7) $(am__append_10) \
 LDADD = $(am__append_5) $(am__append_8) $(am__append_15) -lseeksdht \
 	-lseekslsh -lseeksproxy -lseeksplugins -lseeksutils \
 	-lseekswebsearchplugin -lseekswebsearchapicompatplugin \
-	-lrmd160 @XML2_LDADD@ @CURL_LDADD@ @ICU_LDADD@ -lpthread \
+	-lrmd160 @XML2_LDADD@ @CURL_LDADD@ @ICU_LDADD@ @PTHREAD_LDADD@ \
 	-lpcreposix -lpcre -lz @LCOV_LIBS@ $(GTEST_LIBS) \
 	$(am__append_19)
 all: all-am

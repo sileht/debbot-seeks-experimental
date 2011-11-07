@@ -134,6 +134,7 @@ CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DOCBOOK = @DOCBOOK@
 DOXYGEN_PAPER_SIZE = @DOXYGEN_PAPER_SIZE@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -218,6 +219,7 @@ PERL = @PERL@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
+PTHREAD_LDADD = @PTHREAD_LDADD@
 RANLIB = @RANLIB@
 SED = @SED@
 SEEKS_CODE_STATUS = @SEEKS_CODE_STATUS@
@@ -257,7 +259,6 @@ builddir = @builddir@
 cf = @cf@
 datadir = @datadir@
 datarootdir = @datarootdir@
-docbook = @docbook@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
@@ -314,7 +315,7 @@ seeksclilib_LIBRARIES = libseekscli.a
 libseekscli_a_SOURCES = cli.cpp ../proxy/encode.cpp ../utils/miscutil.cpp cli.h
 seeks_cli_SOURCES = seeks_cli.cpp ../proxy/curl_mget.cpp ../proxy/errlog.cpp
 AM_LDFLAGS = -L${srcdir} -L${srcdir}/../proxy -L${srcdir}/../utils
-LDADD = -lseekscli -lseeksutils @CURL_LDADD@
+LDADD = -lseekscli -lseeksutils @PTHREAD_LDADD@ @CURL_LDADD@
 all: all-am
 
 .SUFFIXES:

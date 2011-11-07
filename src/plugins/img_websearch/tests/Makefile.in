@@ -148,6 +148,7 @@ CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DOCBOOK = @DOCBOOK@
 DOXYGEN_PAPER_SIZE = @DOXYGEN_PAPER_SIZE@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -232,6 +233,7 @@ PERL = @PERL@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
+PTHREAD_LDADD = @PTHREAD_LDADD@
 RANLIB = @RANLIB@
 SED = @SED@
 SEEKS_CODE_STATUS = @SEEKS_CODE_STATUS@
@@ -271,7 +273,6 @@ builddir = @builddir@
 cf = @cf@
 datadir = @datadir@
 datarootdir = @datarootdir@
-docbook = @docbook@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
@@ -337,7 +338,8 @@ AM_LDFLAGS = -L../ -L../../../utils -L../../../lsh -L../../../proxy \
 LDADD = -lseeksimgwebsearchplugin -lseekswebsearchplugin \
 	$(am__append_12) $(am__append_13) -lseekslsh -lseeksutils \
 	-lseeksproxy -lseeksplugins -lseeksdht -lrmd160 @XML2_LDADD@ \
-	@CURL_LDADD@ @ICU_LDADD@ -lpthread -lpcreposix -lpcre -lz
+	@CURL_LDADD@ @ICU_LDADD@ @PTHREAD_LDADD@ -lpcreposix -lpcre \
+	-lz
 all: all-am
 
 .SUFFIXES:

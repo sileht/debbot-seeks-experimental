@@ -175,6 +175,7 @@ CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DOCBOOK = @DOCBOOK@
 DOXYGEN_PAPER_SIZE = @DOXYGEN_PAPER_SIZE@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -259,6 +260,7 @@ PERL = @PERL@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
+PTHREAD_LDADD = @PTHREAD_LDADD@
 RANLIB = @RANLIB@
 SED = @SED@
 SEEKS_CODE_STATUS = @SEEKS_CODE_STATUS@
@@ -298,7 +300,6 @@ builddir = @builddir@
 cf = @cf@
 datadir = @datadir@
 datarootdir = @datarootdir@
-docbook = @docbook@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
@@ -369,7 +370,7 @@ AM_LDFLAGS = $(am__append_2) $(am__append_5) $(am__append_8) \
 LDADD = $(am__append_3) $(am__append_6) $(am__append_13) -lseeksdht \
 	-lseekslsh -lseeksproxy -lseeksplugins -lseeksutils \
 	-lseekswebsearchplugin -lseekswebsearchapicompatplugin \
-	-lrmd160 @XML2_LDADD@ @CURL_LDADD@ @ICU_LDADD@ -lpthread \
+	-lrmd160 @XML2_LDADD@ @CURL_LDADD@ @ICU_LDADD@ @PTHREAD_LDADD@ \
 	-lpcreposix -lpcre -lz @LCOV_LIBS@ $(GTEST_LIBS) \
 	$(am__append_17)
 all: all-am
