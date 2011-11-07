@@ -38,8 +38,8 @@ host_triplet = @host@
 @HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_3 = img_websearch
 @HAVE_HTTPSERV_PLUGIN_TRUE@am__append_4 = httpserv
 @HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_5 = img_websearch/tests
-@HAVE_PROTOBUF_TRUE@am__append_6 = query_capture/tests \
-@HAVE_PROTOBUF_TRUE@	udb_service/tests
+@HAVE_PROTOBUF_TRUE@am__append_6 = uri_capture/tests \
+@HAVE_PROTOBUF_TRUE@	query_capture/tests udb_service/tests
 subdir = src/plugins
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -70,7 +70,7 @@ CTAGS = ctags
 DIST_SUBDIRS = query_capture uri_capture cf udb_service xsl_serializer \
 	websearch_api_compat websearch blocker no_tracking \
 	img_websearch httpserv websearch/tests img_websearch/tests \
-	query_capture/tests udb_service/tests
+	uri_capture/tests query_capture/tests udb_service/tests
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 am__relativize = \
   dir0=`pwd`; \
@@ -120,6 +120,7 @@ CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DOCBOOK = @DOCBOOK@
 DOXYGEN_PAPER_SIZE = @DOXYGEN_PAPER_SIZE@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -204,6 +205,7 @@ PERL = @PERL@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
+PTHREAD_LDADD = @PTHREAD_LDADD@
 RANLIB = @RANLIB@
 SED = @SED@
 SEEKS_CODE_STATUS = @SEEKS_CODE_STATUS@
@@ -243,7 +245,6 @@ builddir = @builddir@
 cf = @cf@
 datadir = @datadir@
 datarootdir = @datarootdir@
-docbook = @docbook@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@

@@ -37,9 +37,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@HAVE_PROTOBUF_TRUE@am__append_1 = -I${srcdir}/../query_capture -I../../proxy \
-@HAVE_PROTOBUF_TRUE@	       `pkg-config --cflags protobuf`
-
+@HAVE_PROTOBUF_TRUE@am__append_1 = -I${srcdir}/../query_capture -I${srcdir}/../cf
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_2 = `pkg-config --cflags tokyocabinet`
 @HAVE_PROTOBUF_TRUE@@HAVE_TT_TRUE@am__append_3 = `pkg-config --cflags tokyotyrant`
 @HAVE_OPENCV2_TRUE@am__append_4 = `pkg-config opencv --cflags`
@@ -170,6 +168,7 @@ CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DLLTOOL = @DLLTOOL@
+DOCBOOK = @DOCBOOK@
 DOXYGEN_PAPER_SIZE = @DOXYGEN_PAPER_SIZE@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -254,6 +253,7 @@ PERL = @PERL@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
+PTHREAD_LDADD = @PTHREAD_LDADD@
 RANLIB = @RANLIB@
 SED = @SED@
 SEEKS_CODE_STATUS = @SEEKS_CODE_STATUS@
@@ -293,7 +293,6 @@ builddir = @builddir@
 cf = @cf@
 datadir = @datadir@
 datarootdir = @datarootdir@
-docbook = @docbook@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
@@ -345,9 +344,9 @@ imgwebsearchplugindatadir = $(datadir)/seeks/plugins/img_websearch
 AM_CPPFLAGS = -Wno-deprecated -Wall -g -pipe -I${srcdir} \
 	-I${srcdir}/../../utils -I${srcdir}/../../lsh \
 	-I${srcdir}/../../proxy -I${srcdir}/../websearch \
-	-I${srcdir}/../../dht -I${srcdir}/../cf \
-	-I${srcdir}/..//query_capture $(am__append_1) $(am__append_2) \
-	$(am__append_3) $(am__append_4) $(am__append_5)
+	-I${srcdir}/../../dht -I${srcdir}/../../proxy $(am__append_1) \
+	$(am__append_2) $(am__append_3) $(am__append_4) \
+	$(am__append_5)
 ACLOCAL_AMFLAGS = -I m4
 imgwebsearchpluginlib_LTLIBRARIES = libseeksimgwebsearchplugin.la
 libseeksimgwebsearchplugin_la_SOURCES = img_websearch.cpp \
@@ -835,6 +834,7 @@ uninstall-am: uninstall-dist_imgwebsearchpluginconfigDATA \
 	uninstall-imgwebsearchpluginlibLTLIBRARIES \
 	uninstall-nobase_dist_imgwebsearchplugindataDATA
 
+@HAVE_PROTOBUF_TRUE@	       `pkg-config --cflags protobuf`
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
