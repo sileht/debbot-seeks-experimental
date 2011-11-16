@@ -157,11 +157,13 @@ namespace seeks_plugins
   {
     evhttp_add_header(r->output_headers,"Location",url);
     evhttp_send_reply(r, HTTP_MOVETEMP, "OK", NULL);
+    errlog::log_error(LOG_LEVEL_CRUNCH,"HTTP Call: %s",r->uri);
   }
 
   void httpserv::reply_with_error_400(struct evhttp_request *r)
   {
     evhttp_send_reply(r, HTTP_BADREQUEST, "BAD REQUEST", NULL);
+    errlog::log_error(LOG_LEVEL_CRUNCH,"HTTP Call: %s",r->uri);
   }
 
   void httpserv::reply_with_error(struct evhttp_request *r,
@@ -184,6 +186,7 @@ namespace seeks_plugins
 
     evhttp_send_reply(r, http_code, message, buffer);
     evbuffer_free(buffer);
+    errlog::log_error(LOG_LEVEL_CRUNCH,"HTTP Call: %s",r->uri);
   }
 
   void httpserv::reply_with_empty_body(struct evhttp_request *r,
@@ -191,6 +194,7 @@ namespace seeks_plugins
                                        const char *message)
   {
     evhttp_send_reply(r, http_code, message, NULL);
+    errlog::log_error(LOG_LEVEL_CRUNCH,"HTTP Call: %s",r->uri);
   }
 
   void httpserv::reply_with_body(struct evhttp_request *r,
@@ -213,6 +217,8 @@ namespace seeks_plugins
 
     evhttp_send_reply(r, http_code, message, buffer);
     evbuffer_free(buffer);
+
+    errlog::log_error(LOG_LEVEL_CRUNCH,"HTTP Call: %s",r->uri);
   }
 
   void httpserv::websearch_hp(struct evhttp_request *r, void *arg)
@@ -413,8 +419,16 @@ namespace seeks_plugins
     client_state csp;
     csp._config = seeks_proxy::_config;
     http_response rsp;
-    hash_map<const char*,const char*,hash<const char*>,eqstr> *parameters
-    = new hash_map<const char*,const char*,hash<const char*>,eqstr>();
+    hash_map<const char*,const char*,hash<const char*>,eqstr> *parameters = NULL;
+    const char *uri = r->uri;
+    if (uri)
+      parameters = httpserv::parse_query(uri);
+    else
+      {
+        httpserv::reply_with_empty_body(r,404,"ERROR");
+        return;
+      }
+    std::string uri_str = std::string(uri);
 
     const char *host = evhttp_find_header(r->input_headers, "host");
     if (host)
@@ -424,8 +438,6 @@ namespace seeks_plugins
       miscutil::enlist_unique_header(&csp._headers,"seeks-remote-location",baseurl);
 
     /* return requested file. */
-    std::string uri_str = std::string(r->uri);
-
     /* XXX: truely, this is a hack, we're routing websearch file service. */
     std::string ct;  // content-type.
     sp_err serr = SP_ERR_OK;
@@ -454,15 +466,17 @@ namespace seeks_plugins
         serr = cgisimple::cgi_file_server(&csp,&rsp,parameters);
         ct = "text/plain";
       }
+    else // wrong resource.
+      {
+        cgisimple::cgi_error_404(&csp,&rsp,parameters);
+        serr = SP_ERR_NOT_FOUND;
+      }
 
-    // XXX: other services can be routed here.
     miscutil::free_map(parameters);
     miscutil::list_remove_all(&csp._headers);
+    std::string status = "OK";
     if (serr != SP_ERR_OK)
-      {
-        httpserv::reply_with_empty_body(r,404,"ERROR");
-        return;
-      }
+      status = "ERROR";
 
     /* fill up response. */
     if (ct.empty())
@@ -479,8 +493,12 @@ namespace seeks_plugins
             ++lit;
           }
       }
-    std::string content = std::string(rsp._body,rsp._content_length);
-    httpserv::reply_with_body(r,200,"OK",content,ct);
+    std::string content;
+    if (rsp._body)
+      content = std::string(rsp._body);
+    if (status == "OK")
+      httpserv::reply_with_body(r,200,"OK",content,ct);
+    else httpserv::reply_with_error(r,404,"ERROR",content);
   }
 
   void httpserv::websearch(struct evhttp_request *r, void *arg)
