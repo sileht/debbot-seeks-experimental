@@ -495,7 +495,7 @@ namespace seeks_plugins
       }
     std::string content;
     if (rsp._body)
-      content = std::string(rsp._body);
+      content = std::string(rsp._body,rsp._content_length);
     if (status == "OK")
       httpserv::reply_with_body(r,200,"OK",content,ct);
     else httpserv::reply_with_error(r,404,"ERROR",content);
@@ -576,7 +576,11 @@ namespace seeks_plugins
             cgi::cgi_error_bad_param(&csp,rsp,parameters);
             code = 400;
           }
-        else if (serr == DB_ERR_NO_REC || serr == SP_ERR_NOT_FOUND)
+        else if (
+#if defined(PROTOBUF) && defined(TC)
+          serr == DB_ERR_NO_REC ||
+#endif
+          serr == SP_ERR_NOT_FOUND)
           {
             cgisimple::cgi_error_404(&csp,rsp,parameters);
             code = 404;
@@ -692,7 +696,11 @@ t.dtd\"><html><head><title>408 - Seeks fail connection to background search engi
             cgi::cgi_error_bad_param(&csp,rsp,parameters);
             code = 400;
           }
-        else if (serr == DB_ERR_NO_REC || serr == SP_ERR_NOT_FOUND)
+        else if (
+#if defined(PROTOBUF) && defined(TC)
+          serr == DB_ERR_NO_REC ||
+#endif
+          serr == SP_ERR_NOT_FOUND)
           {
             cgisimple::cgi_error_404(&csp,rsp,parameters);
             code = 404;
