@@ -1,3 +1,10 @@
+seeks-experimental (3:0.4~git201111211213-1) UNRELEASED; urgency=low
+
+  * Use correct LD Flags
+  * Imported Upstream version 0.4~git201111211213
+
+ -- Mehdi Abaakouk <sileht@sileht.net>  Mon, 21 Nov 2011 22:11:33 +0100
+
 seeks-experimental (3:0.4~git201111171332-1) UNRELEASED; urgency=low
 
   * Imported Upstream version 0.4~git201111171332
