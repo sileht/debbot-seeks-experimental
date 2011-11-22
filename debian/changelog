@@ -1,60 +1,60 @@
-seeks-experimental (3:0.4~git201111211213-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201111211213-1) sid; urgency=low
 
   * Use correct LD Flags
   * Imported Upstream version 0.4~git201111211213
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Mon, 21 Nov 2011 22:11:33 +0100
 
-seeks-experimental (3:0.4~git201111171332-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201111171332-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201111171332
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Thu, 17 Nov 2011 22:11:30 +0100
 
-seeks-experimental (3:0.4~git201111161039-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201111161039-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201111161039
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Wed, 16 Nov 2011 22:11:35 +0100
 
-seeks-experimental (3:0.4~git201111152100-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201111152100-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201111152100
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Tue, 15 Nov 2011 22:11:28 +0100
 
-seeks-experimental (3:0.4~git201111141529-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201111141529-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201111141529
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Mon, 14 Nov 2011 22:11:30 +0100
 
-seeks-experimental (3:0.4~git201111131740-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201111131740-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201111131740
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Sun, 13 Nov 2011 22:11:21 +0100
 
-seeks-experimental (3:0.4~git201111111852-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201111111852-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201111111852
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Fri, 11 Nov 2011 22:11:30 +0100
 
-seeks-experimental (3:0.4~git201111091409-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201111091409-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201111091409
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Wed, 09 Nov 2011 22:11:41 +0100
 
-seeks-experimental (3:0.4~git201111071644-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201111071644-1) sid; urgency=low
 
   * Sync packages description with stable version
   * Imported Upstream version 0.4~git201111071644
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Tue, 08 Nov 2011 22:11:31 +0100
 
-seeks-experimental (3:0.4~git201111061836-2) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201111061836-2) sid; urgency=low
 
   [ Mehdi Abaakouk ]
   * override LD_FLAGS with -Wl,--no-as-neede
@@ -63,7 +63,7 @@ seeks-experimental (3:0.4~git201111061836-2) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Mon, 07 Nov 2011 12:39:16 +0100
 
-seeks-experimental (3:0.4~git201111061836-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201111061836-1) sid; urgency=low
 
   [ Mehdi Abaakouk ]
   * restore previous behavior
@@ -73,7 +73,7 @@ seeks-experimental (3:0.4~git201111061836-1) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Mon, 07 Nov 2011 08:38:02 +0100
 
-seeks-experimental (3:0.4~git201110191530-2) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110191530-2) sid; urgency=low
 
   [ Mehdi Abaakouk ]
   * Try a other trick
@@ -82,7 +82,7 @@ seeks-experimental (3:0.4~git201110191530-2) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Wed, 19 Oct 2011 18:02:31 +0200
 
-seeks-experimental (3:0.4~git201110191530-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110191530-1) sid; urgency=low
 
   [ Mehdi Abaakouk ]
   * Always link lib for now
@@ -92,211 +92,211 @@ seeks-experimental (3:0.4~git201110191530-1) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Wed, 19 Oct 2011 17:28:06 +0200
 
-seeks-experimental (3:0.4~git201110171459-32) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-32) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 14:23:08 +0200
 
-seeks-experimental (3:0.4~git201110171459-31) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-31) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 14:03:43 +0200
 
-seeks-experimental (3:0.4~git201110171459-30) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-30) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 14:01:51 +0200
 
-seeks-experimental (3:0.4~git201110171459-29) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-29) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 14:00:55 +0200
 
-seeks-experimental (3:0.4~git201110171459-28) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-28) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:59:05 +0200
 
-seeks-experimental (3:0.4~git201110171459-27) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-27) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:55:04 +0200
 
-seeks-experimental (3:0.4~git201110171459-26) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-26) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:54:36 +0200
 
-seeks-experimental (3:0.4~git201110171459-25) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-25) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:44:27 +0200
 
-seeks-experimental (3:0.4~git201110171459-24) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-24) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:43:28 +0200
 
-seeks-experimental (3:0.4~git201110171459-23) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-23) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:43:10 +0200
 
-seeks-experimental (3:0.4~git201110171459-22) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-22) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:42:46 +0200
 
-seeks-experimental (3:0.4~git201110171459-21) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-21) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:42:04 +0200
 
-seeks-experimental (3:0.4~git201110171459-20) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-20) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:38:15 +0200
 
-seeks-experimental (3:0.4~git201110171459-19) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-19) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:37:05 +0200
 
-seeks-experimental (3:0.4~git201110171459-18) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-18) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:32:16 +0200
 
-seeks-experimental (3:0.4~git201110171459-17) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-17) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:27:43 +0200
 
-seeks-experimental (3:0.4~git201110171459-16) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-16) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:27:17 +0200
 
-seeks-experimental (3:0.4~git201110171459-15) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-15) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:26:46 +0200
 
-seeks-experimental (3:0.4~git201110171459-14) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-14) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:25:54 +0200
 
-seeks-experimental (3:0.4~git201110171459-13) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-13) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:21:31 +0200
 
-seeks-experimental (3:0.4~git201110171459-12) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-12) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:20:15 +0200
 
-seeks-experimental (3:0.4~git201110171459-11) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-11) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:17:34 +0200
 
-seeks-experimental (3:0.4~git201110171459-10) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-10) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:05:38 +0200
 
-seeks-experimental (3:0.4~git201110171459-9) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-9) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:03:11 +0200
 
-seeks-experimental (3:0.4~git201110171459-8) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-8) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 13:00:17 +0200
 
-seeks-experimental (3:0.4~git201110171459-7) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-7) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 12:58:24 +0200
 
-seeks-experimental (3:0.4~git201110171459-6) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-6) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 12:56:14 +0200
 
-seeks-experimental (3:0.4~git201110171459-5) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-5) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 12:54:52 +0200
 
-seeks-experimental (3:0.4~git201110171459-4) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-4) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 12:53:23 +0200
 
-seeks-experimental (3:0.4~git201110171459-3) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-3) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 12:48:37 +0200
 
-seeks-experimental (3:0.4~git201110171459-2) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-2) sid; urgency=low
 
   * Snapshot version 0.4~git201110171459
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 18 Oct 2011 12:36:42 +0200
 
-seeks-experimental (3:0.4~git201110171459-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110171459-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110171459
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Mon, 17 Oct 2011 22:11:57 +0200
 
-seeks-experimental (3:0.4~git201110112148-4) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110112148-4) sid; urgency=low
 
   * Snapshot version 0.4~git201110112148
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Mon, 17 Oct 2011 18:34:46 +0200
 
-seeks-experimental (3:0.4~git201110112148-3) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110112148-3) sid; urgency=low
 
   * Snapshot version 0.4~git201110112148
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Mon, 17 Oct 2011 14:07:52 +0200
 
-seeks-experimental (3:0.4~git201110112148-2) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110112148-2) sid; urgency=low
 
   [ Mehdi Abaakouk ]
   * Add docbook-xml
@@ -305,85 +305,85 @@ seeks-experimental (3:0.4~git201110112148-2) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Mon, 17 Oct 2011 14:00:59 +0200
 
-seeks-experimental (3:0.4~git201110112148-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110112148-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110112148
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Tue, 11 Oct 2011 22:11:48 +0200
 
-seeks-experimental (3:0.4~git201110101604-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110101604-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110101604
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Mon, 10 Oct 2011 22:11:45 +0200
 
-seeks-experimental (3:0.4~git201110091745-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110091745-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110091745
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Sun, 09 Oct 2011 22:11:44 +0200
 
-seeks-experimental (3:0.4~git201110082059-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110082059-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110082059
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Sat, 08 Oct 2011 22:11:57 +0200
 
-seeks-experimental (3:0.4~git201110071736-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110071736-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110071736
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Fri, 07 Oct 2011 22:11:52 +0200
 
-seeks-experimental (3:0.4~git201110061740-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110061740-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110061740
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Thu, 06 Oct 2011 22:11:46 +0200
 
-seeks-experimental (3:0.4~git201110052036-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110052036-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110052036
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Wed, 05 Oct 2011 22:13:57 +0200
 
-seeks-experimental (3:0.4~git201110041032-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110041032-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110041032
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Tue, 04 Oct 2011 22:11:47 +0200
 
-seeks-experimental (3:0.4~git201110031832-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110031832-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110031832
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Mon, 03 Oct 2011 22:11:50 +0200
 
-seeks-experimental (3:0.4~git201110022053-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110022053-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110022053
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Sun, 02 Oct 2011 22:11:49 +0200
 
-seeks-experimental (3:0.4~git201110011254-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201110011254-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201110011254
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Sat, 01 Oct 2011 22:11:52 +0200
 
-seeks-experimental (3:0.4~git201109201748-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201109201748-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201109201748
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Tue, 20 Sep 2011 22:11:54 +0200
 
-seeks-experimental (3:0.4~git201109130751-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201109130751-1) sid; urgency=low
 
   * Imported Upstream version 0.4~git201109130751
 
  -- Mehdi Abaakouk <sileht@sileht.net>  Wed, 14 Sep 2011 22:11:46 +0200
 
-seeks-experimental (3:0.4~git201109121103-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201109121103-1) sid; urgency=low
 
   [ Mehdi Abaakouk ]
   * Imported Upstream version 0.4~git201109121103
@@ -392,25 +392,25 @@ seeks-experimental (3:0.4~git201109121103-1) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Mon, 12 Sep 2011 20:27:52 +0200
 
-seeks-experimental (3:0.4~git201108300007-5) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201108300007-5) sid; urgency=low
 
   * Snapshot version 0.4~git201108300007
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Thu, 01 Sep 2011 20:04:35 +0200
 
-seeks-experimental (3:0.4~git201108300007-4) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201108300007-4) sid; urgency=low
 
   * Snapshot version 0.4~git201108300007
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Thu, 01 Sep 2011 20:02:07 +0200
 
-seeks-experimental (3:0.4~git201108300007-3) UNRELEASED; urgency=low
+seeks-experimental (3:0.4~git201108300007-3) sid; urgency=low
 
   * Add epoq 
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Thu, 01 Sep 2011 19:53:16 +0200
 
-seeks-experimental (0.4~git201108300007-2) UNRELEASED; urgency=low
+seeks-experimental (0.4~git201108300007-2) sid; urgency=low
 
   [ Mehdi Abaakouk ]
   * Add libicu dependancy
@@ -419,7 +419,7 @@ seeks-experimental (0.4~git201108300007-2) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Wed, 31 Aug 2011 08:33:23 +0200
 
-seeks-experimental (0.4~git201108300007-1) UNRELEASED; urgency=low
+seeks-experimental (0.4~git201108300007-1) sid; urgency=low
 
   [ Mehdi Abaakouk ]
   * Imported Upstream version 0.4~git201108300007
@@ -428,13 +428,13 @@ seeks-experimental (0.4~git201108300007-1) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 30 Aug 2011 21:13:30 +0200
 
-seeks-experimental (0.4~git201108212241-2) UNRELEASED; urgency=low
+seeks-experimental (0.4~git201108212241-2) sid; urgency=low
 
   * Snapshot version 0.4~git201108212241
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Sat, 27 Aug 2011 19:19:52 +0200
 
-seeks-experimental (0.4~git201108212241-1) UNRELEASED; urgency=low
+seeks-experimental (0.4~git201108212241-1) sid; urgency=low
 
   [ Mehdi Abaakouk ]
   * Imported Upstream version 0.4~git201108212241
@@ -443,7 +443,7 @@ seeks-experimental (0.4~git201108212241-1) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Sat, 27 Aug 2011 18:41:17 +0200
 
-seeks-experimental (0.4~git201108191949-4) UNRELEASED; urgency=low
+seeks-experimental (0.4~git201108191949-4) sid; urgency=low
 
   [ Mehdi ABAAKOUK ]
   * Don't make broken check
@@ -452,7 +452,7 @@ seeks-experimental (0.4~git201108191949-4) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Sun, 21 Aug 2011 21:27:59 +0200
 
-seeks-experimental (0.4~git201108191949-3) UNRELEASED; urgency=low
+seeks-experimental (0.4~git201108191949-3) sid; urgency=low
 
   [ Mehdi ABAAKOUK ]
   * Remove gtest deps
@@ -461,7 +461,7 @@ seeks-experimental (0.4~git201108191949-3) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Sun, 21 Aug 2011 12:16:59 +0200
 
-seeks-experimental (0.4~git201108191949-2) UNRELEASED; urgency=low
+seeks-experimental (0.4~git201108191949-2) sid; urgency=low
 
   [ Mehdi ABAAKOUK ]
   * Add gtest falgs
@@ -470,7 +470,7 @@ seeks-experimental (0.4~git201108191949-2) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Sat, 20 Aug 2011 20:51:00 +0200
 
-seeks-experimental (0.4~git201108191949-1) UNRELEASED; urgency=low
+seeks-experimental (0.4~git201108191949-1) sid; urgency=low
 
   [ Mehdi ABAAKOUK ]
   * Imported Upstream version 0.4~git201108191949
@@ -479,7 +479,7 @@ seeks-experimental (0.4~git201108191949-1) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Sat, 20 Aug 2011 16:10:51 +0200
 
-seeks-experimental (0.4~git201108082344-2) UNRELEASED; urgency=low
+seeks-experimental (0.4~git201108082344-2) sid; urgency=low
 
   [ Mehdi ABAAKOUK ]
   * Add gtest dep
@@ -488,7 +488,7 @@ seeks-experimental (0.4~git201108082344-2) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Sat, 20 Aug 2011 16:09:53 +0200
 
-seeks-experimental (0.4~git201108082344-1) UNRELEASED; urgency=low
+seeks-experimental (0.4~git201108082344-1) sid; urgency=low
 
   [ Mehdi ABAAKOUK ]
   * Imported Upstream version 0.4~git201108082344
@@ -497,7 +497,7 @@ seeks-experimental (0.4~git201108082344-1) UNRELEASED; urgency=low
 
  -- Abaakouk Mehdi <theli48@gmail.com>  Sun, 14 Aug 2011 22:15:23 +0200
 
-seeks-experimental (0.4~0-1) UNRELEASED; urgency=low
+seeks-experimental (0.4~0-1) sid; urgency=low
 
   * Preparation for snapshot bot
 
