@@ -1,3 +1,13 @@
+seeks-experimental (3:0.4~git201111211213-2) UNRELEASED; urgency=low
+
+  [ Mehdi Abaakouk ]
+  * Restore previosu bahavior for LDFLAGS
+  * Restore previosu bahavior for LDFLAGS
+
+  [ Abaakouk Mehdi ]
+
+ -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 22 Nov 2011 13:56:01 +0100
+
 seeks-experimental (3:0.4~git201111211213-1) sid; urgency=low
 
   * Use correct LD Flags
