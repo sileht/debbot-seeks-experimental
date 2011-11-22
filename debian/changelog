@@ -1,3 +1,12 @@
+seeks-experimental (3:0.4~git201111211213-3) UNRELEASED; urgency=low
+
+  [ Mehdi Abaakouk ]
+  * Remove empty line
+
+  [ Abaakouk Mehdi ]
+
+ -- Abaakouk Mehdi <theli48@gmail.com>  Tue, 22 Nov 2011 14:00:31 +0100
+
 seeks-experimental (3:0.4~git201111211213-2) UNRELEASED; urgency=low
 
   [ Mehdi Abaakouk ]
