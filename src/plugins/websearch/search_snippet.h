@@ -190,7 +190,7 @@ namespace seeks_plugins
                        std::set<std::string> &words) const;
 
       // tag snippet, i.e. detect its type if not already done by the parsers.
-      void tag();
+      virtual void tag();
 
       // load tagging patterns from files.
       static sp_err load_patterns();
@@ -214,6 +214,15 @@ namespace seeks_plugins
 
       // get doc type in a string form.
       std::string get_doc_type_str() const;
+
+      // HTML rendering.
+      virtual std::string to_html(std::vector<std::string> &words,
+                                  const std::string &base_url_str,
+                                  const hash_map<const char*,const char*,hash<const char*>,eqstr> *parameters);
+
+      // JSON rendering.
+      virtual std::string to_json(const bool &thumbs,
+                                  const std::vector<std::string> &query_words);
 
       // printing output.
       virtual std::ostream& print(std::ostream &output);
