@@ -26,11 +26,16 @@
 #include "db_uri_record.h"
 #include "udb_client.h"
 #include "udbs_err.h"
+#include "seeks_snippet.h"
 #include "mrf.h"
 #include "urlmatch.h"
 #include "miscutil.h"
 #include "mem_utils.h"
 #include "errlog.h"
+
+#ifdef FEATURE_IMG_WEBSEARCH_PLUGIN
+#include "img_search_snippet.h"  // XXX: for IMAGE type only.
+#endif
 
 #include <assert.h>
 #include <math.h>
@@ -920,8 +925,12 @@ namespace seeks_plugins
 
         // estimate the url prior.
         float prior =  1.0 / (log(nuri + 1.0) + 1.0);
-        if (rsc.empty() && nuri != 0 && (*vit)->_doc_type != VIDEO_THUMB
-            && (*vit)->_doc_type != TWEET && (*vit)->_doc_type != IMAGE) // not empty or type with not enough competition on domains.
+        if (rsc.empty() && nuri != 0 && (*vit)->_doc_type != seeks_doc_type::VIDEO_THUMB
+            && (*vit)->_doc_type != seeks_doc_type::TWEET
+#ifdef FEATURE_IMG_WEBSEARCH_PLUGIN
+            && (*vit)->_doc_type != seeks_img_doc_type::IMAGE // not empty or type with not enough competition on domains.
+#endif
+           )
           prior = estimate_prior((*vit),filter->empty() ? NULL:filter,url,host,nuri);
         posteriors[j] *= prior;
         posteriors[j] *= (*vit)->_engine.size(); // accounts for multiple sources.
@@ -1016,8 +1025,11 @@ namespace seeks_plugins
       return posterior;
 
     hash_map<uint32_t,bool,id_hash_uint>::const_iterator hit;
-    if (!vd_host || vd_host->_hits < 0 || !s || s->_doc_type == VIDEO_THUMB || s->_doc_type == TWEET
-        || s->_doc_type == IMAGE) // empty or type with not enough competition on domains.
+    if (!vd_host || vd_host->_hits < 0 || !s || s->_doc_type == seeks_doc_type::VIDEO_THUMB || s->_doc_type == seeks_doc_type::TWEET
+#ifdef FEATURE_IMG_WEBSEARCH_PLUGIN
+        || s->_doc_type == seeks_img_doc_type::IMAGE // empty or type with not enough competition on domains.
+#endif
+       )
       filtered = true;
     else if (filter && filtered)
       filtered = true;

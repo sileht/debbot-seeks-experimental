@@ -37,6 +37,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_1 = -I${srcdir}/../xsl_serializer @XSLT_CFLAGS@
 subdir = src/plugins/query_capture
 DIST_COMMON = $(dist_querycapturepluginconfig_DATA) \
 	$(nobase_dist_querycaptureplugindata_DATA) \
@@ -310,11 +311,13 @@ with_gtest = @with_gtest@
 querycapturepluginlibdir = $(libdir)/seeks/plugins/query_capture
 querycaptureplugindatadir = $(datadir)/seeks/plugins/query_capture
 AM_CXXFLAGS = -Wall -g -pipe
-AM_CPPFLAGS = -I${srcdir} -I${srcdir}/../../utils -I${srcdir}/../../proxy -I${srcdir}/../../lsh -I${srcdir}/../../dht -I${srcdir}/../websearch -I${srcdir}/../uri_capture \
-	    -DSEEKS_CONFIGDIR='"$(sysconfdir)/seeks/"' `pkg-config --cflags protobuf` `pkg-config --cflags tokyocabinet` \
-            @PCRE_CFLAGS@ \
-	    -I../../proxy/
-
+AM_CPPFLAGS = -I${srcdir} -I${srcdir}/../../utils \
+	-I${srcdir}/../../proxy -I${srcdir}/../../lsh \
+	-I${srcdir}/../../dht -I${srcdir}/../websearch \
+	-I${srcdir}/../uri_capture \
+	-DSEEKS_CONFIGDIR='"$(sysconfdir)/seeks/"' `pkg-config \
+	--cflags protobuf` `pkg-config --cflags tokyocabinet` \
+	@PCRE_CFLAGS@ -I../../proxy/ $(am__append_1)
 ACLOCAL_AMFLAGS = -I m4
 protoc_inputs = db_query_record_msg.proto
 protoc_outputs = db_query_record_msg.pb.cc db_query_record_msg.pb.h
