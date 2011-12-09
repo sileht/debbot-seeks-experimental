@@ -37,7 +37,9 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_1 = -I${srcdir}/../xsl_serializer @XML2_CFLAGS@
+@HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_1 = -I${srcdir}/../img_websearch
+@HAVE_OPENCV2_TRUE@am__append_2 = `pkg-config opencv --cflags`
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_3 = -I${srcdir}/../xsl_serializer @XML2_CFLAGS@
 subdir = src/plugins/cf
 DIST_COMMON = $(dist_cfpluginconfig_DATA) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -349,7 +351,8 @@ AM_CPPFLAGS = -I${srcdir} -I${srcdir}/../../utils \
 	-I${srcdir}/../udb_service \
 	-DSEEKS_CONFIGDIR='"$(sysconfdir)/seeks/"' `pkg-config \
 	--cflags protobuf` `pkg-config --cflags tokyocabinet` \
-	@PCRE_CFLAGS@ -I../../proxy/ $(am__append_1)
+	@PCRE_CFLAGS@ -I../../proxy/ $(am__append_1) $(am__append_2) \
+	$(am__append_3)
 ACLOCAL_AMFLAGS = -I m4
 cfpluginlib_LTLIBRARIES = libcfplugin.la
 libcfplugin_la_SOURCES = cf.cpp rank_estimators.cpp query_recommender.cpp cf_configuration.cpp cr_store.cpp peer_list.cpp \

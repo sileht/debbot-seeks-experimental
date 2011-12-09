@@ -39,6 +39,7 @@ build_triplet = @build@
 host_triplet = @host@
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_1 = -I${srcdir}/../query_capture -I${srcdir}/../cf -I${srcdir}/../udb_service `pkg-config --cflags protobuf` `pkg-config --cflags tokyocabinet`
 @HAVE_IMG_WEBSEARCH_PLUGIN_TRUE@am__append_2 = -I${srcdir}/../img_websearch
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_3 = -I${srcdir}/../xsl_serializer @XSLT_CFLAGS@
 subdir = src/plugins/httpserv
 DIST_COMMON = $(dist_httpservconfig_DATA) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -313,7 +314,7 @@ AM_CPPFLAGS = -Wno-deprecated -Wall -g -pipe -I${srcdir} \
 	-I${srcdir}/../websearch -I${srcdir}/../../utils \
 	-I${srcdir}/../../lsh -I${srcdir}/../../proxy \
 	-I${srcdir}/../../dht -I${srcdir}/../websearch_api_compat \
-	$(am__append_1) $(am__append_2)
+	$(am__append_1) $(am__append_2) $(am__append_3)
 ACLOCAL_AMFLAGS = -I m4
 httpservpluginlib_LTLIBRARIES = libseekshttpservplugin.la
 libseekshttpservplugin_la_SOURCES = httpserv_configuration.cpp httpserv.cpp httpserv.h httpserv_configuration.h

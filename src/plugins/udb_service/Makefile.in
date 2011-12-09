@@ -37,6 +37,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
+@HAVE_XSLSERIALIZER_PLUGIN_TRUE@am__append_1 = -I${srcdir}/../xsl_serializer @XSLT_CFLAGS@
 subdir = src/plugins/udb_service
 DIST_COMMON = $(dist_udbservicepluginconfig_DATA) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in
@@ -307,11 +308,13 @@ with_gtest = @with_gtest@
 udbservicepluginlibdir = $(libdir)/seeks/plugins/udb_service
 udbserviceplugindatadir = $(datadir)/seeks/plugins/udb_service
 AM_CXXFLAGS = -Wall -g -pipe
-AM_CPPFLAGS = -I${srcdir} -I${srcdir}/../../utils -I${srcdir}/../../proxy -I${srcdir}/../../lsh -I${srcdir}/../../dht \
-            -I${srcdir}/../websearch -I${srcdir}/../query_capture -I${srcdir}/../uri_capture -I${srcdir}/../cf \
-            -DSEEKS_CONFIGDIR='"$(sysconfdir)/seeks/"' `pkg-config --cflags protobuf` `pkg-config --cflags tokyocabinet` \
-            @PCRE_CFLAGS@ -I../../proxy/
-
+AM_CPPFLAGS = -I${srcdir} -I${srcdir}/../../utils \
+	-I${srcdir}/../../proxy -I${srcdir}/../../lsh \
+	-I${srcdir}/../../dht -I${srcdir}/../websearch \
+	-I${srcdir}/../query_capture -I${srcdir}/../uri_capture \
+	-I${srcdir}/../cf -DSEEKS_CONFIGDIR='"$(sysconfdir)/seeks/"' \
+	`pkg-config --cflags protobuf` `pkg-config --cflags \
+	tokyocabinet` @PCRE_CFLAGS@ -I../../proxy/ $(am__append_1)
 ACLOCAL_AMFLAGS = -I m4
 @HAVE_PROTOBUF_TRUE@protoc_inputs = halo_msg.proto
 @HAVE_PROTOBUF_TRUE@protoc_outputs = halo_msg.pb.h halo_msg.pb.cc
