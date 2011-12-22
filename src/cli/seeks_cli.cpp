@@ -169,7 +169,8 @@ int main(int argc, char **argv)
           || p == "--nclusters" || p == "--sid" || p == "--engines"
           || p == "--rpp" || p == "--page" || p == "--prs"
           || p == "--thumbs" || p == "--nq" || p == "--redirect"
-          || p == "--cpost" || p == "--surl" || p == "--swords")
+          || p == "--cpost" || p == "--surl" || p == "--swords"
+          || p == "--expansion")
         {
           std::string v = argv[++i];
           params.insert(std::pair<std::string,std::string>(p,v));
@@ -330,21 +331,35 @@ int main(int argc, char **argv)
     }
   else if (command == "cluster_types")
     {
-      std::string lang;
+      std::string lang,engines,expansion,peers;
       if ((mit=params.find("--lang"))!=params.end())
         lang = (*mit).second;
+      if ((mit=params.find("--engines"))!=params.end())
+        engines = (*mit).second;
+      if ((mit=params.find("--expansion"))!=params.end())
+        expansion = (*mit).second;
+      if ((mit=params.find("--peers"))!=params.end())
+        peers = (*mit).second;
       err = cli::get_cluster_types(node,output,timeout,
-                                   query,lang,result);
+                                   query,lang,engines,
+                                   expansion,peers,result);
     }
   else if (command == "cluster_auto")
     {
-      std::string lang,nclusters;
+      std::string lang,nclusters,engines,expansion,peers;
       if ((mit=params.find("--lang"))!=params.end())
         lang = (*mit).second;
       if ((mit=params.find("--nclusters"))!=params.end())
         nclusters = (*mit).second;
+      if ((mit=params.find("--engines"))!=params.end())
+        engines = (*mit).second;
+      if ((mit=params.find("--expansion"))!=params.end())
+        expansion = (*mit).second;
+      if ((mit=params.find("--peers"))!=params.end())
+        peers = (*mit).second;
       err = cli::get_cluster_auto(node,output,timeout,
-                                  query,lang,nclusters,result);
+                                  query,lang,nclusters,engines,
+                                  expansion,peers,result);
     }
   else if (command == "similar")
     {

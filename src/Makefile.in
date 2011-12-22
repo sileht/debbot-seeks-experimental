@@ -364,21 +364,22 @@ AM_CXXFLAGS = -Wall -Wno-deprecated -g -pipe -I${srcdir} \
 	-I${srcdir}/plugins/websearch_api_compat \
 	-I${srcdir}/plugins/query_capture \
 	-I${srcdir}/plugins/uri_capture -I${srcdir}/plugins/cf \
-	-I${srcdir}/plugins/udb_service -I${srcdir}/dht `pkg-config \
-	opencv --cflags` $(am__append_1) $(am__append_2) \
-	$(am__append_3) $(am__append_7)
+	-I${srcdir}/plugins/udb_service -I${srcdir}/plugins/readable \
+	-I${srcdir}/dht `pkg-config opencv --cflags` $(am__append_1) \
+	$(am__append_2) $(am__append_3) $(am__append_7)
 AM_LDFLAGS = `pkg-config opencv --libs` -Lutils/ -Llsh/ -Lproxy/ \
 	@PCRE_LDADD@ @CURL_LDADD@ @XML2_LDADD@ @ICU_LDADD@ \
 	-Lplugins/websearch -Lplugins/websearch_api_compat \
 	-Lplugins/query_capture -Lplugins/uri_capture \
-	-Lplugins/udb_service -Ldht/ $(am__append_4) $(am__append_5) \
-	$(am__append_6) $(am__append_8) $(am__append_9) \
-	$(am__append_12)
+	-Lplugins/udb_service -Lplugins/readable -Ldht/ \
+	$(am__append_4) $(am__append_5) $(am__append_6) \
+	$(am__append_8) $(am__append_9) $(am__append_12)
 LDADD = -lseekswebsearchplugin -lseekswebsearchapicompatplugin \
-	$(am__append_10) $(am__append_11) $(am__append_13) \
-	-lseeksutils -lseeksproxy -lseeksplugins $(am__append_14) \
-	$(am__append_15) -lpcre -lpcreposix -lseekslsh -lseeksdht \
-	-lrmd160 @PTHREAD_LDADD@ -lz @CURL_LDADD@ $(am__append_16)
+	-lreadableplugin $(am__append_10) $(am__append_11) \
+	$(am__append_13) -lseeksutils -lseeksproxy -lseeksplugins \
+	$(am__append_14) $(am__append_15) -lpcre -lpcreposix \
+	-lseekslsh -lseeksdht -lrmd160 @PTHREAD_LDADD@ -lz \
+	@CURL_LDADD@ $(am__append_16)
 SUBDIRS = utils proxy lsh dht plugins proxy/tests lsh/tests . cli
 configdir = $(sysconfdir)/seeks
 dist_config_DATA = config \
