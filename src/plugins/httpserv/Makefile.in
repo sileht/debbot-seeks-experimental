@@ -314,7 +314,8 @@ AM_CPPFLAGS = -Wno-deprecated -Wall -g -pipe -I${srcdir} \
 	-I${srcdir}/../websearch -I${srcdir}/../../utils \
 	-I${srcdir}/../../lsh -I${srcdir}/../../proxy \
 	-I${srcdir}/../../dht -I${srcdir}/../websearch_api_compat \
-	$(am__append_1) $(am__append_2) $(am__append_3)
+	-I${srcdir}/../readable $(am__append_1) $(am__append_2) \
+	$(am__append_3)
 ACLOCAL_AMFLAGS = -I m4
 httpservpluginlib_LTLIBRARIES = libseekshttpservplugin.la
 libseekshttpservplugin_la_SOURCES = httpserv_configuration.cpp httpserv.cpp httpserv.h httpserv_configuration.h
