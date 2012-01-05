@@ -360,7 +360,8 @@ AM_CPPFLAGS = $(am__append_1) $(am__append_4) $(am__append_7) \
 	-I$(top_srcdir)/src/plugins/websearch \
 	-I$(top_srcdir)/src/plugins/websearch_api_compat \
 	-I$(top_srcdir)/src/plugins/readable @PCRE_CFLAGS@ \
-	@XML2_CFLAGS@ @ICU_CFLAGS@ $(GTEST_CPPFLAGS) $(am__append_15)
+	@XML2_CFLAGS@ @ICU_CFLAGS@ $(GTEST_CPPFLAGS) $(am__append_15) \
+	-I../../../proxy/
 AM_LDFLAGS = $(am__append_2) $(am__append_5) $(am__append_8) \
 	$(am__append_10) $(am__append_12) -L.. \
 	-L$(top_builddir)/src/dht -L$(top_builddir)/src/lsh \

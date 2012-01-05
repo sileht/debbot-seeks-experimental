@@ -452,7 +452,7 @@ AM_CPPFLAGS = $(am__append_3) $(am__append_6) $(am__append_9) \
 	-I$(top_srcdir)/src/plugins/websearch_api_compat \
 	-I$(top_srcdir)/src/plugins/readable @PCRE_CFLAGS@ \
 	@XML2_CFLAGS@ @ICU_CFLAGS@ $(GTEST_CPPFLAGS) $(am__append_17) \
-	-I../
+	-I../../../proxy/
 AM_LDFLAGS = $(am__append_4) $(am__append_7) $(am__append_10) \
 	$(am__append_12) $(am__append_14) -L.. \
 	-L$(top_builddir)/src/dht -L$(top_builddir)/src/lsh \
