@@ -454,12 +454,12 @@ namespace seeks_plugins
 
   bool search_snippet::is_se_enabled(const hash_map<const char*,const char*,hash<const char*>,eqstr> *parameters)
   {
-    //if (_personalized && _engine.has_feed("seeks"))
-    //return true;
+    if (_personalized && _engine.has_feed("seeks"))
+      return true;
     feeds se_enabled;
     query_context::fillup_engines(parameters,se_enabled);
     feeds band = _engine.inter(se_enabled);
-    
+
     /*if (band.empty())
       {
         // check for a wildcard (all feeds for a given parser).
@@ -512,7 +512,7 @@ namespace seeks_plugins
   {
     _summary = summary;
 
-    if (_summary.length() > websearch::_wconfig->_max_summary_length)
+    if (websearch::_wconfig && _summary.length() > websearch::_wconfig->_max_summary_length)
       {
         // indiscriminate shortening can break UTF-8 characters.
         // instead, find the last space - 3 characters (for ...)
