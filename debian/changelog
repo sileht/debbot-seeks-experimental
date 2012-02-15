@@ -1,3 +1,9 @@
+seeks-experimental (3:0.4~git201111211213-8) UNRELEASED; urgency=low
+
+  * Snapshot version 0.4~git201111211213
+
+ -- Mehdi ABAAKOUK <sileht@sileht.net>  Wed, 15 Feb 2012 15:51:22 +0100
+
 seeks-experimental (3:0.4~git201111211213-7) UNRELEASED; urgency=low
 
   * Snapshot version 0.4~git201111211213
