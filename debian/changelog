@@ -1,3 +1,78 @@
+seeks-experimental (3:0.4~git201111211213-5) UNRELEASED; urgency=low
+
+  [ Mehdi Abaakouk ]
+  * Imported Upstream version 0.4.1~git201111260930
+  * Imported Upstream version 0.4.1~git201111271741
+  * Imported Upstream version 0.4.1~git201111281715
+  * Imported Upstream version 0.4.1~git201111281715
+  * Imported Upstream version 0.4.1~git201111302010
+  * Imported Upstream version 0.4.1~git201112011915
+  * Imported Upstream version 0.4.1~git201112021554
+  * Imported Upstream version 0.4.1~git201112031750
+  * Imported Upstream version 0.4.1~git201112031750
+  * Imported Upstream version 0.4.1~git201112051309
+  * Imported Upstream version 0.4.1~git201112051309
+  * Imported Upstream version 0.4.1~git201112051309
+  * Imported Upstream version 0.4.1~git201112051309
+  * Imported Upstream version 0.4.1~git201112091610
+  * Imported Upstream version 0.4.1~git201112101414
+  * Imported Upstream version 0.4.1~git201112111929
+  * Imported Upstream version 0.4.1~git201112121209
+  * Imported Upstream version 0.4.1~git201112131455
+  * Imported Upstream version 0.4.1~git201112131455
+  * Imported Upstream version 0.4.1~git201112131455
+  * Imported Upstream version 0.4.1~git201112162118
+  * Imported Upstream version 0.4.1~git201112162118
+  * Imported Upstream version 0.4.1~git201112162118
+  * Imported Upstream version 0.4.1~git201112191634
+  * Imported Upstream version 0.4.1~git201112191634
+  * Imported Upstream version 0.4.1~git201112221835
+  * Imported Upstream version 0.4.1~git201112231242
+  * Imported Upstream version 0.4.1~git201112241926
+  * Imported Upstream version 0.4.1~git201112241926
+  * Imported Upstream version 0.4.1~git201112261915
+  * Imported Upstream version 0.4.1~git201112261915
+  * Imported Upstream version 0.4.1~git201112261915
+  * Imported Upstream version 0.4.1~git201112261915
+  * Imported Upstream version 0.4.1~git201112301627
+  * Imported Upstream version 0.4.1~git201112301627
+  * Imported Upstream version 0.4.1~git201201011949
+  * Imported Upstream version 0.4.1~git201201021221
+  * Imported Upstream version 0.4.1~git201201021221
+  * Imported Upstream version 0.4.1~git201201041615
+  * Imported Upstream version 0.4.1~git201201051556
+  * Imported Upstream version 0.4.1~git201201061141
+  * Imported Upstream version 0.4.1~git201201061141
+  * Imported Upstream version 0.4.1~git201201081006
+  * Imported Upstream version 0.4.1~git201201081006
+  * Imported Upstream version 0.4.1~git201201101205
+  * Imported Upstream version 0.4.1~git201201111123
+  * Imported Upstream version 0.4.1~git201201111123
+  * Imported Upstream version 0.4.1~git201201111123
+  * Imported Upstream version 0.4.1~git201201141343
+  * Imported Upstream version 0.4.1~git201201141343
+  * Imported Upstream version 0.4.1~git201201141343
+  * Imported Upstream version 0.4.1~git201201170746
+  * Imported Upstream version 0.4.1~git201201170746
+  * Imported Upstream version 0.4.1~git201201170746
+  * Imported Upstream version 0.4.1~git201201170746
+  * Imported Upstream version 0.4.1~git201201170746
+  * Imported Upstream version 0.4.1~git201201170746
+  * Imported Upstream version 0.4.1~git201201231019
+  * Imported Upstream version 0.4.1~git201201231019
+  * Imported Upstream version 0.4.1~git201201231019
+  * Imported Upstream version 0.4.1~git201201260025
+  * Imported Upstream version 0.4.1~git201201260025
+  * Imported Upstream version 0.4.1~git201201260025
+  * Imported Upstream version 0.4.1~git201201260025
+  * Imported Upstream version 0.4.1~git201201260025
+  * Imported Upstream version 0.4.1~git201201260025
+  * Imported Upstream version 0.4.1~git201202010002
+
+  [ Mehdi ABAAKOUK ]
+
+ -- Mehdi ABAAKOUK <sileht@sileht.net>  Wed, 15 Feb 2012 15:32:15 +0100
+
 seeks-experimental (3:0.4~git201111211213-4) UNRELEASED; urgency=low
 
   * Snapshot version 0.4~git201111211213
