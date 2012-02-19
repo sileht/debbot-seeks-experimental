@@ -7,7 +7,7 @@
 LDFLAGS += -Wl,--no-as-needed
 
 %:
-	dh $@ --with autotools-dev
+	dh $@
 
 
 override_dh_auto_configure:
