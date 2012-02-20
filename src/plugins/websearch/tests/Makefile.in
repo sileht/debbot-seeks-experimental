@@ -39,13 +39,14 @@ check_PROGRAMS = ut_json_renderer$(EXEEXT) ut_feeds$(EXEEXT) \
 	ut_qc$(EXEEXT) ut_websearch$(EXEEXT) \
 	ut_content_handler$(EXEEXT)
 noinst_PROGRAMS = test_ggle_parser$(EXEEXT) test_bing_parser$(EXEEXT) \
-	test_yahoo_parser$(EXEEXT) test_exalead_parser$(EXEEXT) \
-	test_html_txt_parser$(EXEEXT) test_twitter_parser$(EXEEXT) \
-	test_youtube_parser$(EXEEXT) test_dailymotion_parser$(EXEEXT) \
-	test_yauba_parser$(EXEEXT) test_blekko_parser$(EXEEXT) \
-	test_osearch_parser$(EXEEXT) test_doku_parser$(EXEEXT) \
-	test_mediawiki_parser$(EXEEXT) test_delicious_parser$(EXEEXT) \
-	test_wordpress_parser$(EXEEXT) test_redmine_parser$(EXEEXT)
+	test_bing_parser_api$(EXEEXT) test_yahoo_parser$(EXEEXT) \
+	test_exalead_parser$(EXEEXT) test_html_txt_parser$(EXEEXT) \
+	test_twitter_parser$(EXEEXT) test_youtube_parser$(EXEEXT) \
+	test_dailymotion_parser$(EXEEXT) test_yauba_parser$(EXEEXT) \
+	test_blekko_parser$(EXEEXT) test_osearch_parser$(EXEEXT) \
+	test_doku_parser$(EXEEXT) test_mediawiki_parser$(EXEEXT) \
+	test_delicious_parser$(EXEEXT) test_wordpress_parser$(EXEEXT) \
+	test_redmine_parser$(EXEEXT)
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/src/Makefile.include
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_1 = \
@@ -125,6 +126,12 @@ test_bing_parser_OBJECTS = $(am_test_bing_parser_OBJECTS)
 test_bing_parser_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
 test_bing_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+am_test_bing_parser_api_OBJECTS = test-bing-parser-api.$(OBJEXT)
+test_bing_parser_api_OBJECTS = $(am_test_bing_parser_api_OBJECTS)
+test_bing_parser_api_LDADD = $(LDADD)
+test_bing_parser_api_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_test_blekko_parser_OBJECTS = test-blekko-parser.$(OBJEXT)
@@ -280,7 +287,8 @@ CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(test_bing_parser_SOURCES) $(test_blekko_parser_SOURCES) \
+SOURCES = $(test_bing_parser_SOURCES) $(test_bing_parser_api_SOURCES) \
+	$(test_blekko_parser_SOURCES) \
 	$(test_dailymotion_parser_SOURCES) \
 	$(test_delicious_parser_SOURCES) $(test_doku_parser_SOURCES) \
 	$(test_exalead_parser_SOURCES) $(test_ggle_parser_SOURCES) \
@@ -295,7 +303,7 @@ SOURCES = $(test_bing_parser_SOURCES) $(test_blekko_parser_SOURCES) \
 	$(ut_qc_SOURCES) $(ut_se_handler_SOURCES) \
 	$(ut_snippet_SOURCES) $(ut_websearch_SOURCES)
 DIST_SOURCES = $(test_bing_parser_SOURCES) \
-	$(test_blekko_parser_SOURCES) \
+	$(test_bing_parser_api_SOURCES) $(test_blekko_parser_SOURCES) \
 	$(test_dailymotion_parser_SOURCES) \
 	$(test_delicious_parser_SOURCES) $(test_doku_parser_SOURCES) \
 	$(test_exalead_parser_SOURCES) $(test_ggle_parser_SOURCES) \
@@ -522,6 +530,7 @@ test_blekko_parser_SOURCES = test-blekko-parser.cpp
 test_twitter_parser_SOURCES = test-twitter-parser.cpp
 test_youtube_parser_SOURCES = test-youtube-parser.cpp
 test_bing_parser_SOURCES = test-bing-parser.cpp
+test_bing_parser_api_SOURCES = test-bing-parser-api.cpp
 test_yauba_parser_SOURCES = test-yauba-parser.cpp
 test_dailymotion_parser_SOURCES = test-dailymotion-parser.cpp
 test_yahoo_parser_SOURCES = test-yahoo-parser.cpp
@@ -613,6 +622,9 @@ clean-noinstPROGRAMS:
 test_bing_parser$(EXEEXT): $(test_bing_parser_OBJECTS) $(test_bing_parser_DEPENDENCIES) $(EXTRA_test_bing_parser_DEPENDENCIES) 
 	@rm -f test_bing_parser$(EXEEXT)
 	$(CXXLINK) $(test_bing_parser_OBJECTS) $(test_bing_parser_LDADD) $(LIBS)
+test_bing_parser_api$(EXEEXT): $(test_bing_parser_api_OBJECTS) $(test_bing_parser_api_DEPENDENCIES) $(EXTRA_test_bing_parser_api_DEPENDENCIES) 
+	@rm -f test_bing_parser_api$(EXEEXT)
+	$(CXXLINK) $(test_bing_parser_api_OBJECTS) $(test_bing_parser_api_LDADD) $(LIBS)
 test_blekko_parser$(EXEEXT): $(test_blekko_parser_OBJECTS) $(test_blekko_parser_DEPENDENCIES) $(EXTRA_test_blekko_parser_DEPENDENCIES) 
 	@rm -f test_blekko_parser$(EXEEXT)
 	$(CXXLINK) $(test_blekko_parser_OBJECTS) $(test_blekko_parser_LDADD) $(LIBS)
@@ -689,6 +701,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-bing-parser-api.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-bing-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-blekko-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-dailymotion-parser.Po@am__quote@

@@ -101,6 +101,7 @@ am_libseekswebsearchplugin_la_OBJECTS =  \
 	libseekswebsearchplugin_la-se_parser.lo \
 	libseekswebsearchplugin_la-se_parser_ggle.lo \
 	libseekswebsearchplugin_la-se_parser_bing.lo \
+	libseekswebsearchplugin_la-se_parser_bing_api.lo \
 	libseekswebsearchplugin_la-se_parser_yahoo.lo \
 	libseekswebsearchplugin_la-se_parser_exalead.lo \
 	libseekswebsearchplugin_la-html_txt_parser.lo \
@@ -365,7 +366,7 @@ ACLOCAL_AMFLAGS = -I m4
 websearchpluginlib_LTLIBRARIES = libseekswebsearchplugin.la
 libseekswebsearchplugin_la_SOURCES = websearch.cpp se_handler.cpp search_snippet.cpp seeks_snippet.cpp \
 				   static_renderer.cpp \
-				   se_parser.cpp se_parser_ggle.cpp se_parser_bing.cpp \
+				   se_parser.cpp se_parser_ggle.cpp se_parser_bing.cpp se_parser_bing_api.cpp \
 				   se_parser_yahoo.cpp se_parser_exalead.cpp html_txt_parser.cpp \
 				   se_parser_twitter.cpp se_parser_osearch.cpp se_parser_youtube.cpp \
 				   se_parser_dailymotion.cpp se_parser_doku.cpp se_parser_delicious.cpp se_parser_wordpress.cpp se_parser_redmine.cpp \
@@ -374,7 +375,7 @@ libseekswebsearchplugin_la_SOURCES = websearch.cpp se_handler.cpp search_snippet
 				   sort_rank.cpp query_context.cpp content_handler.cpp \
 				   clustering.cpp oskmeans.cpp json_renderer.cpp dynamic_renderer.cpp feeds.cpp \
 				   clustering.h content_handler.h html_txt_parser.h json_renderer.h json_renderer_private.h oskmeans.h \
-				   query_context.h query_interceptor.h search_snippet.h seeks_snippet.h se_handler.h se_parser_bing.h \
+				   query_context.h query_interceptor.h search_snippet.h seeks_snippet.h se_handler.h se_parser_bing.h se_parser_bing_api.h \
 				   se_parser_exalead.h se_parser_ggle.h se_parser.h se_parser_yahoo.h \
 	                           se_parser_youtube.h se_parser_dailymotion.h se_parser_yauba.h se_parser_twitter.h se_parser_osearch.h \
 				   se_parser_blekko.h se_parser_mediawiki.h se_parser_doku.h se_parser_delicious.h se_parser_wordpress.h se_parser_redmine.h \
@@ -553,6 +554,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libseekswebsearchplugin_la-se_handler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libseekswebsearchplugin_la-se_parser.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libseekswebsearchplugin_la-se_parser_bing.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libseekswebsearchplugin_la-se_parser_bing_api.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libseekswebsearchplugin_la-se_parser_blekko.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libseekswebsearchplugin_la-se_parser_dailymotion.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libseekswebsearchplugin_la-se_parser_delicious.Plo@am__quote@
@@ -650,6 +652,13 @@ libseekswebsearchplugin_la-se_parser_bing.lo: se_parser_bing.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='se_parser_bing.cpp' object='libseekswebsearchplugin_la-se_parser_bing.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseekswebsearchplugin_la_CXXFLAGS) $(CXXFLAGS) -c -o libseekswebsearchplugin_la-se_parser_bing.lo `test -f 'se_parser_bing.cpp' || echo '$(srcdir)/'`se_parser_bing.cpp
+
+libseekswebsearchplugin_la-se_parser_bing_api.lo: se_parser_bing_api.cpp
+@am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseekswebsearchplugin_la_CXXFLAGS) $(CXXFLAGS) -MT libseekswebsearchplugin_la-se_parser_bing_api.lo -MD -MP -MF $(DEPDIR)/libseekswebsearchplugin_la-se_parser_bing_api.Tpo -c -o libseekswebsearchplugin_la-se_parser_bing_api.lo `test -f 'se_parser_bing_api.cpp' || echo '$(srcdir)/'`se_parser_bing_api.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/libseekswebsearchplugin_la-se_parser_bing_api.Tpo $(DEPDIR)/libseekswebsearchplugin_la-se_parser_bing_api.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='se_parser_bing_api.cpp' object='libseekswebsearchplugin_la-se_parser_bing_api.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseekswebsearchplugin_la_CXXFLAGS) $(CXXFLAGS) -c -o libseekswebsearchplugin_la-se_parser_bing_api.lo `test -f 'se_parser_bing_api.cpp' || echo '$(srcdir)/'`se_parser_bing_api.cpp
 
 libseekswebsearchplugin_la-se_parser_yahoo.lo: se_parser_yahoo.cpp
 @am__fastdepCXX_TRUE@	$(LIBTOOL)  --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseekswebsearchplugin_la_CXXFLAGS) $(CXXFLAGS) -MT libseekswebsearchplugin_la-se_parser_yahoo.lo -MD -MP -MF $(DEPDIR)/libseekswebsearchplugin_la-se_parser_yahoo.Tpo -c -o libseekswebsearchplugin_la-se_parser_yahoo.lo `test -f 'se_parser_yahoo.cpp' || echo '$(srcdir)/'`se_parser_yahoo.cpp
