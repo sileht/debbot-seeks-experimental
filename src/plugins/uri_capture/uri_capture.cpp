@@ -27,6 +27,7 @@
 #include "miscutil.h"
 #include "charset_conv.h"
 #include "curl_mget.h"
+#include "encode.h"
 #include "errlog.h"
 
 #include <sys/time.h>
@@ -42,6 +43,7 @@ using sp::db_record;
 using sp::urlmatch;
 using sp::miscutil;
 using sp::charset_conv;
+using sp::encode;
 using sp::errlog;
 
 namespace seeks_plugins
@@ -212,7 +214,7 @@ namespace seeks_plugins
           }
         else
           {
-            title = miscutil::chomp_cpp(title);
+            title = encode::html_decode(miscutil::chomp_cpp(title));
             miscutil::replace_in_string(title,"\n","");
             miscutil::replace_in_string(title,"\r","");
             std::string titlec = charset_conv::charset_check_and_conversion(title,cheaders);
