@@ -44,9 +44,9 @@ noinst_PROGRAMS = test_ggle_parser$(EXEEXT) test_bing_parser$(EXEEXT) \
 	test_twitter_parser$(EXEEXT) test_youtube_parser$(EXEEXT) \
 	test_dailymotion_parser$(EXEEXT) test_yauba_parser$(EXEEXT) \
 	test_blekko_parser$(EXEEXT) test_osearch_parser$(EXEEXT) \
-	test_doku_parser$(EXEEXT) test_mediawiki_parser$(EXEEXT) \
-	test_delicious_parser$(EXEEXT) test_wordpress_parser$(EXEEXT) \
-	test_redmine_parser$(EXEEXT)
+	test_doku_parser$(EXEEXT) test_dotclear_parser$(EXEEXT) \
+	test_mediawiki_parser$(EXEEXT) test_delicious_parser$(EXEEXT) \
+	test_wordpress_parser$(EXEEXT) test_redmine_parser$(EXEEXT)
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/src/Makefile.include
 @HAVE_PROTOBUF_TRUE@@HAVE_TC_TRUE@am__append_1 = \
@@ -158,6 +158,12 @@ am_test_doku_parser_OBJECTS = test-doku-parser.$(OBJEXT)
 test_doku_parser_OBJECTS = $(am_test_doku_parser_OBJECTS)
 test_doku_parser_LDADD = $(LDADD)
 test_doku_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+am_test_dotclear_parser_OBJECTS = test-dotclear-parser.$(OBJEXT)
+test_dotclear_parser_OBJECTS = $(am_test_dotclear_parser_OBJECTS)
+test_dotclear_parser_LDADD = $(LDADD)
+test_dotclear_parser_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_test_exalead_parser_OBJECTS = test-exalead-parser.$(OBJEXT)
@@ -291,8 +297,8 @@ SOURCES = $(test_bing_parser_SOURCES) $(test_bing_parser_api_SOURCES) \
 	$(test_blekko_parser_SOURCES) \
 	$(test_dailymotion_parser_SOURCES) \
 	$(test_delicious_parser_SOURCES) $(test_doku_parser_SOURCES) \
-	$(test_exalead_parser_SOURCES) $(test_ggle_parser_SOURCES) \
-	$(test_html_txt_parser_SOURCES) \
+	$(test_dotclear_parser_SOURCES) $(test_exalead_parser_SOURCES) \
+	$(test_ggle_parser_SOURCES) $(test_html_txt_parser_SOURCES) \
 	$(test_mediawiki_parser_SOURCES) \
 	$(test_osearch_parser_SOURCES) $(test_redmine_parser_SOURCES) \
 	$(test_twitter_parser_SOURCES) \
@@ -306,8 +312,8 @@ DIST_SOURCES = $(test_bing_parser_SOURCES) \
 	$(test_bing_parser_api_SOURCES) $(test_blekko_parser_SOURCES) \
 	$(test_dailymotion_parser_SOURCES) \
 	$(test_delicious_parser_SOURCES) $(test_doku_parser_SOURCES) \
-	$(test_exalead_parser_SOURCES) $(test_ggle_parser_SOURCES) \
-	$(test_html_txt_parser_SOURCES) \
+	$(test_dotclear_parser_SOURCES) $(test_exalead_parser_SOURCES) \
+	$(test_ggle_parser_SOURCES) $(test_html_txt_parser_SOURCES) \
 	$(test_mediawiki_parser_SOURCES) \
 	$(test_osearch_parser_SOURCES) $(test_redmine_parser_SOURCES) \
 	$(test_twitter_parser_SOURCES) \
@@ -538,6 +544,7 @@ test_exalead_parser_SOURCES = test-exalead-parser.cpp
 test_delicious_parser_SOURCES = test-delicious-parser.cpp
 test_osearch_parser_SOURCES = test-osearch-parser.cpp
 test_doku_parser_SOURCES = test-doku-parser.cpp
+test_dotclear_parser_SOURCES = test-dotclear-parser.cpp
 test_mediawiki_parser_SOURCES = test-mediawiki-parser.cpp
 test_wordpress_parser_SOURCES = test-wordpress-parser.cpp
 test_redmine_parser_SOURCES = test-redmine-parser.cpp
@@ -637,6 +644,9 @@ test_delicious_parser$(EXEEXT): $(test_delicious_parser_OBJECTS) $(test_deliciou
 test_doku_parser$(EXEEXT): $(test_doku_parser_OBJECTS) $(test_doku_parser_DEPENDENCIES) $(EXTRA_test_doku_parser_DEPENDENCIES) 
 	@rm -f test_doku_parser$(EXEEXT)
 	$(CXXLINK) $(test_doku_parser_OBJECTS) $(test_doku_parser_LDADD) $(LIBS)
+test_dotclear_parser$(EXEEXT): $(test_dotclear_parser_OBJECTS) $(test_dotclear_parser_DEPENDENCIES) $(EXTRA_test_dotclear_parser_DEPENDENCIES) 
+	@rm -f test_dotclear_parser$(EXEEXT)
+	$(CXXLINK) $(test_dotclear_parser_OBJECTS) $(test_dotclear_parser_LDADD) $(LIBS)
 test_exalead_parser$(EXEEXT): $(test_exalead_parser_OBJECTS) $(test_exalead_parser_DEPENDENCIES) $(EXTRA_test_exalead_parser_DEPENDENCIES) 
 	@rm -f test_exalead_parser$(EXEEXT)
 	$(CXXLINK) $(test_exalead_parser_OBJECTS) $(test_exalead_parser_LDADD) $(LIBS)
@@ -707,6 +717,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-dailymotion-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-delicious-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-doku-parser.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-dotclear-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-exalead-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-ggle-parser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-html-text-parser.Po@am__quote@
