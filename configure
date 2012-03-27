@@ -15589,6 +15589,7 @@ if test "$ac_res" != no; then :
 
 fi
 
+LT_LIB_DLLOAD
 
 # Checks for header files.
 
