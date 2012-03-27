@@ -56,7 +56,7 @@ bin_PROGRAMS = seeks$(EXEEXT)
 @HAVE_PROTOBUF_TRUE@@HAVE_XSLSERIALIZER_PLUGIN_TRUE@	-lseeksxslserializerplugin \
 @HAVE_PROTOBUF_TRUE@@HAVE_XSLSERIALIZER_PLUGIN_TRUE@	@XSLT_LDADD@
 
-@HAVE_BSD_FALSE@am__append_16 = -ldl
+@HAVE_BSD_FALSE@am__append_16 = @LIBADD_DL@
 subdir = src
 DIST_COMMON = README $(dist_config_DATA) $(nobase_dist_proxy_DATA) \
 	$(nobase_dist_public_DATA) $(srcdir)/Makefile.am \
