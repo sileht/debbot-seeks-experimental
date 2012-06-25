@@ -38,10 +38,12 @@ namespace seekscli
                       const std::string &url,
                       const std::string &http_method,
                       int &status,
-                      std::string *&result)
+                      std::string *&result,
+                      std::string *content,
+                      const int &content_size)
   {
     curl_mget cmg(1,timeout,0,timeout,0);
-    result = cmg.www_simple(url,NULL,status,http_method,NULL,-1,"",
+    result = cmg.www_simple(url,NULL,status,http_method,content,content_size,"",
                             cli::_proxy_addr,cli::_proxy_port);
   }
 
@@ -393,6 +395,19 @@ namespace seekscli
         std::string enc_url = cli::url_encode(url);
         rurl += "&url=" + enc_url;
       }
+    int status = 0;
+    cli::make_call(timeout,rurl,"GET",status,result);
+    return status;
+  }
+
+  int cli::readable(const std::string &seeks_url,
+                    const std::string &output,
+                    const int &timeout,
+                    const std::string &url,
+                    std::string *&result)
+  {
+    std::string enc_url = cli::url_encode(url);
+    std::string rurl = seeks_url + "/readable?url=" + enc_url;
     int status = 0;
     cli::make_call(timeout,rurl,"GET",status,result);
     return status;

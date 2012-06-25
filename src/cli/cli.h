@@ -32,7 +32,9 @@ namespace seekscli
                             const std::string &url,
                             const std::string &http_method,
                             int &status,
-                            std::string *&result);
+                            std::string *&result,
+                            std::string *content=NULL,
+                            const int &content_size=-1);
 
       static std::string url_encode(const std::string &str);
 
@@ -215,6 +217,12 @@ namespace seekscli
                                const std::string &url,
                                const std::string &lang,
                                std::string *&result);
+
+      static int readable(const std::string &seeks_url,
+                          const std::string &output,
+                          const int &timeout,
+                          const std::string &url,
+                          std::string *&result);
 
       /* collaborative filter */
       static int get_peers(const std::string &seeks_url,
