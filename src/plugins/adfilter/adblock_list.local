@@ -1,0 +1,14 @@
+! Local adblock rules file
+! Quick ref :
+! - Block a domain (and its sub-domains) :
+!   ||domain.tld
+! - Filter an element by its ID
+!   ###elemid
+! - Filter an element by its class
+!   ##.elemclass
+! - Filter en element by its ID for a specific URL
+!   domain.tld###elemid
+
+||ad.lemde.fr
+||domain.tld$~case,domain=facebook.com,script
+||static.ak.fbcdn.net$~case,script

@@ -90,8 +90,8 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
 ETAGS = etags
 CTAGS = ctags
 DIST_SUBDIRS = query_capture uri_capture cf udb_service xsl_serializer \
-	websearch_api_compat websearch blocker no_tracking readable \
-	img_websearch httpserv websearch/tests readable/tests \
+	websearch_api_compat websearch adfilter blocker no_tracking \
+	readable img_websearch httpserv websearch/tests readable/tests \
 	img_websearch/tests uri_capture/tests query_capture/tests \
 	udb_service/tests
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -321,9 +321,9 @@ udbservice = @udbservice@
 uricapture = @uricapture@
 with_gtest = @with_gtest@
 SUBDIRS = $(am__append_1) $(am__append_2) websearch_api_compat \
-	websearch blocker no_tracking readable $(am__append_3) \
-	$(am__append_4) websearch/tests readable/tests $(am__append_5) \
-	$(am__append_6)
+	websearch adfilter blocker no_tracking readable \
+	$(am__append_3) $(am__append_4) websearch/tests readable/tests \
+	$(am__append_5) $(am__append_6)
 all: all-recursive
 
 .SUFFIXES:

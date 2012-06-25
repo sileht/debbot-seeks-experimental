@@ -301,7 +301,8 @@ logfile logfile
 #
 activated-plugin websearch
 activated-plugin websearch-api-compat
-activated-plugin blocker
+#activated-plugin blocker
+activated-plugin adfilter
 #activated-plugin no-tracking
 activated-plugin img_websearch
 activated-plugin uri-capture
@@ -715,7 +716,7 @@ debug 8192 # Non-fatal errors
 #        listen-address [::1]:8250
 #
 #
-listen-address  127.0.0.1:8250
+listen-address localhost:8250
 #
 #
 #  4.2. toggle
