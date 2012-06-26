@@ -1,9 +1,10 @@
-seeks-experimental (3:0.4.2~git201206131920-1) UNRELEASED; urgency=low
+seeks-experimental (3:0.4.2~git201206131920-2) UNRELEASED; urgency=low
 
   * Imported Upstream version 0.4.2~git201204161438
   * Imported Upstream version 0.4.2~git201206131920
+  * Snapshot version 0.4.2~git201206131920
 
- -- Mehdi Abaakouk <sileht@sileht.net>  Mon, 25 Jun 2012 22:11:50 +0200
+ -- Mehdi Abaakouk <sileht@sileht.net>  Tue, 26 Jun 2012 11:36:01 +0200
 
 seeks-experimental (3:0.4.2~git201204121430-1) UNRELEASED; urgency=low
 
